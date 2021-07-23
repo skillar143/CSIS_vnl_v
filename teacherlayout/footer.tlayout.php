@@ -46,6 +46,12 @@ if (stat == "open"){
         gradingBtn.setAttribute('disabled', 'disabled');
     }
 
+    if (stat == "open"){ 
+        summaryBtn.removeAttribute('disabled');
+    }else{
+        summaryBtn.setAttribute('disabled', 'disabled');
+    }
+
 
 
 

@@ -35,53 +35,16 @@ if (isset($_SESSION['username'])) {
                     <th>Cell No.</th>
                     <th>Course</th>
                     <th>Address</th>
-                    <th>Password</th>
                 </tr>
             </thead>
             <tbody>
 
 
                 <?php
-                include_once '../database/dbconnection.db.php';
+                include_once 'filteredstudent.print.php';
+               ?>
 
-                $sql = "SELECT * from studentrecords";
-                $result = $conn->query($sql);
-
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-
-                        $id = $row['student_id'];
-                        $name = $row['name'];
-                        $gender = $row['gender'];
-                        $cell = $row['cellphone'];
-                        $course = $row['course'];
-                        $address = $row['address'];
-
-
-                        $sq = "SELECT * from users where user_id = '$id'";
-                        $resul = $conn->query($sq);
-
-                        if ($resul->num_rows > 0) {
-                            while ($row = $resul->fetch_assoc()) {
-
-
-
-                                echo "<tr><td>" . $id . "</td>
-                                    <td>" . $name . "</td>
-                                    <td>" . $gender . "</td>
-                                    <td>" . $cell . "</td>
-                                    <td>" . $course . "</td>
-                                    <td>" . $address . "</td>
-                                    <td>" . $row['password'] . "</td>
-                                    </tr>";
-                            }
-                        }
-                    }
-                } else {
-                    echo "<tr><td>No records</td></tr>";
-                }
-
-                ?>
+               
 
 
             </tbody>

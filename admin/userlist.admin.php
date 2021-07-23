@@ -2,15 +2,18 @@
 session_start();
 
 if (isset($_SESSION['username'])) {
-
+  
     include_once '../adminlayout/head.admin.php' ?>
+    <form action="../database/changepass/user.db.php" method="post">
     <nav class="navbar navbar-expand navbar-light  topbar static-top ">
         <!-- Topbar Search -->
-        <h1 class="h3 text-gray-800 mr-auto">Course List</h1>
+        <h1 class="h3 text-gray-800 mr-auto">Users List</h1>
         <div class="float-right">
-        <a class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#AddcourseModal"><i class="fas fa-plus"></i>Add Course</a>
+        <button class="btn btn-sm btn-outline-info" type="submit">
+                          <i class="fas fa-edit"></i>Edit</button>
     </div>
     </nav>
+    
     
     <div class="table-responsive">
     <table class="table table-striped table-hover table-borderless" id="datatableid">
@@ -20,38 +23,43 @@ if (isset($_SESSION['username'])) {
                 <th class="">Name</th>
                 <th class="">Role</th>
                 <th class="">Password</th>
-                <th>Action</th>
             </tr>
         </thead>
         <tbody>
+      
             <?php
+             
             include_once '../database/dbconnection.db.php';
-
+            
             $sql = "SELECT * from users";
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
+               
+                
+                   // $edit = "<a class='btn btn-sm btn-outline-info' href='user.admin.php?id=$row[user_id]'>
+                    //        <i class='fas fa-edit'></i></a>";
 
-                   
-                    $edit = "<a class='btn btn-sm btn-outline-info' href=''>
-                            <i class='fas fa-edit'></i></a>";
+                    $edit =  "<button class='btn btn-sm btn-outline-info' type='submit'>
+                          <i class='fas fa-edit'></i></button>";
 
                     echo "<tr>
                             <td class=''>" . $row['user_id'] . "</td>
                             <td class=''>users</td>
                             <td class=''>" . $row['role'] . "</td>
-                            <td class=''>" . $row['password'] . "</td>
-                            <td class=''>" . $edit . "</td>";
+                            <td class=''><input type='text' class='border-0 bg-transparent' name='password[]' value='$row[password]' ></td>
+                            <input type='text' class='border-0 bg-transparent' name='id[]' value='$row[user_id]' hidden>";
                 }
             } else {
                 echo "<tr><td>No records</td></tr>";
             }
             ?>
+         
         </tbody>
     </table>
+    </form>
     </div>
-    
     <?php include "creatcourse.admin.php"; ?>
 
 <?php include_once '../adminlayout/footer.admin.php';

@@ -70,11 +70,11 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsegradesummary"
+                <button class="nav-link collapsed btn btn" disabled="disabled" id="summaryBtn" href="#" data-toggle="collapse" data-target="#collapsegradesummary"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-address-card"></i>
                     <span>Grade Summary</span>
-                </a>
+                </button>
                 <div id="collapsegradesummary" class="collapse" aria-labelledby="headinggradesummary" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Subjects:</h6>

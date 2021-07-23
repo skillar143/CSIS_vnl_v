@@ -38,6 +38,7 @@ if (isset($_SESSION['user_id'])) {
       
     <?php
                     include_once '../database/dbconnection.db.php';
+
                     $sub = $_GET['sub'];
                     $sql = "SELECT * from studentsubs where subject = '$sub'";
                     $result = $conn-> query($sql);

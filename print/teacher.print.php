@@ -32,7 +32,6 @@ if (isset($_SESSION['username'])) {
                     <th>Gender</th>
                     <th>Cell No.</th>
                     <th>Address</th>
-                    <th>Password</th>
                 </tr>
             </thead>
             <tbody>
@@ -56,18 +55,12 @@ if (isset($_SESSION['username'])) {
                         $sq = "SELECT * from users where user_id = '$id'";
                         $resul = $conn->query($sq);
 
-                        if ($resul->num_rows > 0) {
-                            while ($row = $resul->fetch_assoc()) {
-
-                                echo "<tr><td>" . $id . "</td>
+                        echo "<tr><td>" . $id . "</td>
                                     <td>" . $name . "</td>
                                     <td>" . $gender . "</td>
                                     <td>" . $cell . "</td>
                                     <td>" . $address . "</td>
-                                    <td>" . $row['password'] . "</td>
                                     </tr>";
-                            }
-                        }
                     }
                 } else {
                     echo "<tr><td>No records</td></tr>";

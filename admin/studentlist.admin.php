@@ -10,7 +10,7 @@ include_once '../adminlayout/head.admin.php' ?>
 </nav>
 <div class="float-right m-1">
 <a class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#AddStudentModal"><i class="fas fa-plus mr-2"></i>Add Student</i></a>
-<a class="btn btn-sm btn-outline-primary" href="../print/student.print.php"><i class="fas fa-print"></i>Print Records</a>
+<a class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#print"><i class="fas fa-print"></i>Print Records</i></a>
 </div>
 <?php if (isset($_GET['error'])) { ?>
     <div class="alert alert-danger text-center">
@@ -73,3 +73,61 @@ include_once '../adminlayout/head.admin.php' ?>
                     
                 
 
+<div class="modal fade" id="print" tabindex="-1" role="dialog" 
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <!-- modal header -->
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title text-light" id="exampleModalLabel">Activate Grading Period</h5>
+                <button class="close text-light" type="button" data-dismiss="modal" aria-label="Close">
+                <i class="fa fa-window-close" aria-hidden="true"></i>
+                </button>
+            </div>
+            <!-- end of modal header -->
+            <form action="../print/student.print.php" method="post">
+                <!-- modal body -->
+                <div class="modal-body row">
+                    <!-- text box student id -->
+                <div class="mt-2 d-flex">
+                <label >Select course</label>
+            <select name="filter"  class="form-control">
+            <option value="all">All Course</option>
+            <?php
+                                include_once '../database/dbconnection.db.php';
+
+                                $sql = "SELECT * from course";
+                                $result = $conn->query($sql);
+
+                                if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
+
+                                        echo "<option value='" . $row['description'] . "'>" . $row['description'] . "</option>";
+                                    }
+                                } else {
+                                    echo "<tr><td>No records</td></tr>";
+                                }
+                                ?>
+
+            </select>
+            
+                </div>
+           
+            
+            
+                    <!-- end student id -->      
+                    <!-- end of course selection -->
+                </div>
+                <!-- end of modal body -->
+
+                <!-- modal footer -->
+                <div class="modal-footer">
+                    <button class="btn btn-sm btn-outline-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-sm btn-outline-primary" type="submit" name="ok">Done</button>
+                </div>
+               
+                    <!-- end of modal footer -->
+            </form>
+        </div>
+    </div>
+</div>
