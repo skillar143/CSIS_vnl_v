@@ -15,7 +15,7 @@ include_once '../adminlayout/head.admin.php' ?>
 <a class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#AddsubjectModal"><i class="fas fa-plus"></i>Add Subject</a>
 </div>
 <div class="table-responsive">
-<table class="table table table-striped table-hover table-borderless" id="datatableid">
+<table class="table table-striped table-hover table-borderless" id="datatableid">
     <thead class="bg-primary text-light ">
         <tr>
             <th>Subject Code</th>

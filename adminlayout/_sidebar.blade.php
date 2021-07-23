@@ -63,7 +63,7 @@
     </li>
 
      <!-- Divider -->
-     <hr class="sidebar-divider">
+     <hr class="sidebar-divider my-0">
 
 <div class="sidebar-heading">
     Manage Grading System
@@ -82,12 +82,18 @@
     </li>
 
     <!-- Divider -->
-    <hr class="sidebar-divider">
+    <hr class="sidebar-divider my-0">
 
     <div class="sidebar-heading">
-        Account Settings
+        Accounts Setting
     </div>
 
+    <li class="nav-item">
+        <a class="nav-link" href="../admin/userlist.admin.php">
+            <i class="fas fa-users"></i>
+            <span>Users</span></a>
+    </li>
+    <div class="sidebar-heading">admin account</div>
     <li class="nav-item">
         <a class="nav-link" href="../admin/changepass.admin.php">
             <i class="fas fa-key"></i>
@@ -107,6 +113,7 @@
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
     </div>
 </ul>
+
 
 <!-- MODAL -->
 <?php include "../admin/gradingtoggle.admin.php"; ?>

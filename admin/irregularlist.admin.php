@@ -10,7 +10,7 @@ include_once '../adminlayout/head.admin.php' ?>
 <a class="btn btn-outline-primary" href="../print/irregular.print.php"><i class="fas fa-print"></i>Print Records</a>
 </div>
 <div class="table-responsive">
-    <table class="table table table-striped table-hover table-borderless" id="datatableid">
+    <table class="table table-striped table-hover table-borderless" id="datatableid">
         <thead class="bg-primary text-light ">
             <tr>
                 <th>Student ID</th>

@@ -15,7 +15,7 @@ if (isset($_SESSION['username'])) {
       <strong>Error!</strong> <?php echo $_GET['error']; ?>
     </div><?php } ?>
     <div class="table-responsive">
-    <table class="table table table-striped table-hover table-borderless" id="datatableid">
+    <table class="table table-striped table-hover table-borderless" id="datatableid">
         <thead class="bg-primary text-light">
             <tr>
                 <th >Teacher ID</th>
