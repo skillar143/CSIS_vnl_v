@@ -31,14 +31,14 @@ if (isset($_POST['ok'])) {
 
     if($description == $des){
        
-            header("Location: ../../admin/teacher.admin.php?tid=$tid");
+            header("Location: ../../admin/teacher/teacher.admin.php?tid=$tid");
         
 
     }else{
         $result = mysqli_query($conn, $sq);
 
     if ($result == 1) {
-        header("Location: ../../admin/teacher.admin.php?tid=$tid");
+        header("Location: ../../admin/teacher/teacher.admin.php?tid=$tid");
     }
 
     }

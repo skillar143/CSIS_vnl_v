@@ -2,7 +2,7 @@
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center">
         <div class="sidebar-brand-icon">
-            <img class="img-profile rounded-circle w-50" src="../assets/img/logo.png">
+            <img class="img-profile rounded-circle w-50" src="../../assets/img/logo.png">
         </div>
         <div class="sidebar-brand-text mx-3">CSIS</sup></div>
     </a>
@@ -19,7 +19,7 @@
              Counter - Alerts
 
              <?php
-            include_once '../database/dbconnection.db.php';
+            include_once '../../database/dbconnection.db.php';
 
             foreach ($conn->query('SELECT COUNT(*) FROM requests') as $row) {
 
@@ -40,24 +40,24 @@
     </div>
     <!-- Nav Item - admit Student Menu -->
     <li class="nav-item">
-        <a class="nav-link" href="../admin/studentlist.admin.php">
+        <a class="nav-link" href="../student/studentlist.admin.php">
             <i class="fas fa-users"></i>
             <span>Students</span></a>
     </li>
     <!-- Nav Item - admit Teachers Menu -->
     <li class="nav-item">
-        <a class="nav-link" href="../admin/teacherlist.admin.php">
+        <a class="nav-link" href="../teacher/teacherlist.admin.php">
             <i class="fas fa-users"></i>
             <span>Teachers</span></a>
     </li>
     <!-- Nav Item -reg subject Menu -->
     <li class="nav-item">
-        <a class="nav-link" href="../admin/subjectlist.admin.php">
+        <a class="nav-link" href="../program/subjectlist.admin.php">
             <i class="fas fa-book"></i>
             <span>Subjects</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="../admin/courselist.admin.php">
+        <a class="nav-link" href="../program/courselist.admin.php">
             <i class="fas fa-book"></i>
             <span>Courses</span></a>
     </li>
@@ -76,7 +76,7 @@
 </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="../admin/irregularlist.admin.php">
+        <a class="nav-link" href="../student/irregularlist.admin.php">
             <i class="fas fa-users"></i>
             <span>Irregular Students</span></a>
     </li>
@@ -89,13 +89,13 @@
     </div>
 
     <li class="nav-item">
-        <a class="nav-link" href="../admin/userlist.admin.php">
+        <a class="nav-link" href="../management/userlist.admin.php">
             <i class="fas fa-users"></i>
             <span>Users</span></a>
     </li>
     <div class="sidebar-heading">admin account</div>
     <li class="nav-item">
-        <a class="nav-link" href="../admin/changepass.admin.php">
+        <a class="nav-link" href="../management/changepass.admin.php">
             <i class="fas fa-key"></i>
             <span>Change Password</span></a>
     </li>
@@ -116,4 +116,4 @@
 
 
 <!-- MODAL -->
-<?php include "../admin/gradingtoggle.admin.php"; ?>
+<?php include "../management/gradingtoggle.admin.php"; ?>

@@ -49,7 +49,7 @@ if (isset($_POST['ok'])) {
 
    
     if (($teacherid == $id) || ($subject == $sub)) {
-        header("Location: ../../admin/teacherlist.admin.php?error= The Subject or the Id is invalid");
+        header("Location: ../../admin/teacher/teacherlist.admin.php?error= The Subject or the Id is invalid");
         exit(); 
 
     } else {
@@ -59,6 +59,6 @@ if (isset($_POST['ok'])) {
     
         $quey = mysqli_query($conn, $sqlsubject) or die(mysqli_error($conn));
 
-        header("Location: ../../admin/teacherlist.admin.php?succesfull");
+        header("Location: ../../admin/teacher/teacherlist.admin.php?succesfull");
     }
 }

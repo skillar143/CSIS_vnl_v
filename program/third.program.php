@@ -13,7 +13,7 @@
             </thead>
             <tbody>
                 <?php
-                include_once '../database/dbconnection.db.php';
+          
 
                 $sql = "SELECT * from programs where year = 'third' && sem = 'first' && course = '$_GET[des]'";
                 $result = $conn->query($sql);
@@ -49,7 +49,7 @@
             <select name="tyfssub" id="subject" class="form-control">
                 <option value="">Description</option>
                 <?php
-                include_once '../database/dbconnection.db.php';
+          
 
                 $sql = "SELECT * from sublists where description != '$description'";
                 $result = $conn->query($sql);
@@ -91,7 +91,7 @@
 
 
                 <?php
-                include_once '../database/dbconnection.db.php';
+          
 
                 $sql = "SELECT * from programs where year = 'third' && sem = 'second' && course = '$_GET[des]'";
                 $result = $conn->query($sql);
@@ -127,7 +127,7 @@
             <select name="tysssub" id="subject" class="form-control">
                 <option value="">Description</option>
                 <?php
-                include_once '../database/dbconnection.db.php';
+          
 
                 $sql = "SELECT * from sublists where description != '$description'";
                 $result = $conn->query($sql);

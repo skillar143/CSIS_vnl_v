@@ -20,7 +20,7 @@ if (isset($_SESSION['username'])) {
             <div class="col-1 "><img src="../assets/img/logo.jpg" alt=""></div>
         </div>
         <div class="text-right mb-3">
-            <a class="btn btn-danger" id="print-btn" href="../admin/teacherlist.admin.php"><i class="fas fa-arrow-circle-left"></i></a>
+            <a class="btn btn-danger" id="print-btn" href="../admin/teacher/teacherlist.admin.php"><i class="fas fa-arrow-circle-left"></i></a>
             <button class="btn btn-danger" onclick="window.print();" id="print-btn"><i class="fas fa-print"></i></button>
         </div>
 
@@ -75,7 +75,7 @@ if (isset($_SESSION['username'])) {
     </div>
 
 
-<?php include_once '../adminlayout/footer.admin.php';
+<?php 
 } else {
     header("Location: ../canossa/master.blade.php");
     exit();

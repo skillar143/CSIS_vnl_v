@@ -18,8 +18,9 @@ if (isset($_SESSION['user_id'])) {
                 <div class="body w-75 m-auto">
                     <!-- text box student id -->
                     <div class="form-group">
-                        <input type="text" class="form-control" name="teacherid" autocomplete="off"
-                            placeholder="Teacher Id" value="<?php echo $_SESSION['user_id'];  ?>" disabled required>
+                        <input type="text" class="form-control"  value="<?php echo $_SESSION['user_id'];  ?>" disabled >
+                        
+                        <input type="hidden" name="teacherid" value="<?php echo $_SESSION['user_id'];  ?>">
                     </div>
                     <!-- end student id -->
                     

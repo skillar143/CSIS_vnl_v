@@ -67,7 +67,7 @@ input:checked + .slider:before{
                 </button>
             </div>
             <!-- end of modal header -->
-            <form action="../database/addrecord/gradingstatus.db.php" method="post" id="loginForm">
+            <form action="../../database/addrecord/gradingstatus.db.php" method="post" id="loginForm">
                 <!-- modal body -->
                 <div class="modal-body row">
                     <!-- text box student id -->

@@ -5,7 +5,7 @@ session_start();
 if (isset($_SESSION['username'])) {
 
     include_once '../adminlayout/head.admin.php';
-    include_once '../database/dbconnection.db.php';
+    include_once '../../database/dbconnection.db.php';
     $student = "SELECT * from studentrecords where student_id = '$_GET[stid]'";
     $r = $conn->query($student);
     if ($r->num_rows > 0) {
@@ -26,7 +26,7 @@ if (isset($_SESSION['username'])) {
         <!-- Topbar Search -->
         <h1 class="h3 text-gray-800 mr-auto">Edit Student Record</h1>
     </nav>
-    <form class="needs-validation" action="../database/editprofile/student.db.php" method="post" novalidate>
+    <form class="needs-validation" action="../../database/editprofile/student.db.php" method="post" novalidate>
                 <div class="w-75 m-auto">
                     <!-- text box student id -->
                     <div class="form-group d-flex" >

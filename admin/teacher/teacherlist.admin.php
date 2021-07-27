@@ -8,7 +8,7 @@ if (isset($_SESSION['username'])) {
     </nav>
     <div class="float-right m-1">
 <a class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#AddTeacherModal"><i class="fas fa-plus mr-2"></i>Add Teacher</i></a>
-<a class="btn btn-sm btn-outline-primary" href="../print/teacher.print.php"><i class="fas fa-print"></i>Print Records</a>
+<a class="btn btn-sm btn-outline-primary" href="../../print/teacher.print.php"><i class="fas fa-print"></i>Print Records</a>
 </div>
     <?php if (isset($_GET['error'])) { ?>
     <div class="alert alert-danger text-center">
@@ -28,7 +28,6 @@ if (isset($_SESSION['username'])) {
         </thead>
         <tbody>
             <?php
-            include_once '../database/dbconnection.db.php';
             $sql = "SELECT * from teacherrecords";
             $result = $conn->query($sql);
             if ($result->num_rows > 0) {

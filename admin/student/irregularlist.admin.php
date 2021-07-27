@@ -7,7 +7,7 @@ include_once '../adminlayout/head.admin.php' ?>
 <!-- Topbar Search -->
 </nav>
 <div class="float-right m-1">
-<a class="btn btn-outline-primary" href="../print/irregular.print.php"><i class="fas fa-print"></i>Print Records</a>
+<a class="btn btn-outline-primary btn-sm" href="../../print/irregular.print.php"><i class="fas fa-print"></i>Print Records</a>
 </div>
 <div class="table-responsive">
     <table class="table table-striped table-hover table-borderless" id="datatableid">
@@ -26,7 +26,7 @@ include_once '../adminlayout/head.admin.php' ?>
         </thead>
         <tbody> 
             <?php
-                    include_once '../database/dbconnection.db.php';
+                    include_once '../../database/dbconnection.db.php';
                     $sql = "SELECT * from studentrecords where status = 'irregular'";
                     $result = $conn-> query($sql);
                 
@@ -49,7 +49,6 @@ include_once '../adminlayout/head.admin.php' ?>
         </tbody>
     </table>
 </div>
-<?php include "create.admin.php" ?>
 <?php include_once '../adminlayout/footer.admin.php';
  }else{
     header("Location: ../canossa/master.blade.php");

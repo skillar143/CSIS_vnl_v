@@ -1,9 +1,9 @@
-<?php 
+<?php
 session_start();
 
 if (isset($_SESSION['username'])) {
 
-include_once '../adminlayout/head.admin.php' ?>
+    include_once '../adminlayout/head.admin.php' ?>
 <nav class="navbar navbar-expand navbar-light topbar static-top ">
 <h1 class="h3 text-gray-800 ">Student List</h1>
 <!-- Topbar Search -->
@@ -35,13 +35,13 @@ include_once '../adminlayout/head.admin.php' ?>
         </thead>
         <tbody>  
             <?php
-                    include_once '../database/dbconnection.db.php';
+                    include_once '../../database/dbconnection.db.php';
                     $sql = "SELECT * from studentrecords";
                     $result = $conn-> query($sql);
 
                     if($result-> num_rows > 0 ){
                         while($row = $result-> fetch_assoc()){
-                            $del = "<a class='btn btn-outline-danger m-1 btn-sm' href='../database/deleterecord/student.db.php?stid=$row[student_id]'>
+                            $del = "<a class='btn btn-outline-danger m-1 btn-sm' href='../../database/deleterecord/student.db.php?stid=$row[student_id]'>
                             <i class='fas fa-user-minus'></i></a>";
                             $edit = "<a class='btn btn-outline-info m-1 btn-sm' href='editstudentrecord.admin.php?stid=$row[student_id]'>
                             <i class='fas fa-edit'></i></a>";
@@ -62,16 +62,14 @@ include_once '../adminlayout/head.admin.php' ?>
         </tbody>
     </table>
   </div>
-
-<?php include "create.admin.php" ?>
+  <?php include "create.admin.php" ?>  
 <?php include_once '../adminlayout/footer.admin.php';
- }else{
+} else {
     header("Location: ../canossa/master.blade.php");
     exit();
 } ?>
-                    
-                    
-                
+
+
 
 <div class="modal fade" id="print" tabindex="-1" role="dialog" 
     aria-hidden="true">
@@ -85,7 +83,7 @@ include_once '../adminlayout/head.admin.php' ?>
                 </button>
             </div>
             <!-- end of modal header -->
-            <form action="../print/student.print.php" method="post">
+            <form action="../../print/student.print.php" method="post">
                 <!-- modal body -->
                 <div class="modal-body row">
                     <!-- text box student id -->

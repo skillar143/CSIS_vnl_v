@@ -13,5 +13,5 @@ $query = "DELETE from studentsubs where student_id = '$studentid'";
 $dat = mysqli_query($conn, $query);
 
 if($data && $dat){
-    header("Location: ../../admin/studentlist.admin.php");
+    header("Location: ../../admin/student/studentlist.admin.php");
 }

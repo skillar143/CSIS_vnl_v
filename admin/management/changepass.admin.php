@@ -14,13 +14,15 @@ if (isset($_SESSION['username'])) {
                         <strong>Success!</strong> <?php echo $_GET['success'];?> 
                         </div> <?php } ?>
             <!-- end of modal header -->
-            <form action="../database/changepass/adminpass.db.php" method="post">
+            <form action="../../database/changepass/adminpass.db.php" method="post">
                 <!-- modal body -->
                 <div class="body w-75 m-auto">
                     <!-- text box username -->
                     <div class="form-group">
-                        <input type="text" class="form-control" name="username" autocomplete="off"
+                        <input type="text" class="form-control"
                             placeholder="Username" value="<?php echo $_SESSION['username']; ?>" disabled required>
+                            <input type="hidden" class="form-control" name="username"
+                            placeholder="Username" value="<?php echo $_SESSION['username']; ?>" required>
                     </div>
                     <!-- end username -->
 

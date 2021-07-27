@@ -23,7 +23,6 @@ if (isset($_SESSION['username'])) {
         </thead>
         <tbody>
             <?php
-            include_once '../database/dbconnection.db.php';
 
             $sql = "SELECT * from course";
             $result = $conn->query($sql);
@@ -31,7 +30,7 @@ if (isset($_SESSION['username'])) {
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
 
-                    $del = "<a class='btn btn-sm btn-outline-danger' href='../database/deleterecord/course.db.php?cid=$row[id]'>
+                    $del = "<a class='btn btn-sm btn-outline-danger' href='../../database/deleterecord/course.db.php?cid=$row[id]'>
                             <i class='fas fa-minus'></i></a>";
                     $des = "<a class='btn btn-sm btn-outline-info' href='course.admin.php?des=$row[description]'>
                             <i class='fas fa-edit'></i></a>";

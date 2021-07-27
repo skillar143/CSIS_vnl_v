@@ -51,16 +51,16 @@ if (isset($_POST['ok'])) {
             $query = mysqli_query($conn, $sqlstudent) or die(mysqli_error($conn));
             $quey = mysqli_query($conn, $sqladmin) or die(mysqli_error($conn));
 
-            header("Location: ../../admin/studentlist.admin.php?succesfull");;
+            header("Location: ../../admin/student/studentlist.admin.php?succesfull");;
         } else {
-            header("Location: ../../admin/studentlist.admin.php?error= The course is not yet done");;
+            header("Location: ../../admin/student/studentlist.admin.php?error= The course is not yet done");;
         }
     }
     else{
         $query = mysqli_query($conn, $sqlstudent) or die(mysqli_error($conn));
         $quey = mysqli_query($conn, $sqladmin) or die(mysqli_error($conn));
 
-        header("Location: ../../admin/studentlist.admin.php?");
+        header("Location: ../../admin/student/studentlist.admin.php?");
         exit();
     }
 }

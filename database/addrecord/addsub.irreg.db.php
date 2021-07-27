@@ -20,4 +20,4 @@ for($j = 0; $j < $i; $j++) {
 }
 
 
-header("Location: ../../admin/irregular.admin.php?success=Successfully enroll&stid=$id");
+header("Location: ../../admin/student/irregular.admin.php?success=Successfully enroll&stid=$id");

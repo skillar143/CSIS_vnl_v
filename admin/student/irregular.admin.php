@@ -31,7 +31,7 @@ if (isset($_SESSION['username'])) {
                             $res = $conn-> query($sub);
                             if($res-> num_rows > 0 ){
                                 while($row = $res-> fetch_assoc()){
-                                  $del = "<a class='btn btn-outline-danger m-1 btn-sm' href='../database/deleterecord/irregularsubject.db.php?sub=$row[description] & stid=$id'>
+                                  $del = "<a class='btn btn-outline-danger m-1 btn-sm' href='../../database/deleterecord/irregularsubject.db.php?sub=$row[description] & stid=$id'>
                                   <i class='fas fa-user-minus'></i></a>";
                                     echo "<tr>
                                     <td>".$row['subject_code']."</td>
@@ -49,7 +49,7 @@ if (isset($_SESSION['username'])) {
     </table>
   </div>
 
-  <form class="needs-validation mt-2" action="../database/addrecord/addsub.irreg.db.php" method="post" novalidate>
+  <form class="needs-validation mt-2" action="../../database/addrecord/addsub.irreg.db.php" method="post" novalidate>
     <input type="text" name="id" value="<?php echo $_GET['stid']; ?>" hidden>
     <div class="form-row">
         <div class="mt-3">

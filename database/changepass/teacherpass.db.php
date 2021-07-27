@@ -9,23 +9,32 @@ if(isset($_POST['submit'])){
         $npwd = $_POST['npass'];
         $cpwd = $_POST['cpass'];
 
-        $query = mysqli_query($conn,"SELECT teacher_id,password from teachers 
-            where teacher_id = '$teacherid' AND password = '$opwd'");
-        $num = mysqli_fetch_array($query);
+        $sql = "SELECT * from users WHERE user_id ='$teacherid' AND password='$opwd'";
+        $result = $conn-> query($sql);
+        
+    if (mysqli_num_rows($result) === 1) {
+        $row = mysqli_fetch_assoc($result);
+        if ($row['user_id'] === $teacherid && $row['password'] === $opwd) {
+            $con = mysqli_query($conn,"UPDATE teachers set password='$npwd' 
+            where teacher_id = '$teacherid'");
+            header("Location: ../../teacher/changepass.teacher.php?success=Password is successfuly changed");
+            close();
+        }
+    }
+        else{
+            header("Location: ../../teacher/changepass.teacher.php?error=your old password is incorrect");
+        }  
+       
+        
+    } 
 
-            if($num>0){
-                $con = mysqli_query($conn,"UPDATE teachers set password='$npwd' 
-                where teacher_id = '$teacherid'");
-                header("Location: ../../teacher/changepass.teacher.php?success=Password is successfuly changed");
-                close();
-            }
-            else{
-                header("Location: ../../teacher/changepass.teacher.php?error=invalid username or password");
-            }  
-    }      
     else{
         header("Location: ../../teacher/changepass.teacher.php?error=New password does not match into confirm password");
     }
+    
+
+    }
 
     
-}
+
+

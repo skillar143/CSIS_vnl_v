@@ -26,14 +26,14 @@ include_once '../adminlayout/head.admin.php' ?>
     </thead>
     <tbody>
                <?php
-                    include_once '../database/dbconnection.db.php';
+                   
 
                     $sql = "SELECT * from sublists";
                     $result = $conn-> query($sql);
                    
                     if($result-> num_rows > 0 ){
                         while($row = $result-> fetch_assoc()){
-                            $del = "<a class='btn btn-outline-danger m-1 btn-sm' href='../database/deleterecord/subject.db.php?subcode=$row[subject_code]'>
+                            $del = "<a class='btn btn-outline-danger m-1 btn-sm' href='../../database/deleterecord/subject.db.php?subcode=$row[subject_code]'>
                             <i class='fas fa-minus'></i></a>";
                             $edit = "<a class='btn btn-outline-info m-1 btn-sm' href='editsubject.admin.php?subcode=$row[subject_code]'>
                             <i class='fas fa-edit'></i></a>";

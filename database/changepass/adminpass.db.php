@@ -9,18 +9,22 @@ if (isset($_POST['submit'])) {
         $npwd = $_POST['npass'];
         $cpwd = $_POST['cpass'];
 
-        $query = mysqli_query($conn, "SELECT username,password from admins 
-            where username = '$username' AND password = '$opwd'");
-        $num = mysqli_fetch_array($query);
+        $sql = "SELECT * FROM admins WHERE username ='$username' AND password='$opwd'";
 
-        if ($num > 0) {
-            $con = mysqli_query($conn, "UPDATE admins set password='$npwd' 
+		$result = mysqli_query($conn, $sql);
+
+		if (mysqli_num_rows($result) === 1) {
+			$row = mysqli_fetch_assoc($result);
+            if ($row['username'] === $username && $row['password'] === $opwd) {
+                $con = mysqli_query($conn, "UPDATE admins set password='$npwd' 
                 where username = '$username'");
-            header("Location: ../../admin/changepass.admin.php?success=Password is successfuly changed");
+            header("Location: ../../admin/management/changepass.admin.php?success=Password is successfuly changed");
+		        exit();
+			}
         } else {
-            header("Location: ../../admin/changepass.admin.php?error=invalid username or password");
+            header("Location: ../../admin/management/changepass.admin.php?error=invalid username or password");
         }
     } else {
-        header("Location: ../../admin/changepass.admin.php?error=New password does not match into confirm password");
+        header("Location: ../../admin/management/changepass.admin.php?error=New password does not match into confirm password");
     }
 }

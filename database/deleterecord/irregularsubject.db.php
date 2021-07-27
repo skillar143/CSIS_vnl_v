@@ -9,5 +9,5 @@ $data = mysqli_query($conn, $query);
 
 
 if($data){
-    header("Location: ../../admin/irregular.admin.php?stid=$id");
+    header("Location: ../../admin/student/irregular.admin.php?stid=$id");
 }

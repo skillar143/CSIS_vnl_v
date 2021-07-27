@@ -23,7 +23,7 @@ if (isset($_SESSION['username'])) {
         <!-- Topbar Search -->
         <h1 class="h3 text-gray-800 mr-auto">Edit Teacher Record</h1>
     </nav>
-    <form class="needs-validation" action="../database/editprofile/teacher.db.php" method="post" novalidate>
+    <form class="needs-validation" action="../../database/editprofile/teacher.db.php" method="post" novalidate>
                 <div class="w-75 m-auto">
                     
                     <div class="form-group d-flex" >
@@ -78,7 +78,7 @@ if (isset($_SESSION['username'])) {
             <h5 class="modal-title" id="exampleModalLabel">Subject Listed To - <?php echo $name; ?></h5>
        
         <!-- end of modal header -->
-        <form action="../database/addrecord/addsub.db.php" method="post">
+        <form action="../../database/addrecord/addsub.db.php" method="post">
             <!-- modal body -->
             <div class="modal-body">
                 <!-- text box student id -->
@@ -97,8 +97,6 @@ if (isset($_SESSION['username'])) {
 
 
                                 <?php
-                                include_once '../database/dbconnection.db.php';
-
                                 $sql = "SELECT * from subjects where teacher_id = '$_GET[tid]'";
                                 $result = $conn->query($sql);
 
@@ -108,7 +106,7 @@ if (isset($_SESSION['username'])) {
                                         $description = $row['description'];
                                         $units = $row['units'];
 
-                                        $del = "<a class='btn btn-sm btn-outline-danger' href='../database/deleterecord/sub.db.php?subcode=$subcode'>
+                                        $del = "<a class='btn btn-sm btn-outline-danger' href='../../database/deleterecord/sub.db.php?subcode=$subcode'>
                                         <i class='fas fa-minus'></i></a>";
 
                                         echo "<tr><td>" . $subcode . "</td>
@@ -116,6 +114,8 @@ if (isset($_SESSION['username'])) {
                                                 <td>" . $units . "</td>
                                                 <td>. $del .</td></tr>";
                                     }
+                                }else{
+                                    echo"<td>No Subject</td>";
                                 }
                                 ?>
                             </tbody>
@@ -126,7 +126,6 @@ if (isset($_SESSION['username'])) {
                             <select name="subject" id="subject" class="form-control" required>
                                 <option value="">Description</option>
                                 <?php
-                                include_once '../database/dbconnection.db.php';
 
                                 $sql = "SELECT * from sublists where description != '$description'";
                                 $result = $conn->query($sql);

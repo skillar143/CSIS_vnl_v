@@ -17,7 +17,7 @@ include "../dbconnection.db.php";
             	$_SESSION['username'] = $row['username'];
             	$_SESSION['password'] = $row['password'];
             	$_SESSION['id'] = $row['id'];
-            	header("Location: ../../admin/studentlist.admin.php");
+            	header("Location: ../../admin/management/index.admin.php");
 		        exit();
 			}
 			else{

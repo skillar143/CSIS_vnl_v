@@ -11,4 +11,4 @@ include_once '../dbconnection.db.php';
     VALUES ('$subcode', '$des', '$unit');";
 
     $query=mysqli_query($conn,$sql) or die (mysqli_error($conn));    
-            header("Location: ../../admin/subjectlist.admin.php?succesfull");
+            header("Location: ../../admin/program/subjectlist.admin.php?succesfull");

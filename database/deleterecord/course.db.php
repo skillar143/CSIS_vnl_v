@@ -7,5 +7,5 @@ $query = "DELETE from course where id = '$id'";
 $data = mysqli_query($conn, $query);
 
 if($data){
-    header("Location: ../../admin/courselist.admin.php?$studentid");
+    header("Location: ../../admin/program/courselist.admin.php");
 }

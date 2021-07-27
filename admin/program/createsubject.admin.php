@@ -10,7 +10,7 @@
                 </button>
             </div>
             <!-- end of modal header -->
-            <form action="../database/addrecord/registersubject.db.php" method="post" novalidate class="needs-validation">
+            <form action="../../database/addrecord/registersubject.db.php" method="post" novalidate class="needs-validation">
                 <!-- modal body -->
                 <div class="modal-body">
                     <!-- text box student id -->

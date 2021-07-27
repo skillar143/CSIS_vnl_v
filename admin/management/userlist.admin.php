@@ -4,7 +4,7 @@ session_start();
 if (isset($_SESSION['username'])) {
   
     include_once '../adminlayout/head.admin.php' ?>
-    <form action="../database/changepass/user.db.php" method="post">
+    <form action="../../database/changepass/user.db.php" method="post">
     <nav class="navbar navbar-expand navbar-light  topbar static-top ">
         <!-- Topbar Search -->
         <h1 class="h3 text-gray-800 mr-auto">Users List</h1>
@@ -28,8 +28,6 @@ if (isset($_SESSION['username'])) {
         <tbody>
       
             <?php
-             
-            include_once '../database/dbconnection.db.php';
             
             $sql = "SELECT * from users";
             $result = $conn->query($sql);
@@ -60,7 +58,6 @@ if (isset($_SESSION['username'])) {
     </table>
     </form>
     </div>
-    <?php include "creatcourse.admin.php"; ?>
 
 <?php include_once '../adminlayout/footer.admin.php';
 } else {

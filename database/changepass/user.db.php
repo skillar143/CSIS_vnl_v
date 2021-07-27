@@ -29,7 +29,7 @@ for($j = 0; $j < $i; $j++) {
   SET password = '$pass[$j]' 
   WHERE user_id = '$uid[$j]';";
   $result = mysqli_query($conn, $sql);
- header("Location: ../../admin/userlist.admin.php?success=Password is successfuly changed");
+ header("Location: ../../admin/management/userlist.admin.php?success=Password is successfuly changed");
 }
 
 

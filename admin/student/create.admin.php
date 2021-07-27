@@ -10,7 +10,7 @@
                 </button>
             </div>
             <!-- end of modal header -->
-            <form class="needs-validation" action="../database/addrecord/registerstudent.db.php" method="post" novalidate>
+            <form class="needs-validation" action="../../database/addrecord/registerstudent.db.php" method="post" novalidate>
                 <!-- modal body -->
                 <div class="modal-body">
                     <!-- text box student id -->
@@ -67,7 +67,7 @@
                        <label for="course" style="width: 70%; padding:1px"> Course
                         <select name="course" id="c" class="form-control" required>
                                 <?php
-                                include_once '../database/dbconnection.db.php';
+                                include_once '../../database/dbconnection.db.php';
 
                                 $sql = "SELECT * from course";
                                 $result = $conn->query($sql);

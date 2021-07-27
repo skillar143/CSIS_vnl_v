@@ -20,10 +20,10 @@ if (isset($_POST['fy-fs'])) {
                 }
             }
             if($sub == $_POST['fyfssub']){
-                header("Location: ../../admin/course.admin.php?des=$course");
+                header("Location: ../../admin/program/course.admin.php?des=$course");
             }else{
                 $query = mysqli_query($conn, $sqlstudent) or die(mysqli_error($conn));
-                header("Location: ../../admin/course.admin.php?des=$course");
+                header("Location: ../../admin/program/course.admin.php?des=$course");
             }
     
 } elseif (isset($_POST['fy-ss'])) {
@@ -41,10 +41,10 @@ if (isset($_POST['fy-fs'])) {
                 }
             }
             if($sub == $_POST['fysssub']){
-                header("Location: ../../admin/course.admin.php?des=$course");
+                header("Location: ../../admin/program/course.admin.php?des=$course");
             }else{
                 $query = mysqli_query($conn, $sqlstudent) or die(mysqli_error($conn));
-                header("Location: ../../admin/course.admin.php?des=$course");
+                header("Location: ../../admin/program/course.admin.php?des=$course");
             }
 
 } elseif (isset($_POST['sy-fs'])) {
@@ -62,10 +62,10 @@ if (isset($_POST['fy-fs'])) {
                 }
             }
             if($sub == $_POST['syfssub']){
-                header("Location: ../../admin/course.admin.php?des=$course");
+                header("Location: ../../admin/program/course.admin.php?des=$course");
             }else{
                 $query = mysqli_query($conn, $sqlstudent) or die(mysqli_error($conn));
-                header("Location: ../../admin/course.admin.php?des=$course");
+                header("Location: ../../admin/program/course.admin.php?des=$course");
             }
     
 } elseif (isset($_POST['sy-ss'])) {
@@ -83,10 +83,10 @@ if (isset($_POST['fy-fs'])) {
                 }
             }
             if($sub == $_POST['sysssub']){
-                header("Location: ../../admin/course.admin.php?des=$course");
+                header("Location: ../../admin/program/course.admin.php?des=$course");
             }else{
                 $query = mysqli_query($conn, $sqlstudent) or die(mysqli_error($conn));
-                header("Location: ../../admin/course.admin.php?des=$course");
+                header("Location: ../../admin/program/course.admin.php?des=$course");
             }
    
 } elseif (isset($_POST['ty-fs'])) {
@@ -104,10 +104,10 @@ if (isset($_POST['fy-fs'])) {
                 }
             }
             if($sub == $_POST['tyfssub']){
-                header("Location: ../../admin/course.admin.php?des=$course");
+                header("Location: ../../admin/program/course.admin.php?des=$course");
             }else{
                 $query = mysqli_query($conn, $sqlstudent) or die(mysqli_error($conn));
-                header("Location: ../../admin/course.admin.php?des=$course");
+                header("Location: ../../admin/program/course.admin.php?des=$course");
             }
     
 } elseif (isset($_POST['ty-ss'])) {
@@ -126,10 +126,10 @@ if (isset($_POST['fy-fs'])) {
                 }
             }
             if($sub == $_POST['tysssub']){
-                header("Location: ../../admin/course.admin.php?des=$course");
+                header("Location: ../../admin/program/course.admin.php?des=$course");
             }else{
                 $query = mysqli_query($conn, $sqlstudent) or die(mysqli_error($conn));
-                header("Location: ../../admin/course.admin.php?des=$course");
+                header("Location: ../../admin/program/course.admin.php?des=$course");
             }
 
 } elseif (isset($_POST['ff-fs'])) {
@@ -147,10 +147,10 @@ if (isset($_POST['fy-fs'])) {
                 }
             }
             if($sub == $_POST['fffssub']){
-                header("Location: ../../admin/course.admin.php?des=$course");
+                header("Location: ../../admin/program/course.admin.php?des=$course");
             }else{
                 $query = mysqli_query($conn, $sqlstudent) or die(mysqli_error($conn));
-                header("Location: ../../admin/course.admin.php?des=$course");
+                header("Location: ../../admin/program/course.admin.php?des=$course");
             }
 
 } elseif (isset($_POST['ff-ss'])) {
@@ -168,10 +168,10 @@ if (isset($_POST['fy-fs'])) {
                 }
             }
             if($sub == $_POST['ffsssub']){
-                header("Location: ../../admin/course.admin.php?des=$course");
+                header("Location: ../../admin/program/course.admin.php?des=$course");
             }else{
                 $query = mysqli_query($conn, $sqlstudent) or die(mysqli_error($conn));
-                header("Location: ../../admin/course.admin.php?des=$course");
+                header("Location: ../../admin/program/course.admin.php?des=$course");
             }
 
 }

@@ -18,5 +18,5 @@ $query = "DELETE from subjects where subcode = '$subcode'";
 $data = mysqli_query($conn, $query);
 
 if($data){
-    header("Location: ../../admin/teacher.admin.php?tid=$tid");
+    header("Location: ../../admin/teacher/teacher.admin.php?tid=$tid");
 }

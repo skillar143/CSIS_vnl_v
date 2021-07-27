@@ -15,7 +15,7 @@
 
 
                 <?php
-                        include_once '../database/dbconnection.db.php';
+                         
 
                         $sql = "SELECT * from programs where year = 'forth' && sem = 'first' && course = '$_GET[des]'";
                         $result = $conn->query($sql);
@@ -51,8 +51,7 @@
             <select name="fffssub" id="subject" class="form-control">
                 <option value="">Description</option>
                 <?php
-                        include_once '../database/dbconnection.db.php';
-
+                         
                         $sql = "SELECT * from sublists where description != '$description'";
                         $result = $conn->query($sql);
 
@@ -93,7 +92,6 @@
 
 
                 <?php
-                        include_once '../database/dbconnection.db.php';
 
                         $sql = "SELECT * from programs where year = 'forth' && sem = 'second' && course = '$_GET[des]'";
                         $result = $conn->query($sql);
@@ -129,7 +127,7 @@
             <select name="ffsssub" id="subject" class="form-control">
                 <option value="">Description</option>
                 <?php
-                        include_once '../database/dbconnection.db.php';
+                    
 
                         $sql = "SELECT * from sublists where description != '$description'";
                         $result = $conn->query($sql);

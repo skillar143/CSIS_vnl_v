@@ -18,5 +18,5 @@ $sql = "UPDATE studentrecords set student_id ='$studentid' ,name ='$name'
     where student_id = '$id';";
 
                 $result = mysqli_query($conn, $sql);
-            header("Location: ../../admin/editstudentrecord.admin.php?success=New record is saved &stid=$studentid");
+            header("Location: ../../admin/student/editstudentrecord.admin.php?success=New record is saved &stid=$studentid");
        

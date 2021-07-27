@@ -14,5 +14,5 @@ $sql = "UPDATE teacherrecords set teacher_id ='$tid' ,name ='$name'
     where teacher_id = '$id';";
 
                 $result = mysqli_query($conn, $sql);
-            header("Location: ../../admin/teacher.admin.php?success=New record is saved &tid=$tid");
+            header("Location: ../../admin/teacher/teacher.admin.php?success=New record is saved &tid=$tid");
        

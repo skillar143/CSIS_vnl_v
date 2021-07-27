@@ -17,5 +17,5 @@ $dat = mysqli_query($conn, $query);
 
 
 if($data && $dat){
-    header("Location: ../../admin/teacherlist.admin.php?success=deleted");
+    header("Location: ../../admin/teacher/teacherlist.admin.php?success=deleted");
 }

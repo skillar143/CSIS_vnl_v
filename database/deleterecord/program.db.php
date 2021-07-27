@@ -9,5 +9,5 @@ $data = mysqli_query($conn, $query);
 
 
 if($data){
-    header("Location: ../../admin/course.admin.php?des=$des");
+    header("Location: ../../admin/program/course.admin.php?des=$des");
 }
