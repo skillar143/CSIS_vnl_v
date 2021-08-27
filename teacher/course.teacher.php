@@ -15,7 +15,7 @@ if (isset($_SESSION['user_id'])) {
                 <h5 class="modal-title text-light">Choose Course</h5>
             </div>
             <!-- end of modal header -->
-            <form action="inputgrade.teacher.php" method="get">
+            <form action="studentgrade.teacher.php" method="get">
                 <!-- modal body -->
                 <div class="modal-body">
                     <!-- text box student id -->
