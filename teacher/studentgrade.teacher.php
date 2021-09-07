@@ -28,7 +28,7 @@ if (isset($_SESSION['user_id'])) {
 
 <!-- content here -->
 <h5 class="title text-dark mb-3">Input Grade in <?php echo "(".$subcode.")-".$sub?></h5>
-<?php echo "<form action='../database/grade/finalizegrade.db.php?sub=$sub' method='post'>"; ?>
+<?php echo "<form action='../database/grade/finalizegrade.db.php?sub=$sub'&course=$course method='post'>"; ?>
 <div class="row mb-2">
 
     <div class="form-group col">
@@ -37,30 +37,8 @@ if (isset($_SESSION['user_id'])) {
 
 </div>
 
-<?php
-            
-            ?>
 
-<!-- 
-    /
-    /
-    /
-    /
- -->
-
-<!-- 
-
-
-/
-/
-/
-/
-/
-/
- -->
-
-
-<table class="table">
+<table class="table" id="datatableid">
     <thead class="bg-primary text-light ">
         <tr>
             <th class="">Student ID</th>
@@ -79,24 +57,61 @@ if (isset($_SESSION['user_id'])) {
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     $id = $row['student_id'];
-                    $sql2 = "SELECT * from studentrecords where student_id = '$id' and course = '$course'";
+                    $sql2 = "SELECT * from studentrecords where student_id = '$id' and course = '$course' order by name";
                     $result2 = $conn->query($sql2);
+                     $term;
+                    if ($term == "midterm"){
+                        $table = "prelims";
+                    }elseif($term == "final"){
+                        $table = "midterms";
+                    }else{
+                        $table = "prelims";
+                    }
+                    
 
                     if ($result2->num_rows > 0) {
                         while ($row2 = $result2->fetch_assoc()) {
+
+                            $sql3 = "SELECT * from $table where student_id = '$id' and subject = '$sub'";
+                            $result3 = $conn->query($sql3);
+        //getting the recent grade
+                            if ($result3->num_rows > 0) {
+                                while ($row3 = $result3->fetch_assoc()) {
+                                   $recentgrade = $row3['grade'];
+                                }
+                            }
+// finalizing
+                            if ($term == 'prelim'){
+                                
+                              
+                                $grade = number_format($csarray[$c] + $examarray[$c] + $reportarray[$c] , 0);
+
+                                $finalgrade = $grade;
+
+                            }else{
+                                
+                                $grade = number_format($csarray[$c] + $examarray[$c] + $reportarray[$c] , 0);
+
+                                $finalgrade = ($recentgrade * .30 )+($grade * .70);
+
+                            }
+
+                            
             ?>
         <tr>
             <td><?php echo $row2['student_id']; ?></td>
             <td><?php echo $row2['name']; ?></td>
             <td><?php echo $row2['course']; ?></td>
+            
+        
 
             <td><input type='text' name="grade[]" class='form-control mb-2 mr-sm-2 mb-sm-0'
-                    value="<?php echo number_format($csarray[$c] + $examarray[$c] + $reportarray[$c] , 0) ; ?>" autocomplete="off" required></td>
+                    value="<?php echo $grade; ?>" autocomplete="off" required></td>
             <input type="hidden" name="studentid[]" value="<?php echo $row2['student_id']; ?>"
                 class="border-0 bg-transparent ">
-            <input type="hidden" name="subject[]" value="<?php echo $sub; ?>" class="border-0 bg-transparent ">
-            <input type="hidden" name="count" value="<?php echo $count; ?>" class="border-0 bg-transparent ">
-            <input type="hidden" name="course" value="<?php echo $_GET['course']; ?>" class="border-0 bg-transparent ">
+                <input type="hidden" name="course" value="<?php echo $course; ?>"
+                class="border-0 bg-transparent ">
+          
 
 
 

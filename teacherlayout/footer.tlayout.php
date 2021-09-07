@@ -54,13 +54,26 @@ if (stat == "open"){
     }
 
 
-
-
     $(document).ready(function() {
         $('#datatableid').DataTable( {
         "paging":   false,
-        "ordering": false,
+        "order": [[1, "asc"]],
+        "ordering": true,
+        "columnDefs": [{
+          "targets": [0,2],
+          "orderable": false,
+        }],
+        "searching": false
+    } 
+    );
+    });
+
+    $(document).ready(function() {
+        $('#studentlist').DataTable( {
+        "paging":   false,
+        "order": [[1, "asc"]],
         "info":     true,
+        "ordering": true,
     } 
     );
     });

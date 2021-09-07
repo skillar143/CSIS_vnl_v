@@ -13,7 +13,7 @@ if (isset($_SESSION['user_id'])) {
     }?>
        <!-- content here -->
        <h5 class="title text-dark mb-5">Student List in <?php echo "(".$subcode.")-".$sub?></h5>
-       <table class="table" id="datatableid">
+       <table class="table" id="studentlist">
     <thead class="bg-primary text-light ">
         <tr>
             <th>Student ID</th>

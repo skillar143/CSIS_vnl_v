@@ -6,18 +6,9 @@ if (isset($_SESSION['user_id'])) {
     $sub = $_GET['sub'];
     $course = $_GET['course'];
    
+    include "../database/dbconnection.db.php"; 
 
-    include "../teacherlayout/head.tlayout.php"; 
-
-    $sql2 = "SELECT * from gradingstatus ";
-$result2 = $conn->query($sql2);
-if ($result2->num_rows > 0) {
-    while ($row2 = $result2->fetch_assoc()) { 
-      
-  $term = $row2['term'];
-
-    }}
-
+    
     $sql2 = "SELECT * from subjects where description = '$sub'";
     $result2 = $conn->query($sql2);
 
@@ -26,22 +17,53 @@ if ($result2->num_rows > 0) {
             $subcode = $row2['subcode'];
         }
     }
+
+
+    $sql2 = "SELECT * from gradingstatus ";
+    $result2 = $conn->query($sql2);
+    if ($result2->num_rows > 0) {
+        while ($row2 = $result2->fetch_assoc()) { 
+          
+      $term = $row2['term'];
+    
+        }}
+
+
     ?>
-<!-- content here -->
-<h5 class="title text-dark mb-3">Class Standing in <?php echo "(".$subcode.")-".$sub?></h5>
-<div class="float-right m-1">
-    <a class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#AddCS"><i class="fas fa-plus"></i>Add
-        Class Record</i></a>
-</div>
+
+<title>CSIS</title>
+    <!-- Custom fonts for this template-->
+    <link rel="icon" href="../assets/img/logo.png">
+    <!-- Custom fonts for this template-->
+    <link href="../assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="../assets/css/font.css" rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link href="../assets/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../assets/css/print.css" rel="stylesheet" media="print">
+    <!-- end of header -->
+    <div class="p-5">
+        <div class="title mb-3 row text-center">
+            <div class="col-1 "><img src="../assets/img/logo.jpg" alt=""></div>
+        </div>
+        <div class="text-right mb-3">
+            <a class="btn btn-danger" id="print-btn" href="../teacher/ovview.teacher.php?sub=<?php echo $sub;?>&course=<?php echo $course;?>"><i class="fas fa-arrow-circle-left"></i></a>
+            <button class="btn btn-danger" onclick="window.print();" id="print-btn"><i class="fas fa-print"></i></button>
+        </div>
 <div class="table-responsive">
-<table class="table" id="datatableid">
+<table class="table" id="studentlist">
     <thead class="bg-primary text-light ">
         <tr>
             <th class="">Student ID</th>
             <th class="">Name</th>
-            <th class="">Score(s)</th>
+            <th class="">Class Standing</th>
+            <th class="">Reporting</th>
+            <th class="">Exam</th>
+
+
+
         </tr>
     </thead>
+
     <tbody>
 
         <?php
@@ -51,14 +73,12 @@ if ($result2->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     $sid = $row['student_id'];
                     $name =$row['name'];
-                    $sql2 = "SELECT * from student_cs where student_id = '$sid' and term = '$term' and subject_code = '$subcode'";
+                    $sql2 = "SELECT * from student_cs where student_id = '$sid' and term = '$term'";
                     $result2 = $conn->query($sql2);
 ?>
         <tr>
             <td><?php echo $sid; ?></td>
             <td><?php echo $name; ?></td>
-            
-
             <td>
             <?php
                     if ($result2->num_rows > 0) {
@@ -67,9 +87,37 @@ if ($result2->num_rows > 0) {
                     echo $score. " | "; 
                         }
                     }
-                }
-            }
+               
             ?></td>
+
+<?php $report = "SELECT * from student_reporting where student_id = '$sid' and term = '$term'";
+                    $resulte = $conn->query($report);
+                    ?> <td>
+                    <?php
+                    if ($resulte->num_rows > 0) {
+                       
+                        while ($rowe = $resulte->fetch_assoc()) { 
+                            $scoree = $rowe['score']; 
+                    echo $scoree. " | "; 
+                         }}
+                      
+?></td>
+<?php $exam = "SELECT * from student_exam where student_id = '$sid' and term = '$term'";
+                    $resultr = $conn->query($exam);
+                    ?> <td>
+                    <?php
+                    if ($resultr->num_rows > 0) {
+                       
+                        while ($rowt = $resultr->fetch_assoc()) { 
+                            $scoree = $rowt['score']; 
+                    echo $scoree. " | "; 
+                         }}
+                        }
+                    }
+?></td>
+            
+            
+                     
            </tr>
     </tbody>
 </table>
@@ -106,13 +154,13 @@ input::-webkit-inner-spin-button {
         <div class="modal-content">
             <!-- modal header -->
             <div class="modal-header bg-primary">
-                <h5 class="modal-title text-light" id="exampleModalLabel">Add New Record</h5>
+                <h5 class="modal-title text-light" id="exampleModalLabel">Add New Score</h5>
                 <button class="close text-light btn btn-sm" type="button" data-dismiss="modal" aria-label="Close">
                     <i class="fa fa-window-close" aria-hidden="true"></i>
                 </button>
             </div>
             <!-- end of modal header -->
-            <form class="needs-validation" action="../database/grade/classrecord.db.php" method="post" novalidate>
+            <form class="needs-validation" action="../database/grade/exam.db.php" method="post" novalidate>
                 <!-- modal body -->
                 <div class="modal-body">
                     <!-- text box student id -->

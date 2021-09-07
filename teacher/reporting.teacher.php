@@ -39,7 +39,7 @@ if (isset($_SESSION['user_id'])) {
                             ?>
                         </select>
                         <select name="sub" id="c" class="form-control m-1" required>
-                            <option value="">subject</option>
+                            <option value="">Subject</option>
                             <?php
                              
                             include_once '../database/dbconnection.db.php';

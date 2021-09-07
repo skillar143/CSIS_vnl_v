@@ -17,7 +17,7 @@ if (isset($_SESSION['user_id'])) {
     <!-- content here -->
     <h5 class="title text-dark mb-3"> Grade summary for <?php echo "(".$subcode.")-".$sub?></h5>
     <?php echo "<form action='../database/grade/edit.db.php?' method='get'>"; ?>
-    <table class="table" id="datatableid">
+    <table class="table" id="studentlist">
         <thead class="bg-primary text-light" >
             <tr>
                 <th>Student ID</th>
@@ -25,7 +25,6 @@ if (isset($_SESSION['user_id'])) {
                 <th >Prelims</th>
                 <th >Midterms</th>
                 <th >Finals</th>
-                <th >Action</th>
             </tr>
         </thead>
         <tbody>
@@ -72,7 +71,7 @@ if (isset($_SESSION['user_id'])) {
                             }else{
                                 echo "<td>No records</td>";
                             }
-                           echo "<td><a class='btn btn-outline-info btn-sm' href='update.teacher.php?id=$id&sub=$sub&course=$course&name=$name'>Edit</a></td></tr>";
+                           
                 }
             }
             else{

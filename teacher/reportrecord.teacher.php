@@ -18,16 +18,24 @@ if (isset($_SESSION['user_id'])) {
             $subcode = $row2['subcode'];
         }
     }
+
+    $sql2 = "SELECT * from gradingstatus ";
+    $result2 = $conn->query($sql2);
+    if ($result2->num_rows > 0) {
+        while ($row2 = $result2->fetch_assoc()) { 
+          
+      $term = $row2['term'];
+    
+        }}
     ?>
 <!-- content here -->
 <h5 class="title text-dark mb-3">Class Standing in <?php echo "(".$subcode.")-".$sub?></h5>
 <div class="float-right m-1">
     <a class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#Addreport"><i class="fas fa-plus"></i>Add
         Class Record</i></a>
-    <a class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#print"><i class="fas fa-print"></i>Print
-        Records</i></a>
 </div>
-<table class="table">
+<div class="table-responsive">
+<table class="table" id="datatableid">
     <thead class="bg-primary text-light ">
         <tr>
             <th class="">Student ID</th>
@@ -45,7 +53,7 @@ if (isset($_SESSION['user_id'])) {
                 while ($row = $result->fetch_assoc()) {
                     $sid = $row['student_id'];
                     $name =$row['name'];
-                    $sql2 = "SELECT * from student_reporting where student_id = '$sid' and course = '$course'";
+                    $sql2 = "SELECT * from student_reporting where student_id = '$sid' and term = '$term' and subject_code = '$subcode'";
                     $result2 = $conn->query($sql2);
 ?>
         <tr>
@@ -65,6 +73,7 @@ if (isset($_SESSION['user_id'])) {
            </tr>
     </tbody>
 </table>
+</div>
 <!-- end of content here -->
 <?php include "../teacherlayout/footer.tlayout.php";
 } else {
