@@ -66,6 +66,7 @@
                     <div class="form-group d-flex">
                        <label for="course" style="width: 70%; padding:1px"> Course
                         <select name="course" id="c" class="form-control" required>
+                        <option selected disabled value="">Choose...</option>
                                 <?php
                                 include_once '../../database/dbconnection.db.php';
 

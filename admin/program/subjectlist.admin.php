@@ -19,9 +19,9 @@ include_once '../adminlayout/head.admin.php' ?>
     <thead class="bg-primary text-light ">
         <tr>
             <th>Subject Code</th>
-            <th>Description</th>
+            <th>Subject Title</th>
             <th>Units</th>
-            <th>Delete</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>

@@ -9,7 +9,7 @@
                 </button>
             </div>
             <!-- end of modal header -->
-            <form class="needs-validation" novalidate action="../database/addrecord/registerteacher.db.php" method="post">
+            <form class="needs-validation" novalidate action="../../database/addrecord/registerteacher.db.php" method="post">
                 <!-- modal body -->
                 <div class="modal-body">
                     <!-- text box student id -->
@@ -46,7 +46,7 @@
                     <!-- end address -->
                     <div class="form-group">
                         <select name="subject" id="subject" class="form-control" required>
-                            <option value=""> Subject </option>
+                            <option selected disabled value=""> Subject </option>
                             <?php
                             include_once '../database/dbconnection.db.php';
 

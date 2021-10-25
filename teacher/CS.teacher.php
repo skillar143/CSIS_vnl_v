@@ -20,7 +20,7 @@ if (isset($_SESSION['user_id'])) {
                     <!-- text box student id -->
                     <div class="form-group">
                         <select name="course" id="c" class="form-control m-1" required>
-                            <option value="">Course</option>
+                            <option Selected Disabled value="">Program</option>
                             <?php
                              
                             include_once '../database/dbconnection.db.php';

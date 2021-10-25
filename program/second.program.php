@@ -6,8 +6,8 @@
         <table class="table">
             <thead class="">
                 <tr>
-                    <th>Code</th>
-                    <th>Subject</th>
+                    <th>Subject Code</th>
+                    <th>Subject Title</th>
                     <th>Units</th>
                     <th>Action</th>
                 </tr>
@@ -50,7 +50,7 @@
         <div class="form-group">
             Select subject want to Add
             <select name="syfssub" id="subject" class="form-control">
-                <option value="">Description</option>
+            <option selected disabled value="">Choose...</option>
                 <?php
                 
 
@@ -84,8 +84,8 @@
         <table class="table">
             <thead class="">
                 <tr>
-                    <th>Code</th>
-                    <th>Subject</th>
+                    <th>Subject Code</th>
+                    <th>Subject Title</th>
                     <th>Units</th>
                     <th>Action</th>
                 </tr>
@@ -128,7 +128,7 @@
         <div class="form-group">
             Select subject want to Add
             <select name="sysssub" id="subject" class="form-control">
-                <option value="">Description</option>
+            <option selected disabled value="">Choose...</option>
                 <?php
                 
 

@@ -28,7 +28,7 @@ if ($resul->num_rows > 0) {
     }
 }
 
-    //inserting record to teacher 
+//    //inserting record to teacher 
 $sql = "INSERT INTO teacher_reporting (subject_code, teacher_id, term, item, course) 
     VALUES ('$code', '$tid', '$term', '$item', '$course');";
     $result = mysqli_query($conn, $sql);
@@ -49,15 +49,21 @@ array_push($uid, $id);
 $i = count($sc);
 $j = 0;
 
-print_r(array_values($sc));
-print_r(array_values($uid));
+//print_r(array_values($sc));
+//print_r(array_values($uid));
 
 for($j = 0; $j < $i; $j++) {
-  //print $uid[$j];
-  //print $sc[$j];
 
-  $sql = "INSERT INTO student_reporting (subject_code, teacher_id, student_id, term, score, course) 
-  VALUES ('$code', '$tid', '$uid[$j]', '$term', '$sc[$j]', '$course');";
-  $result = mysqli_query($conn, $sql);
+  
+//  print $uid[$j];
+//  print $code;
+//  print $tid;
+//  print $term;
+//  print $course;
+//  print $sc[$j];
+
+$sql = "INSERT INTO student_reporting (subject_code, teacher_id, student_id, term, score,   course) 
+ VALUES ('$code', '$tid', '$uid[$j]', '$term', '$sc[$j]', '$course');";
+ $result = mysqli_query($conn, $sql);
  header("Location: ../../teacher/reportrecord.teacher.php?course=$course & sub=$sub & success=Recorded Successfuly ");
 }

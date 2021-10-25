@@ -5,8 +5,8 @@
         <table class="table">
             <thead class="">
                 <tr>
-                <th>Code</th>
-                    <th>Subject</th>
+                    <th>Subject Code</th>
+                    <th>Subject Title</th>
                     <th>Units</th>
                     <th>Action</th>
                 </tr>
@@ -49,7 +49,7 @@
         <div class="form-group">
             Select subject want to Add
             <select name="fffssub" id="subject" class="form-control">
-                <option value="">Description</option>
+            <option selected disabled value="">Choose...</option>
                 <?php
                          
                         $sql = "SELECT * from sublists where description != '$description'";
@@ -82,8 +82,8 @@
         <table class="table">
             <thead class="">
                 <tr>
-                <th>Code</th>
-                    <th>Subject</th>
+                <th>Subject Code</th>
+                    <th>Subject Title</th>
                     <th>Units</th>
                     <th>Action</th>
                 </tr>
@@ -125,7 +125,7 @@
         <div class="form-group">
             Select subject want to Add
             <select name="ffsssub" id="subject" class="form-control">
-                <option value="">Description</option>
+            <option selected disabled value="">Choose...</option>
                 <?php
                     
 

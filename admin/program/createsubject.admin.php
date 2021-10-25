@@ -22,7 +22,7 @@
                     <!-- text box student id -->
                     <div class="form-group">
                         <input type="text" class="form-control" name="des" autocomplete="off"
-                            placeholder="Description" required>
+                            placeholder="Subject Title" required>
                     </div>
                     <!-- end student id -->
                     <!-- text box student id -->

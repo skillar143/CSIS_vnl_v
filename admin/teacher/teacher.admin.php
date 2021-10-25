@@ -88,7 +88,7 @@ if (isset($_SESSION['username'])) {
                             <thead class="">
                                 <tr>
                                     <th>Subject Code</th>
-                                    <th>Description</th>
+                                    <th>Subject Title</th>
                                     <th>Units</th>
                                     <th>Action</th>
                                 </tr>
@@ -124,7 +124,7 @@ if (isset($_SESSION['username'])) {
                         <div class="form-group">
                         Select subject want to add in into Teacher
                             <select name="subject" id="subject" class="form-control" required>
-                                <option value="">Description</option>
+                            <option selected disabled value="">Choose...</option>
                                 <?php
 
                                 $sql = "SELECT * from sublists where description != '$description'";

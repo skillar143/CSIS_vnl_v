@@ -25,11 +25,9 @@ for($j = 0; $j < $i; $j++) {
   print $uid[$j];
   print $pass[$j];
 
-  $sql = "UPDATE users
-  SET password = '$pass[$j]' 
-  WHERE user_id = '$uid[$j]';";
-  $result = mysqli_query($conn, $sql);
- header("Location: ../../admin/management/userlist.admin.php?success=Password is successfuly changed");
+//  $sql = "UPDATE users SET password = '$pass[$j]' WHERE user_id = '$uid[$j]'";
+//  $result = mysqli_query($conn, $sql);
+// header("Location: ../../admin/management/userlist.admin.php?success=Password is successfuly changed");
 }
 
 
