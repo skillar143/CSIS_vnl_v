@@ -51,7 +51,7 @@ include_once '../adminlayout/head.admin.php' ?>
 </div>
 <?php include_once '../adminlayout/footer.admin.php';
  }else{
-    header("Location: ../canossa/master.blade.php");
+    header("Location: ../adminlayout/master_layout.blade.php");
     exit();
 } ?>
                     

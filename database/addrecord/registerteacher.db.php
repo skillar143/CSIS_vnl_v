@@ -49,7 +49,7 @@ if (isset($_POST['ok'])) {
 
    
     if (($teacherid == $id) || ($subject == $sub)) {
-        header("Location: ../../admin/teacher/teacherlist.admin.php?error= The Subject or the Id is invalid");
+        header("Location: ../../admin/teacher/teacherlist.admin.php?error= The Subject or the Id is Already Taken");
         exit(); 
 
     } else {

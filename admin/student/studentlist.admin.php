@@ -65,7 +65,7 @@ if (isset($_SESSION['username'])) {
   <?php include "create.admin.php" ?>  
 <?php include_once '../adminlayout/footer.admin.php';
 } else {
-    header("Location: ../canossa/master.blade.php");
+    header("Location: ../adminlayout/master_layout.blade.php");
     exit();
 } ?>
 

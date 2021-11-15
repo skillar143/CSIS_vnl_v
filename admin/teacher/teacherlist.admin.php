@@ -32,7 +32,7 @@ if (isset($_SESSION['username'])) {
             $result = $conn->query($sql);
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
-                    $del = "<a class='btn btn-sm btn-outline-danger m-1' href='../database/deleterecord/teacher.db.php?tid=$row[teacher_id]'>
+                    $del = "<a class='btn btn-sm btn-outline-danger m-1' href='../../database/deleterecord/teacher.db.php?tid=$row[teacher_id]'>
                                 <i class='fas fa-user-minus'></i></a>";
                                 $tid = "<a class='btn btn-sm btn-outline-info m-1' href='teacher.admin.php?tid=$row[teacher_id]'>
                                 <i class='fas fa-edit'></i></a>";
