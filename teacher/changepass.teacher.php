@@ -45,7 +45,7 @@ if (isset($_SESSION['user_id'])) {
                     </div>
                     <!-- end con-password name -->
                     <div class="form-group ml-auto">
-                    <button class="btn btn-success ml-auto" name="submit" type="submit">Confirm</button>
+                    <button class="btn btn-outline-success ml-auto" name="submit" type="submit">Save</button>
                     </div>
                     
                 </div>

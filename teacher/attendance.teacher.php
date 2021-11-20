@@ -20,7 +20,7 @@ if (isset($_SESSION['user_id'])) {
                     <!-- text box student id -->
                     <div class="form-group">
                     <select name="course" id="c" class="form-control m-1" required>
-                            <option value="">Course</option>
+                            <option value="">Program</option>
                             <?php
                              
                             include_once '../database/dbconnection.db.php';
@@ -40,7 +40,7 @@ if (isset($_SESSION['user_id'])) {
                             ?>
                         </select>
                         <select name="sub" id="c" class="form-control m-1" required>
-                            <option value="">subject</option>
+                            <option value="">Subject</option>
                             <?php
                              
                             include_once '../database/dbconnection.db.php';
@@ -68,7 +68,7 @@ if (isset($_SESSION['user_id'])) {
 
                 <!-- modal footer -->
                 <div class="modal-footer">
-                    <button class="btn btn-primary" type="submit">Go</button>
+                    <button class="btn btn-outline-primary" type="submit">Go</button>
                 </div>
                 </form> 
                     <!-- end of modal footer -->

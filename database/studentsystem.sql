@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 20, 2021 at 01:21 PM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.4.10
+-- Generation Time: Nov 20, 2021 at 07:24 PM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 8.0.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -73,14 +73,6 @@ CREATE TABLE `finals` (
   `grade` varchar(123) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `finals`
---
-
-INSERT INTO `finals` (`id`, `student_id`, `subject`, `grade`) VALUES
-(18, '2018-00070-cl-0', 'Mathematics', '83'),
-(19, '2018-00070-cl-0', 'English', '74');
-
 -- --------------------------------------------------------
 
 --
@@ -89,15 +81,16 @@ INSERT INTO `finals` (`id`, `student_id`, `subject`, `grade`) VALUES
 
 CREATE TABLE `gradingstatus` (
   `id` int(11) NOT NULL,
-  `status` text NOT NULL
+  `status` text NOT NULL,
+  `term` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `gradingstatus`
 --
 
-INSERT INTO `gradingstatus` (`id`, `status`) VALUES
-(1, 'open');
+INSERT INTO `gradingstatus` (`id`, `status`, `term`) VALUES
+(1, 'open', 'midterm');
 
 -- --------------------------------------------------------
 
@@ -111,15 +104,6 @@ CREATE TABLE `midterms` (
   `subject` varchar(123) NOT NULL,
   `grade` varchar(123) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `midterms`
---
-
-INSERT INTO `midterms` (`id`, `student_id`, `subject`, `grade`) VALUES
-(12, '2018-00070-cl-0', 'Mathematics', '82'),
-(13, '2018-00073-cl-0', 'Mathematics', '80'),
-(14, '2018-00070-cl-0', 'English', '88');
 
 -- --------------------------------------------------------
 
@@ -139,8 +123,8 @@ CREATE TABLE `prelims` (
 --
 
 INSERT INTO `prelims` (`id`, `student_id`, `subject`, `grade`) VALUES
-(44, '2018-00070-cl-0', 'Mathematics', '88'),
-(45, '2018-00070-cl-0', 'English', '81');
+(46, '2018-00073-cl-0', 'Mathematics', '88'),
+(47, '2018-00071-cl-0', 'Mathematics', '80');
 
 -- --------------------------------------------------------
 
@@ -155,7 +139,7 @@ CREATE TABLE `programs` (
   `year` varchar(128) NOT NULL,
   `sem` varchar(128) NOT NULL,
   `subject_code` varchar(128) NOT NULL,
-  `units` int(12) NOT NULL
+  `units` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -168,7 +152,6 @@ INSERT INTO `programs` (`id`, `course`, `subject`, `year`, `sem`, `subject_code`
 (57, 'bachelor of science in psychology', 'English', 'first', 'first', '', 0),
 (58, 'bachelor of science in psychology', 'Filipino', 'first', 'second', '', 0),
 (59, 'bachelor of science in psychology', 'Physical Education', 'first', 'second', '', 0),
-(60, 'bachelor of elementary education', 'Physical Education', 'first', 'first', '', 0),
 (61, 'bachelor of elementary education', 'Filipino', 'first', 'second', '', 0),
 (62, 'bachelor of elementary education', 'English', 'first', 'second', '', 0),
 (63, 'bachelor of science in nursing', 'Filipino', 'first', 'first', '', 0),
@@ -176,7 +159,8 @@ INSERT INTO `programs` (`id`, `course`, `subject`, `year`, `sem`, `subject_code`
 (65, 'bachelor of science in nursing', 'Mathematics', 'first', 'second', '', 0),
 (66, 'bachelor of science in nursing', 'English', 'first', 'second', '', 0),
 (71, 'bachelor of science in psychology', 'GEN Math', 'second', 'first', '', 0),
-(72, 'Bachelor of Science in Nursing', 'GEN Math', 'second', 'first', '', 0);
+(72, 'Bachelor of Science in Nursing', 'GEN Math', 'second', 'first', '', 0),
+(74, 'Bachelor of Elementary Education', 'Physical Education', 'first', 'first', '', 0);
 
 -- --------------------------------------------------------
 
@@ -253,6 +237,124 @@ INSERT INTO `studentsubs` (`id`, `student_id`, `subject`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `student_attendance`
+--
+
+CREATE TABLE `student_attendance` (
+  `id` int(11) NOT NULL,
+  `subject_code` varchar(128) NOT NULL,
+  `teacher_id` varchar(128) NOT NULL,
+  `student_id` varchar(128) NOT NULL,
+  `term` varchar(128) NOT NULL,
+  `score` int(11) NOT NULL,
+  `course` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `student_attendance`
+--
+
+INSERT INTO `student_attendance` (`id`, `subject_code`, `teacher_id`, `student_id`, `term`, `score`, `course`) VALUES
+(1, 'M-01', '1999-00070-proc-0', '2018-00071-cl-0', 'prelim', 100, 'Bachelor of Elementary Education'),
+(2, 'M-01', '1999-00070-proc-0', '2018-00073-cl-0', 'prelim', 100, 'Bachelor of Elementary Education'),
+(13, 'M-01', '1999-00070-proc-0', '2018-00071-cl-0', 'midterm', 100, 'Bachelor of Elementary Education    '),
+(14, 'M-01', '1999-00070-proc-0', '2018-00073-cl-0', 'midterm', 100, 'Bachelor of Elementary Education    ');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student_cs`
+--
+
+CREATE TABLE `student_cs` (
+  `id` int(11) NOT NULL,
+  `subject_code` varchar(128) NOT NULL,
+  `teacher_id` varchar(128) NOT NULL,
+  `student_id` varchar(128) NOT NULL,
+  `term` varchar(128) NOT NULL,
+  `score` int(11) NOT NULL,
+  `course` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `student_cs`
+--
+
+INSERT INTO `student_cs` (`id`, `subject_code`, `teacher_id`, `student_id`, `term`, `score`, `course`) VALUES
+(1, 'M-01', '1999-00070-proc-0', '2018-00071-cl-0', 'prelim', 9, 'Bachelor of Elementary Education'),
+(2, 'M-01', '1999-00070-proc-0', '2018-00073-cl-0', 'prelim', 10, 'Bachelor of Elementary Education'),
+(3, 'M-01', '1999-00070-proc-0', '2018-00071-cl-0', 'prelim', 5, 'Bachelor of Elementary Education '),
+(4, 'M-01', '1999-00070-proc-0', '2018-00073-cl-0', 'prelim', 10, 'Bachelor of Elementary Education '),
+(9, 'M-01', '1999-00070-proc-0', '2018-00071-cl-0', 'midterm', 9, 'Bachelor of Elementary Education'),
+(10, 'M-01', '1999-00070-proc-0', '2018-00073-cl-0', 'midterm', 10, 'Bachelor of Elementary Education'),
+(11, 'M-01', '1999-00070-proc-0', '2018-00071-cl-0', 'midterm', 20, 'Bachelor of Elementary Education '),
+(12, 'M-01', '1999-00070-proc-0', '2018-00073-cl-0', 'midterm', 18, 'Bachelor of Elementary Education '),
+(13, 'M-01', '1999-00070-proc-0', '2018-00071-cl-0', 'midterm', 10, 'Bachelor of Elementary Education'),
+(14, 'M-01', '1999-00070-proc-0', '2018-00073-cl-0', 'midterm', 10, 'Bachelor of Elementary Education'),
+(15, 'M-01', '1999-00070-proc-0', '2018-00071-cl-0', 'midterm', 19, 'Bachelor of Elementary Education'),
+(16, 'M-01', '1999-00070-proc-0', '2018-00073-cl-0', 'midterm', 20, 'Bachelor of Elementary Education');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student_exam`
+--
+
+CREATE TABLE `student_exam` (
+  `id` int(11) NOT NULL,
+  `subject_code` varchar(128) NOT NULL,
+  `teacher_id` varchar(128) NOT NULL,
+  `student_id` varchar(128) NOT NULL,
+  `term` varchar(128) NOT NULL,
+  `score` int(11) NOT NULL,
+  `course` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `student_exam`
+--
+
+INSERT INTO `student_exam` (`id`, `subject_code`, `teacher_id`, `student_id`, `term`, `score`, `course`) VALUES
+(1, 'M-01', '1999-00070-proc-0', '2018-00071-cl-0', 'prelim', 38, 'Bachelor of Elementary Education'),
+(2, 'M-01', '1999-00070-proc-0', '2018-00073-cl-0', 'prelim', 44, 'Bachelor of Elementary Education'),
+(5, 'M-01', '1999-00070-proc-0', '2018-00071-cl-0', 'midterm', 48, 'Bachelor of Elementary Education'),
+(6, 'M-01', '1999-00070-proc-0', '2018-00073-cl-0', 'midterm', 45, 'Bachelor of Elementary Education'),
+(7, 'M-01', '1999-00070-proc-0', '2018-00071-cl-0', 'midterm', 48, 'Bachelor of Elementary Education'),
+(8, 'M-01', '1999-00070-proc-0', '2018-00073-cl-0', 'midterm', 45, 'Bachelor of Elementary Education'),
+(9, 'M-01', '1999-00070-proc-0', '2018-00071-cl-0', 'midterm', 50, 'Bachelor of Elementary Education'),
+(10, 'M-01', '1999-00070-proc-0', '2018-00073-cl-0', 'midterm', 50, 'Bachelor of Elementary Education');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student_reporting`
+--
+
+CREATE TABLE `student_reporting` (
+  `id` int(11) NOT NULL,
+  `subject_code` varchar(128) NOT NULL,
+  `teacher_id` varchar(128) NOT NULL,
+  `student_id` varchar(128) NOT NULL,
+  `term` varchar(128) NOT NULL,
+  `score` int(11) NOT NULL,
+  `course` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `student_reporting`
+--
+
+INSERT INTO `student_reporting` (`id`, `subject_code`, `teacher_id`, `student_id`, `term`, `score`, `course`) VALUES
+(5, 'M-01', '1999-00070-proc-0', '2018-00071-cl-0', 'prelim', 9, 'Bachelor of Elementary Education'),
+(6, 'M-01', '1999-00070-proc-0', '2018-00073-cl-0', 'prelim', 10, 'Bachelor of Elementary Education'),
+(7, 'M-01', '1999-00070-proc-0', '2018-00071-cl-0', 'prelim', 14, 'Bachelor of Elementary Education '),
+(8, 'M-01', '1999-00070-proc-0', '2018-00073-cl-0', 'prelim', 15, 'Bachelor of Elementary Education '),
+(11, 'M-01', '1999-00070-proc-0', '2018-00071-cl-0', 'midterm', 20, 'Bachelor of Elementary Education'),
+(12, 'M-01', '1999-00070-proc-0', '2018-00073-cl-0', 'midterm', 25, 'Bachelor of Elementary Education');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `subjects`
 --
 
@@ -261,7 +363,7 @@ CREATE TABLE `subjects` (
   `teacher_id` varchar(123) NOT NULL,
   `description` varchar(123) NOT NULL,
   `subcode` varchar(123) NOT NULL,
-  `units` int(10) NOT NULL
+  `units` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -325,27 +427,78 @@ INSERT INTO `teacherrecords` (`id`, `teacher_id`, `name`, `gender`, `cellphone`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `test`
+-- Table structure for table `teacher_cs`
 --
 
-CREATE TABLE `test` (
-  `id` int(12) NOT NULL,
-  `code` varchar(128) NOT NULL,
-  `units` int(12) NOT NULL
+CREATE TABLE `teacher_cs` (
+  `id` int(11) NOT NULL,
+  `subject_code` varchar(128) NOT NULL,
+  `teacher_id` varchar(128) NOT NULL,
+  `term` varchar(128) NOT NULL,
+  `item` int(11) NOT NULL,
+  `course` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `test`
+-- Dumping data for table `teacher_cs`
 --
 
-INSERT INTO `test` (`id`, `code`, `units`) VALUES
-(30, 'qq', 1),
-(31, 'aa', 2),
-(32, 'ww', 3),
-(33, 'Bachelor of ', 0),
-(34, 'Bachelor of ', 0),
-(35, 'Bachelor of ', 0),
-(36, 'Bachelor of Science in Psychology  ', 0);
+INSERT INTO `teacher_cs` (`id`, `subject_code`, `teacher_id`, `term`, `item`, `course`) VALUES
+(1, 'M-01', '1999-00070-proc-0', 'prelim', 10, 'Bachelor of Elementary Education'),
+(2, 'M-01', '1999-00070-proc-0', 'prelim', 10, 'Bachelor of Elementary Education '),
+(5, 'M-01', '1999-00070-proc-0', 'midterm', 10, 'Bachelor of Elementary Education'),
+(6, 'M-01', '1999-00070-proc-0', 'midterm', 20, 'Bachelor of Elementary Education '),
+(7, 'M-01', '1999-00070-proc-0', 'midterm', 10, 'Bachelor of Elementary Education'),
+(8, 'M-01', '1999-00070-proc-0', 'midterm', 20, 'Bachelor of Elementary Education');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `teacher_exam`
+--
+
+CREATE TABLE `teacher_exam` (
+  `id` int(11) NOT NULL,
+  `subject_code` varchar(128) NOT NULL,
+  `teacher_id` varchar(128) NOT NULL,
+  `term` varchar(128) NOT NULL,
+  `item` int(11) NOT NULL,
+  `course` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `teacher_exam`
+--
+
+INSERT INTO `teacher_exam` (`id`, `subject_code`, `teacher_id`, `term`, `item`, `course`) VALUES
+(1, 'M-01', '1999-00070-proc-0', 'prelim', 50, 'Bachelor of Elementary Education'),
+(3, 'M-01', '1999-00070-proc-0', 'midterm', 50, 'Bachelor of Elementary Education'),
+(4, 'M-01', '1999-00070-proc-0', 'midterm', 50, 'Bachelor of Elementary Education'),
+(5, 'M-01', '1999-00070-proc-0', 'midterm', 50, 'Bachelor of Elementary Education');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `teacher_reporting`
+--
+
+CREATE TABLE `teacher_reporting` (
+  `id` int(11) NOT NULL,
+  `subject_code` varchar(128) NOT NULL,
+  `teacher_id` varchar(128) NOT NULL,
+  `term` varchar(128) NOT NULL,
+  `item` int(11) NOT NULL,
+  `course` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `teacher_reporting`
+--
+
+INSERT INTO `teacher_reporting` (`id`, `subject_code`, `teacher_id`, `term`, `item`, `course`) VALUES
+(1, 'M-01', '1999-00070-proc-0', 'prelim', 10, 'Bachelor of Elementary Education'),
+(2, 'M-01', '1999-00070-proc-0', 'prelim', 15, 'Bachelor of Elementary Education '),
+(4, 'M-01', '1999-00070-proc-0', 'midterm', 30, 'Bachelor of Elementary Education');
 
 -- --------------------------------------------------------
 
@@ -367,10 +520,10 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `user_id`, `password`, `role`) VALUES
 (63, '1999-00070-proc-0', 'pass', 'faculty'),
 (75, '1999-00071-proc-1', 'pass', 'faculty'),
-(76, '1999-00072-proc-1', 'pass', 'faculty'),
-(100, '2018-00071-cl-0', 'RaQzF', 'student'),
-(101, '2018-00070-cl-0', 'CNbxB', 'student'),
-(102, '2018-00073-cl-0', 'l2Mon', 'student');
+(76, '1999-00072-proc-1', 'password', 'faculty'),
+(100, '2018-00071-cl-0', 'pass', 'student'),
+(101, '2018-00070-cl-0', 'pass', 'student'),
+(102, '2018-00073-cl-0', 'pass', 'student');
 
 --
 -- Indexes for dumped tables
@@ -437,6 +590,30 @@ ALTER TABLE `studentsubs`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `student_attendance`
+--
+ALTER TABLE `student_attendance`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `student_cs`
+--
+ALTER TABLE `student_cs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `student_exam`
+--
+ALTER TABLE `student_exam`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `student_reporting`
+--
+ALTER TABLE `student_reporting`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `subjects`
 --
 ALTER TABLE `subjects`
@@ -455,9 +632,21 @@ ALTER TABLE `teacherrecords`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `test`
+-- Indexes for table `teacher_cs`
 --
-ALTER TABLE `test`
+ALTER TABLE `teacher_cs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `teacher_exam`
+--
+ALTER TABLE `teacher_exam`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `teacher_reporting`
+--
+ALTER TABLE `teacher_reporting`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -480,7 +669,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `course`
 --
 ALTER TABLE `course`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `finals`
@@ -498,19 +687,19 @@ ALTER TABLE `gradingstatus`
 -- AUTO_INCREMENT for table `midterms`
 --
 ALTER TABLE `midterms`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `prelims`
 --
 ALTER TABLE `prelims`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `programs`
 --
 ALTER TABLE `programs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT for table `requests`
@@ -522,7 +711,7 @@ ALTER TABLE `requests`
 -- AUTO_INCREMENT for table `studentrecords`
 --
 ALTER TABLE `studentrecords`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `studentsubs`
@@ -531,10 +720,34 @@ ALTER TABLE `studentsubs`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
 
 --
+-- AUTO_INCREMENT for table `student_attendance`
+--
+ALTER TABLE `student_attendance`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT for table `student_cs`
+--
+ALTER TABLE `student_cs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `student_exam`
+--
+ALTER TABLE `student_exam`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `student_reporting`
+--
+ALTER TABLE `student_reporting`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
 -- AUTO_INCREMENT for table `subjects`
 --
 ALTER TABLE `subjects`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `sublists`
@@ -546,19 +759,31 @@ ALTER TABLE `sublists`
 -- AUTO_INCREMENT for table `teacherrecords`
 --
 ALTER TABLE `teacherrecords`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
--- AUTO_INCREMENT for table `test`
+-- AUTO_INCREMENT for table `teacher_cs`
 --
-ALTER TABLE `test`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+ALTER TABLE `teacher_cs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `teacher_exam`
+--
+ALTER TABLE `teacher_exam`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `teacher_reporting`
+--
+ALTER TABLE `teacher_reporting`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

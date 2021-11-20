@@ -13,9 +13,9 @@ if (isset($_SESSION['username'])) {
         <thead class="bg-primary text-light ">
             <tr>
                 <th>Subject Code</th>
-                <th>Description</th>
+                <th>Subject Title</th>
                 <th>Units</th>
-                <th>action</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>  

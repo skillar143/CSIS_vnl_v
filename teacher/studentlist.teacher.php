@@ -13,6 +13,8 @@ if (isset($_SESSION['user_id'])) {
     }?>
        <!-- content here -->
        <h5 class="title text-dark mb-5">Student List in <?php echo "(".$subcode.")-".$sub?></h5>
+<a class="btn btn-sm btn-outline-primary" href="../print/studentlist.print.php?sub=<?php echo $sub;?>"><i class="fas fa-print"></i></a>
+
        <div class="table-responsive">
        <table class="table" id="studentlist">
     <thead class="bg-primary text-light ">
@@ -21,7 +23,7 @@ if (isset($_SESSION['user_id'])) {
             <th>Name</th>
             <th>Gender</th>
             <th>Cell No.</th>
-            <th>Course</th>
+            <th>Program Title</th>
             <th>Status</th>
             <th>Address</th>
         </tr>
@@ -66,7 +68,6 @@ if (isset($_SESSION['user_id'])) {
     </tbody>
 </table>
        </div>
-<a class="btn btn-sm btn-outline-primary" href="../print/studentlist.print.php?sub=<?php echo $sub;?>"><i class="fas fa-print"></i></a>
        <!-- end of content here -->
        <?php include "../teacherlayout/footer.tlayout.php";
     }else{

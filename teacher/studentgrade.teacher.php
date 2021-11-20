@@ -84,13 +84,13 @@ if (isset($_SESSION['user_id'])) {
                             if ($term == 'prelim'){
                                 
                               
-                                $grade = number_format($csarray[$c] + $examarray[$c] + $reportarray[$c] , 0);
+                                $grade = number_format($csarray[$c] + $examarray[$c] + $reportarray[$c] + $satarray[$c], 0);
 
                                 $finalgrade = $grade;
 
                             }else{
                                 
-                                $grade = number_format($csarray[$c] + $examarray[$c] + $reportarray[$c] , 0);
+                                $grade = number_format($csarray[$c] + $examarray[$c] + $reportarray[$c] + $satarray[$c], 0);
 
                                 $finalgrade = ($recentgrade * .30 )+($grade * .70);
 

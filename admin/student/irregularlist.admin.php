@@ -20,7 +20,7 @@ include_once '../adminlayout/head.admin.php' ?>
                 <th>Birthday</th>
                 <th>Birth place</th>
                 <th>Address</th>
-                <th>Course</th>
+                <th>Program Title</th>
                 <th>Action</th>
             </tr>
         </thead>

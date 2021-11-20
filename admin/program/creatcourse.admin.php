@@ -15,7 +15,7 @@
                     <!-- text box student id -->
                     <div class="form-group">
                         <input type="text" class="form-control" name="description" autocomplete="off"
-                            placeholder="Description" required>
+                            placeholder="Program Title" required>
                     </div>
                     <!-- end student id -->      
                     <!-- end of course selection -->

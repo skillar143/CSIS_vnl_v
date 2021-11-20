@@ -67,7 +67,7 @@ if (isset($_SESSION['user_id'])) {
 
                 <!-- modal footer -->
                 <div class="modal-footer">
-                    <button class="btn btn-primary" type="submit">Go</button>
+                    <button class="btn btn-outline-primary" type="submit">Go</button>
                 </div>
                 </form> 
                     <!-- end of modal footer -->

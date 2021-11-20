@@ -28,7 +28,7 @@ if (isset($_SESSION['username'])) {
                 <th>Birthday</th>
                 <th>Birth place</th>
                 <th>Address</th>
-                <th>Course</th>
+                <th>Program</th>
                 <th>Status</th>
                 <th>Action</th>
             </tr>
@@ -77,7 +77,7 @@ if (isset($_SESSION['username'])) {
         <div class="modal-content">
             <!-- modal header -->
             <div class="modal-header bg-primary">
-                <h5 class="modal-title text-light" id="exampleModalLabel">Activate Grading Period</h5>
+                <h5 class="modal-title text-light" id="exampleModalLabel">Print Student Records</h5>
                 <button class="close text-light" type="button" data-dismiss="modal" aria-label="Close">
                 <i class="fa fa-window-close" aria-hidden="true"></i>
                 </button>
@@ -88,9 +88,9 @@ if (isset($_SESSION['username'])) {
                 <div class="modal-body row">
                     <!-- text box student id -->
                 <div class="mt-2 d-flex">
-                <label >Select course</label>
+                <label >Select Program</label>
             <select name="filter"  class="form-control">
-            <option value="all">All Course</option>
+            <option value="all">All Programs</option>
             <?php
                                 include_once '../database/dbconnection.db.php';
 

@@ -100,11 +100,11 @@
 <!-- attendance -->
 
 
-<!-- <li class="nav-item">
+<li class="nav-item">
         <a class="nav-link" href="../teacher/attendance.teacher.php">
         <i class=" fas fa-tasks"></i>
         <span>Attendance</span></a>
-</li> -->
+</li> 
     
 <!-- class standing -->
 

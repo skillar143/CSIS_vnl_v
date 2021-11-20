@@ -136,6 +136,30 @@ if ($result->num_rows > 0) {
     } 
 }
 
+// GETTING THE STUDENT EXAM RECORD
+$sql = "SELECT * from studentrecords where course = '$course'";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $sid = $row['student_id'];
+                $name =$row['name'];
+                $sql2 = "SELECT * from student_attendance where student_id = '$sid' and term = '$term' and subject_code = '$subcode'";
+                $result2 = $conn->query($sql2);
+                $sat = 0;
+
+       
+                if ($result2->num_rows > 0) {
+                    while ($row2 = $result2->fetch_assoc()) {    
+                        $score = $row2['score']; 
+                        $sat = $sat + $score;
+           
+                    }
+                }
+
+                $satarray[] = ($sat / 100 * 50 + 50)* .10 ; 
+            } 
+        }
+
 
 
 

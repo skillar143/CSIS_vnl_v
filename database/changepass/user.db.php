@@ -3,32 +3,17 @@
 include "../dbconnection.db.php";
 
 $password = $_POST['password'];
-$id = $_POST['id'];
-$uid = array();
-$pass = array();
+$id = $_POST['userid'];
+
+  $sql = "SELECT * FROM users WHERE user_id ='$id'";
+  $result = mysqli_query($conn, $sql);
 
 
-foreach( $id as $id ) {
-array_push($uid, $id);  
-  }
-  foreach( $password as $password ) {
-    array_push($pass, $password);  
-      }
+ if (mysqli_num_rows($result) === 1) {
+  $sql = "UPDATE users SET password = '$password' WHERE user_id = '$id'";
+  $result = mysqli_query($conn, $sql);
 
-$i = count($pass);
-$j = 0;
-
-//print_r(array_values($pass));
-//print_r(array_values($uid));
-
-for($j = 0; $j < $i; $j++) {
-  print $uid[$j];
-  print $pass[$j];
-
-//  $sql = "UPDATE users SET password = '$pass[$j]' WHERE user_id = '$uid[$j]'";
-//  $result = mysqli_query($conn, $sql);
-// header("Location: ../../admin/management/userlist.admin.php?success=Password is successfuly changed");
-}
-
-
-//header("Location: ../../admin/irregular.admin.php?success=Successfully enroll&stid=$id");
+    header("Location: ../../admin/management/userlist.admin.php?success=Password is successfuly changed");
+    exit();
+  } 
+  

@@ -4,12 +4,6 @@ session_start();
 if (isset($_SESSION['username'])) {
   
     include_once '../adminlayout/head.admin.php' ?>
-    <!-- <form action="../../database/changepass/user.db.php" method="post"> -->
-
-
-
-    
-
 
 
     <nav class="navbar navbar-expand navbar-light  topbar static-top ">
@@ -26,55 +20,12 @@ if (isset($_SESSION['username'])) {
     <span aria-hidden="true">&times;</span>
   </button>
                     </div> <?php } ?>
-                    <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <!-- modal header -->
-            <div class="modal-header bg-primary">
-                <h5 class="modal-title text-light" id="exampleModalLabel">Edit User Account</h5>
-                <button class="close text-light" type="button" data-dismiss="modal" aria-label="Close">
-                    <i class="fa fa-window-close" aria-hidden="true"></i>
-                </button>
-            </div>
-            <!-- end of modal header -->
-            <form class="needs-validation" novalidate action="../../database/addrecord/registerteacher.db.php" method="post">
-                <!-- modal body -->
-                <div class="modal-body">
-                <div class="form-group">
-                        <input type="text" class="form-control" name="user_id" id="user_id" autocomplete="off"  required>
-                    </div>
-                    <!-- text box student id -->
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="role" id="role" autocomplete="off" required>
-                    </div>
-                    <!-- end student id -->
-
-                    <!-- text box first name -->
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="password" id="password" autocomplete="off"  required>
-                    </div>
-                    <!-- end first name -->
-
-                    <!-- selection for gender -->
-                </div>
-                <!-- end of modal body -->
-
-                <!-- modal footer -->
-                <div class="modal-footer">
-                    <button class="btn btn-sm btn-outline-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-sm btn-outline-primary" type="submit" name="ok">Add</button>
-                </div>
-                <!-- end of modal footer -->
-            </form>
-        </div>
-    </div>
-</div>
 
     <div class="table-responsive">
     <table class="table table-striped table-hover table-borderless" id="datatableid">
         <thead class="bg-primary text-light ">
             <tr>
-                <th scope="col">ID</th>
+                <th scope="col">User ID</th>
                 <th scope="col">Role</th>
                 <th scope="col">Password</th>
                 <th scope="col">Action</th>
@@ -96,7 +47,7 @@ if (isset($_SESSION['username'])) {
                             <td><?php echo $row['user_id']?></td>
                             <td><?php echo $row['role']?></td>
                             <td><?php echo $row['password']?></td>
-                            <td><a type="button" class="btn btn-outline-info m-1 btn-sm" id="editBtn">
+                            <td><a type="button" class="btn btn-outline-info m-1 btn-sm editbtn" >
                             <i class="fas fa-edit"></i></a></td>
 
                 <?php
@@ -108,18 +59,52 @@ if (isset($_SESSION['username'])) {
          
         </tbody>
     </table>
-    <!-- </form> -->
     </div>
   
 
+    <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <!-- modal header -->
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title text-light" id="exampleModalLabel">Edit User Password</h5>
+                <button class="close text-light closemodal" type="button" data-dismiss="modal" aria-label="Close">
+                    <i class="fa fa-window-close" aria-hidden="true"></i>
+                </button>
+            </div>
+            <!-- end of modal header -->
+            <form class="needs-validation" novalidate action="../../database/changepass/user.db.php" method="post">
+                <!-- modal body -->
+                <div class="modal-body">
+                    <!-- text box student id -->
+                    <div class="form-group">
+                    <input type="text" class="form-control" name="userid" id="userid" autocomplete="off" placeholder="User id">
+                    </div>
+                    <!-- end student id -->
 
-    
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="role" id="role" autocomplete="off" placeholder="Role" disabled required>
+                    </div>
 
+                    <!-- text box contact-->
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="password" id="password" autocomplete="off" placeholder="Password" required>
+                    </div>
+            
+                    <!-- end address -->
+                </div>
+                <!-- end of modal body -->
 
-
-
-
-
+                <!-- modal footer -->
+                <div class="modal-footer">
+                    <button class="btn btn-sm btn-outline-secondary closemodal" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-sm btn-outline-primary" type="submit" name="ok">Add</button>
+                </div>
+                <!-- end of modal footer -->
+            </form>
+        </div>
+    </div>
+</div>
 
 
 <?php include_once '../adminlayout/footer.admin.php';

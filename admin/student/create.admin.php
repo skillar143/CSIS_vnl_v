@@ -64,7 +64,7 @@
                     <!-- end address -->
                     <!-- selection of course -->
                     <div class="form-group d-flex">
-                       <label for="course" style="width: 70%; padding:1px"> Course
+                       <label for="course" style="width: 70%; padding:1px"> Program
                         <select name="course" id="c" class="form-control" required>
                         <option selected disabled value="">Choose...</option>
                                 <?php
@@ -85,7 +85,7 @@
                             </select>
                         </label>
 
-                        <label for="year" style="width: 20%; padding:1px">Year
+                        <label for="year" style="width: 20%; padding:1px">Year Level
                         <select name="year" class="form-control" required>
                                 <option value="first">1st</option>
                                 <option value="second">2nd</option>
