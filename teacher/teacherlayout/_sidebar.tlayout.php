@@ -3,7 +3,7 @@
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
         <div class="sidebar-brand-icon">
-            <img class="img-profile rounded-circle" src="../assets/img/logo.png" width="90%">
+            <img class="img-profile rounded-circle" src="../../assets/img/logo.PNG" width="90%">
         </div>
         <div class="sidebar-brand-text mx-5">CSIS</sup></div>
     </a>
@@ -31,13 +31,13 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Subjects:</h6>
                 <?php
-                    include_once '../database/dbconnection.db.php';
+                    include_once '../../database/dbconnection.db.php';
                     $tid = $_SESSION['user_id'];
                     $sql = "SELECT * from subjects where teacher_id = '$tid'";
                     $result = $conn-> query($sql);
                     if($result-> num_rows > 0 ){
                         while($row = $result-> fetch_assoc()){
-                            echo "<a class='collapse-item' href='../teacher/studentlist.teacher.php?sub=$row[description]'>".$row['subcode']."-(".$row['description'].")</a>";
+                            echo "<a class='collapse-item' href='../list/studentlist.teacher.php?sub=$row[description]'>".$row['subcode']."-(".$row['description'].")</a>";
                         }
                     }
                 ?>
@@ -55,13 +55,12 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Subjects:</h6>
                 <?php
-                    include_once '../database/dbconnection.db.php';
                     $tid = $_SESSION['user_id'];
                     $sql = "SELECT * from subjects where teacher_id = '$tid'";
                     $result = $conn-> query($sql);
                     if($result-> num_rows > 0 ){
                         while($row = $result-> fetch_assoc()){
-                            echo "<a class='collapse-item' href='../teacher/course.teacher.php?sub=$row[description]'>".$row['subcode']."-(".$row['description'].")</a>";
+                            echo "<a class='collapse-item' href='../programs/course.teacher.php?sub=$row[description]'>".$row['subcode']."-(".$row['description'].")</a>";
                         }
                     } 
                 ?>
@@ -80,13 +79,13 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Subjects:</h6>
                 <?php
-                    include_once '../database/dbconnection.db.php';
+                    
                     $tid = $_SESSION['user_id'];
                     $sql = "SELECT * from subjects where teacher_id = '$tid'";
                     $result = $conn-> query($sql);
                     if($result-> num_rows > 0 ){
                         while($row = $result-> fetch_assoc()){
-                            echo "<a class='collapse-item' href='../teacher/gradesummary.teacher.php?sub=$row[description]'>".$row['subcode']."-(".$row['description'].")</a>";
+                            echo "<a class='collapse-item' href='../programs/gradesummary.teacher.php?sub=$row[description]'>".$row['subcode']."-(".$row['description'].")</a>";
                         }
                     } 
                 ?>
@@ -101,7 +100,7 @@
 
 
 <li class="nav-item">
-        <a class="nav-link" href="../teacher/attendance.teacher.php">
+        <a class="nav-link" href="../programs/attendance.teacher.php">
         <i class=" fas fa-tasks"></i>
         <span>Attendance</span></a>
 </li> 
@@ -109,7 +108,7 @@
 <!-- class standing -->
 
 <li class="nav-item">
-        <a class="nav-link" href="../teacher/CS.teacher.php">
+        <a class="nav-link" href="../programs/CS.teacher.php">
         <i class=" fas fa-chalkboard"></i>
         <span>Class Standing</span></a>
 </li>
@@ -117,7 +116,7 @@
 <!-- reporting -->
 
 <li class="nav-item">
-        <a class="nav-link" href="../teacher/reporting.teacher.php">
+        <a class="nav-link" href="../programs/reporting.teacher.php">
         <i class=" fas fa-tasks"></i>
         <span>Reporting</span></a>
 </li>
@@ -125,13 +124,13 @@
 <!-- exam -->
 
 <li class="nav-item">
-        <a class="nav-link" href="../teacher/exam.teacher.php">
+        <a class="nav-link" href="../programs/exam.teacher.php">
         <i class=" fas fa-user-edit"></i>
         <span>Exam</span></a>
 </li>
 
 <li class="nav-item">
-        <a class="nav-link" href="../teacher/ov.teacher.php">
+        <a class="nav-link" href="../programs/ov.teacher.php">
         <i class=" far fa-list-alt"></i>
         <span>Overall View</span></a>
 </li>
@@ -143,7 +142,7 @@
     </div>
 
     <li class="nav-item">
-        <a class="nav-link" href="../teacher/changepass.teacher.php" ">
+        <a class="nav-link" href="../profile/changepass.teacher.php" ">
         <i class=" fas fa-key"></i>
             <span>Change Password</span></a>
     </li>

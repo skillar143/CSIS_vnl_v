@@ -19,7 +19,7 @@ if (isset($_SESSION['user_id'])) {
         }
     }
 
-    include "../database/grade/computation.php"; 
+    include "../../database/grade/computation.php"; 
     
     ?>
 
@@ -28,7 +28,7 @@ if (isset($_SESSION['user_id'])) {
 
 <!-- content here -->
 <h5 class="title text-dark mb-3">Input Grade in <?php echo "(".$subcode.")-".$sub?></h5>
-<?php echo "<form action='../database/grade/finalizegrade.db.php?sub=$sub'&course=$course method='post'>"; ?>
+<?php echo "<form action='../../database/grade/finalizegrade.db.php?sub=$sub'&course=$course method='post'>"; ?>
 <div class="row mb-2">
 
     <div class="form-group col">
@@ -140,7 +140,7 @@ if (isset($_SESSION['user_id'])) {
 <!-- end of content here -->
 <?php include "../teacherlayout/footer.tlayout.php";
 } else {
-    header("Location: ../canossa/master.blade.php");
+    header("Location: ../../canossa/master.blade.php");
     exit();
 }
 ?>

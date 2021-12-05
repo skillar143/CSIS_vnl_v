@@ -39,5 +39,5 @@ for($j = 0; $j < $i; $j++) {
   $sql = "INSERT INTO $term (student_id, subject, grade) 
   VALUES ('$sid[$j]','$sub','$grad[$j]');";
   $result = mysqli_query($conn, $sql);
- header("Location: ../../teacher/studentgrade.teacher.php?success=Grade is successfuly submitted &sub=$sub&course=$course");
+ header("Location: ../../teacher/records/studentgrade.teacher.php?success=Grade is successfuly submitted &sub=$sub&course=$course");
 }

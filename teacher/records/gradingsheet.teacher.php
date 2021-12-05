@@ -16,7 +16,7 @@ if (isset($_SESSION['user_id'])) {
     }?>
     <!-- content here -->
     <h5 class="title text-dark mb-3"> Grade summary for <?php echo "(".$subcode.")-".$sub?></h5>
-    <?php echo "<form action='../database/grade/edit.db.php?' method='get'>"; ?>
+    <?php echo "<form action='../../database/grade/edit.db.php?' method='get'>"; ?>
     <table class="table" id="studentlist">
         <thead class="bg-primary text-light" >
             <tr>
@@ -29,7 +29,7 @@ if (isset($_SESSION['user_id'])) {
         </thead>
         <tbody>
             <?php
-            include_once '../database/dbconnection.db.php';
+            include_once '../../database/dbconnection.db.php';
             $sub = $_GET['sub'];
             $course = $_GET['course'];
             $sql = "SELECT * from studentrecords where course = '$course'";
@@ -95,7 +95,7 @@ if (isset($_SESSION['user_id'])) {
     <!-- end of content here -->
 <?php include "../teacherlayout/footer.tlayout.php";
 } else {
-    header("Location: ../canossa/master.blade.php");
+    header("Location: ../../canossa/master.blade.php");
     exit();
 }
 ?>

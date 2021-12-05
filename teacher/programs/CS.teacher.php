@@ -3,7 +3,6 @@ session_start();
 
 if (isset($_SESSION['user_id'])) {
     $id = $_SESSION['user_id'];
-    $sub = $_GET['sub'];
                   
     include "../teacherlayout/head.tlayout.php"; ?>
        <!-- content here -->
@@ -12,18 +11,19 @@ if (isset($_SESSION['user_id'])) {
         <div class="modal-content w-50 ">
             <!-- modal header -->
             <div class="modal-header bg-primary">
-                <h5 class="modal-title text-light">Choose Program</h5>
+                <h5 class="modal-title text-light">Class Record</h5>
             </div>
             <!-- end of modal header -->
-            <form action="gradingsheet.teacher.php" method="get">
+            <form action="../records/csrecord.teacher.php" method="get">
                 <!-- modal body -->
                 <div class="modal-body">
                     <!-- text box student id -->
                     <div class="form-group">
-                        <select name="course" id="c" class="form-control" required>
-                            <option value="">Program</option>
+                        <select name="course" id="c" class="form-control m-1" required>
+                            <option Selected Disabled value="">Program</option>
                             <?php
-                            include_once '../database/dbconnection.db.php';
+                             
+                            include_once '../../database/dbconnection.db.php';
 
                             $sql = "SELECT * from course";
                             $result = $conn->query($sql);
@@ -39,8 +39,27 @@ if (isset($_SESSION['user_id'])) {
 
                             ?>
                         </select>
+                        <select name="sub" id="c" class="form-control m-1" required>
+                            <option value="">Subject</option>
+                            <?php
+                             
+                            include_once '../../database/dbconnection.db.php';
+
+                            $sql = "SELECT * from subjects where teacher_id = '$tid'";
+                            $result = $conn->query($sql);
+
+                            if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+
+                                    echo "<option value='" . $row['description'] . "' class='text-uppercase'>".$row['subcode']."-(".$row['description']."</option>";
+                                }
+                            } else {
+                                echo "<tr><td>No records</td></tr>";
+                            }
+
+                            ?>
+                        </select>
                     </div>
-                    <input type="hidden" name="sub" value="<?php echo $sub?>">
                     <!-- end student id -->      
                     <!-- end of course selection -->
                 </div>

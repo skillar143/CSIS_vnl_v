@@ -61,7 +61,7 @@
       ">
         <div class="container d-flex flex-column justify-content-center align-items-center h-100">
           <div class="container d-flex align-items-center p-2 header">
-            <img src="assets/img/circle-logo.png" alt="" height="80" width="80">
+            <img src="assets/img/logo.png" alt="" height="80" width="80">
             <div class="container w-100">
                 <h4>Canossa College</h4>
                 <h5>San Pablo</h5>
@@ -98,7 +98,7 @@
 
         <div class="container d-flex flex-column justify-content-center align-items-center h-100">
           <div class="container d-flex align-items-center p-2">
-            <img src="assets/img/circle-logo.png" alt="" height="80" width="80">
+            <img src="assets/img/logo.PNG" alt="" height="80" width="80">
             <div class="container w-100">
                 <h4>Canossa College</h4>
                 <h5>San Pablo</h5>
@@ -135,7 +135,7 @@
       ">
         <div class="container d-flex flex-column justify-content-center align-items-center h-100">
           <div class="container d-flex align-items-center p-2">
-            <img src="assets/img/circle-logo.png" alt="" height="80" width="80">
+            <img src="assets/img/logo.PNG" alt="" height="80" width="80">
             <div class="container w-100">
                 <h4>Canossa College</h4>
                 <h5>San Pablo</h5>

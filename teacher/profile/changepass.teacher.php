@@ -13,7 +13,7 @@ if (isset($_SESSION['user_id'])) {
 <?php }elseif(isset($_GET['success'])){ ?> <div class="alert alert-success text-center">
   <strong>Success!</strong> <?php echo $_GET['success'];?> </div> <?php } ?>
             <!-- end of modal header -->
-            <form action="../database/changepass/teacherpass.db.php" method="post">
+            <form action="../../database/changepass/teacherpass.db.php" method="post">
                 <!-- modal body -->
                 <div class="body w-75 m-auto">
                     <!-- text box student id -->
@@ -53,7 +53,7 @@ if (isset($_SESSION['user_id'])) {
        <!-- end of content here -->
        <?php include "../teacherlayout/footer.tlayout.php";
     }else{
-        header("Location: ../canossa/master.blade.php");
+        header("Location: ../../canossa/master.blade.php");
         exit();
    }
 ?>

@@ -9,7 +9,15 @@ if (isset($_SESSION['user_id'])) {
 
     include "../teacherlayout/head.tlayout.php"; 
 
-    
+    $sql2 = "SELECT * from gradingstatus ";
+$result2 = $conn->query($sql2);
+if ($result2->num_rows > 0) {
+    while ($row2 = $result2->fetch_assoc()) { 
+      
+  $term = $row2['term'];
+
+    }}
+
     $sql2 = "SELECT * from subjects where description = '$sub'";
     $result2 = $conn->query($sql2);
 
@@ -18,18 +26,6 @@ if (isset($_SESSION['user_id'])) {
             $subcode = $row2['subcode'];
         }
     }
-
-
-    $sql2 = "SELECT * from gradingstatus ";
-    $result2 = $conn->query($sql2);
-    if ($result2->num_rows > 0) {
-        while ($row2 = $result2->fetch_assoc()) { 
-          
-      $term = $row2['term'];
-    
-        }}
-
-
     ?>
 <!-- content here -->
 <h5 class="title text-dark mb-3">Class Standing in <?php echo "(".$subcode.")-".$sub?></h5>
@@ -46,7 +42,6 @@ if (isset($_SESSION['user_id'])) {
             <th class="">Score(s)</th>
         </tr>
     </thead>
-
     <tbody>
 
         <?php
@@ -56,12 +51,14 @@ if (isset($_SESSION['user_id'])) {
                 while ($row = $result->fetch_assoc()) {
                     $sid = $row['student_id'];
                     $name =$row['name'];
-                    $sql2 = "SELECT * from student_exam where student_id = '$sid' and term = '$term' and subject_code = '$subcode'";
+                    $sql2 = "SELECT * from student_cs where student_id = '$sid' and term = '$term' and subject_code = '$subcode'";
                     $result2 = $conn->query($sql2);
 ?>
         <tr>
             <td><?php echo $sid; ?></td>
             <td><?php echo $name; ?></td>
+            
+
             <td>
             <?php
                     if ($result2->num_rows > 0) {
@@ -80,7 +77,7 @@ if (isset($_SESSION['user_id'])) {
 <!-- end of content here -->
 <?php include "../teacherlayout/footer.tlayout.php";
 } else {
-    header("Location: ../canossa/master.blade.php");
+    header("Location: ../../canossa/master.blade.php");
     exit();
 }
 ?>
@@ -109,13 +106,13 @@ input::-webkit-inner-spin-button {
         <div class="modal-content">
             <!-- modal header -->
             <div class="modal-header bg-primary">
-                <h5 class="modal-title text-light" id="exampleModalLabel">Add New Score</h5>
+                <h5 class="modal-title text-light" id="exampleModalLabel">Add New Record</h5>
                 <button class="close text-light btn btn-sm" type="button" data-dismiss="modal" aria-label="Close">
                     <i class="fa fa-window-close" aria-hidden="true"></i>
                 </button>
             </div>
             <!-- end of modal header -->
-            <form class="needs-validation" action="../database/grade/exam.db.php" method="post" novalidate>
+            <form class="needs-validation" action="../../database/grade/classrecord.db.php" method="post" novalidate>
                 <!-- modal body -->
                 <div class="modal-body">
                     <!-- text box student id -->

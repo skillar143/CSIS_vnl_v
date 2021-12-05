@@ -7,7 +7,7 @@ $selectedBg = "$bg[$i]"; // set variable equal to which random filename was chos
 
 <head>
   <title>CSIS-Admin</title>
-  <link rel="icon" href="assets/img/logo.png">
+  <link rel="icon" href="assets/img/logo.PNG">
   <!-- Custom fonts for this template-->
   <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="assets/css/font.css" rel="stylesheet">

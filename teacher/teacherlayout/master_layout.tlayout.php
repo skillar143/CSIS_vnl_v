@@ -9,11 +9,11 @@ if (isset($_SESSION['user_id'])) {
                         <strong>Success!</strong> <?php echo $_GET['success'];?> 
                         </div> <?php } ?>
                         <div class="brand-icon text-center">
-            <img class="img-fluid rounded mx-auto d-block w-75" alt="Responsive image" src="../assets/img/logo.png">
+            <img class="img-fluid rounded mx-auto d-block w-75" alt="Responsive image" src="../../assets/img/logo.png">
         </div> 
 <?php include "footer.tlayout.php";
     }else{
-        header("Location: ../canossa/master.blade.php");
+        header("Location: ../../canossa/master.blade.php");
         exit();
    }
 ?>

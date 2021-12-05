@@ -29,7 +29,7 @@ if(isset($_POST['submit'])){
     } 
 
     else{
-        header("Location: ../../teacher/changepass.teacher.php?error=New password does not match into confirm password");
+        header("Location: ../../teacher/profile/changepass.teacher.php?error=New password does not match into confirm password");
     }
     
 

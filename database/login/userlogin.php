@@ -20,7 +20,7 @@ include "../dbconnection.db.php";
                     header("Location: ../../student/sublist.student.php");
 		        exit();
                 }elseif($_SESSION['role'] == "faculty"){
-                    header("Location: ../../teacherlayout/master_layout.tlayout.php");
+                    header("Location: ../../teacher/teacherlayout/master_layout.tlayout.php");
 		        exit();
                 }
             	

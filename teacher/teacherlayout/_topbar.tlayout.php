@@ -38,7 +38,7 @@
     <div class="topbar-divider d-none d-sm-block"></div> 
     <span class="mr-2 d-none d-lg-inline text-gray-600 small">
         <?php 
-            include_once '../database/dbconnection.db.php';
+            include_once '../../database/dbconnection.db.php';
             $id = $_SESSION['user_id'];
 
 

@@ -54,5 +54,5 @@ for($j = 0; $j < $i; $j++) {
 $sql = "INSERT INTO student_attendance (subject_code, teacher_id, student_id, term, score,   course) 
  VALUES ('$code', '$tid', '$uid[$j]', '$term', '$sc[$j]', '$course');";
  $result = mysqli_query($conn, $sql);
- header("Location: ../../teacher/attendancerecord.teacher.php?course=$course & sub=$sub & success=Recorded Successfuly ");
+ header("Location: ../../teacher/records/attendancerecord.teacher.php?course=$course & sub=$sub & success=Recorded Successfuly ");
 }

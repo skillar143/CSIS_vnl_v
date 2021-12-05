@@ -10,7 +10,7 @@ if (isset($_SESSION['username'])) {
                         <strong>Success!</strong> <?php echo $_GET['success'];?> 
                         </div> <?php } ?>
                         <div class="brand-icon text-center">
-            <img class="img-fluid rounded mx-auto d-block w-75" alt="Responsive image" src="../../assets/img/logo.png">
+            <img class="img-fluid rounded mx-auto d-block w-75" alt="Responsive image" src="../../assets/img/logo.PNG">
         </div>
 
 <?php include_once '../adminlayout/footer.admin.php';

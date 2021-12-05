@@ -2,7 +2,7 @@
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
         <div class="sidebar-brand-icon">
-        <img class="img-profile rounded-circle" src="../assets/img/logo.png" width="90%">
+        <img class="img-profile rounded-circle" src="../assets/img/logo.PNG" width="90%">
         </div>
         <div class="sidebar-brand-text mx-5">CSIS</sup></div>
     </a>

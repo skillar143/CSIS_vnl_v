@@ -77,7 +77,7 @@ if (isset($_SESSION['user_id'])) {
 <!-- end of content here -->
 <?php include "../teacherlayout/footer.tlayout.php";
 } else {
-    header("Location: ../canossa/master.blade.php");
+    header("Location: ../../canossa/master.blade.php");
     exit();
 }
 ?>
@@ -112,7 +112,7 @@ input::-webkit-inner-spin-button {
                 </button>
             </div>
             <!-- end of modal header -->
-            <form class="needs-validation" action="../database/grade/reporting.db.php" method="post" novalidate>
+            <form class="needs-validation" action="../../database/grade/reporting.db.php" method="post" novalidate>
                 <!-- modal body -->
                 <div class="modal-body">
                     <!-- text box student id -->

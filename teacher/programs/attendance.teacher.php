@@ -11,18 +11,19 @@ if (isset($_SESSION['user_id'])) {
         <div class="modal-content w-50 ">
             <!-- modal header -->
             <div class="modal-header bg-primary">
-                <h5 class="modal-title text-light">Reporting</h5>
+                <h5 class="modal-title text-light">Attendance</h5>
             </div>
             <!-- end of modal header -->
-            <form action="reportrecord.teacher.php" method="get">
+            <form action="../records/attendancerecord.teacher.php" method="get">
                 <!-- modal body -->
-                <div class="modal-body ">
+                <div class="modal-body">
                     <!-- text box student id -->
                     <div class="form-group">
-                        <select name="course" id="c" class="form-control m-1" required>
+                    <select name="course" id="c" class="form-control m-1" required>
                             <option value="">Program</option>
                             <?php
-                            include_once '../database/dbconnection.db.php';
+                             
+                            include_once '../../database/dbconnection.db.php';
 
                             $sql = "SELECT * from course";
                             $result = $conn->query($sql);
@@ -42,7 +43,7 @@ if (isset($_SESSION['user_id'])) {
                             <option value="">Subject</option>
                             <?php
                              
-                            include_once '../database/dbconnection.db.php';
+                            include_once '../../database/dbconnection.db.php';
 
                             $sql = "SELECT * from subjects where teacher_id = '$tid'";
                             $result = $conn->query($sql);
@@ -59,6 +60,7 @@ if (isset($_SESSION['user_id'])) {
                             ?>
                         </select>
                     </div>
+                    
                     <!-- end student id -->      
                     <!-- end of course selection -->
                 </div>
@@ -80,7 +82,7 @@ if (isset($_SESSION['user_id'])) {
        <!-- end of content here -->
        <?php include "../teacherlayout/footer.tlayout.php";
     }else{
-        header("Location: ../canossa/master.blade.php");
+        header("Location: ../../canossa/master.blade.php");
         exit();
    }
 ?>

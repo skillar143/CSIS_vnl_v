@@ -28,9 +28,9 @@ if ($result2->num_rows > 0) {
     }
     ?>
 <!-- content here -->
-<h5 class="title text-dark mb-3">Class Standing in <?php echo "(".$subcode.")-".$sub?></h5>
+<h5 class="title text-dark mb-3">Attendance in <?php echo "(".$subcode.")-".$sub?></h5>
 <div class="float-right m-1">
-    <a class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#AddCS"><i class="fas fa-plus"></i>Add
+    <a class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#AddAttendance"><i class="fas fa-plus"></i>Add
         Class Record</i></a>
 </div>
 <div class="table-responsive">
@@ -39,19 +39,21 @@ if ($result2->num_rows > 0) {
         <tr>
             <th class="">Student ID</th>
             <th class="">Name</th>
-            <th class="">Score(s)</th>
+            <th class="">Score(s)</th> 
+            <th class="">Edit</th>
         </tr>
     </thead>
     <tbody>
 
         <?php
+            
             $sql = "SELECT * from studentrecords where course = '$course'";
             $result = $conn->query($sql);
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     $sid = $row['student_id'];
                     $name =$row['name'];
-                    $sql2 = "SELECT * from student_cs where student_id = '$sid' and term = '$term' and subject_code = '$subcode'";
+                    $sql2 = "SELECT * from student_attendance where student_id = '$sid' and term = '$term' and subject_code = '$subcode'";
                     $result2 = $conn->query($sql2);
 ?>
         <tr>
@@ -67,9 +69,14 @@ if ($result2->num_rows > 0) {
                     echo $score. " | "; 
                         }
                     }
+                    $edit = "<a class='btn btn-sm btn-outline-info' href='../edit/attendance.teacher.php?stid=$row[student_id]'>
+                    <i class='fas fa-edit'></i></a>";
+       
+                   echo "<td>" .$edit. "</td></tr>";
                 }
             }
             ?></td>
+            
            </tr>
     </tbody>
 </table>
@@ -101,7 +108,7 @@ input::-webkit-inner-spin-button {
 }
 </style>
 
-<div class="modal fade" id="AddCS" role="dialog" aria-hidden="true">
+<div class="modal fade" id="AddAttendance" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <!-- modal header -->
@@ -112,21 +119,10 @@ input::-webkit-inner-spin-button {
                 </button>
             </div>
             <!-- end of modal header -->
-            <form class="needs-validation" action="../database/grade/classrecord.db.php" method="post" novalidate>
+            <form class="needs-validation" action="../../database/grade/attendance.db.php" method="post" novalidate>
                 <!-- modal body -->
                 <div class="modal-body">
                     <!-- text box student id -->
-                    <a href="">Enter The Perfect Score</a>
-                    <div class="form-group d-flex ">
-                        <label for="studentid" class="p-1 m-1">Subject </label>
-                        <input type="text" class="form-control m-1" style="width: 30%;" value="<?php echo $sub; ?>"
-                            name="studentid" autocomplete="off" disabled>
-                        <label for="studentid" class="p-1 m-1">Total Items: </label>
-                        <input type="number" class="form-control m-1" style="width: 10%; " name="item"
-                            autocomplete="off" required>
-                    </div>
-
-                    <hr class="divider">
 
                     <input type="hidden" name="sub" id="" class="form-control" value="<?php echo $sub; ?>">
                     <input type="hidden" name="tid" id="" class="form-control" value="<?php echo $id; ?>">

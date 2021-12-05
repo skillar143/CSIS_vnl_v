@@ -3,7 +3,8 @@ session_start();
 
 if (isset($_SESSION['user_id'])) {
  $sub = $_GET['sub'];
-    include "../teacherlayout/head.tlayout.php"; $sql2 = "SELECT * from subjects where description = '$sub'";
+    include "../teacherlayout/head.tlayout.php"; 
+    $sql2 = "SELECT * from subjects where description = '$sub'";
     $result2 = $conn->query($sql2);
 
     if ($result2->num_rows > 0) {
@@ -13,7 +14,7 @@ if (isset($_SESSION['user_id'])) {
     }?>
        <!-- content here -->
        <h5 class="title text-dark mb-5">Student List in <?php echo "(".$subcode.")-".$sub?></h5>
-<a class="btn btn-sm btn-outline-primary" href="../print/studentlist.print.php?sub=<?php echo $sub;?>"><i class="fas fa-print"></i></a>
+<a class="btn btn-sm btn-outline-primary" href="../../print/studentlist.print.php?sub=<?php echo $sub;?>"><i class="fas fa-print"></i></a>
 
        <div class="table-responsive">
        <table class="table" id="studentlist">
@@ -31,7 +32,7 @@ if (isset($_SESSION['user_id'])) {
     <tbody>
       
     <?php
-                    include_once '../database/dbconnection.db.php';
+                    include_once '../../database/dbconnection.db.php';
                     $sub = $_GET['sub'];
                     $sql = "SELECT * from studentsubs where subject = '$sub'";
                     $result = $conn-> query($sql);
@@ -71,7 +72,7 @@ if (isset($_SESSION['user_id'])) {
        <!-- end of content here -->
        <?php include "../teacherlayout/footer.tlayout.php";
     }else{
-        header("Location: ../canossa/master.blade.php");
+        header("Location: ../../canossa/master.blade.php");
         exit();
    }
 ?>

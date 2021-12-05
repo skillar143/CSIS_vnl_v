@@ -10,10 +10,10 @@ if (isset($_SESSION['user_id'])) {
         <div class="modal-content w-50 ">
             <!-- modal header -->
             <div class="modal-header bg-primary">
-                <h5 class="modal-title text-light">Overall View</h5>
+                <h5 class="modal-title text-light">Exam</h5>
             </div>
             <!-- end of modal header -->
-            <form action="ovview.teacher.php" method="get">
+            <form action="../records/examrecord.teacher.php" method="get">
                 <!-- modal body -->
                 <div class="modal-body">
                     <!-- text box student id -->
@@ -22,7 +22,7 @@ if (isset($_SESSION['user_id'])) {
                             <option value="">Program</option>
                             <?php
                              
-                            include_once '../database/dbconnection.db.php';
+                            include_once '../../database/dbconnection.db.php';
 
                             $sql = "SELECT * from course";
                             $result = $conn->query($sql);
@@ -42,7 +42,7 @@ if (isset($_SESSION['user_id'])) {
                             <option value="">Subject</option>
                             <?php
                              
-                            include_once '../database/dbconnection.db.php';
+                            include_once '../../database/dbconnection.db.php';
 
                             $sql = "SELECT * from subjects where teacher_id = '$tid'";
                             $result = $conn->query($sql);
@@ -81,7 +81,7 @@ if (isset($_SESSION['user_id'])) {
        <!-- end of content here -->
        <?php include "../teacherlayout/footer.tlayout.php";
     }else{
-        header("Location: ../canossa/master.blade.php");
+        header("Location: ../../canossa/master.blade.php");
         exit();
    }
 ?>

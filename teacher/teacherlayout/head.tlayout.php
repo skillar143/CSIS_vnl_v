@@ -1,21 +1,20 @@
 <!-- header -->
 <title>CSIS-Teacher</title>
     <!-- Custom fonts for this template-->
-    <link rel="icon" href="../assets/img/logo.png" >
+    <link rel="icon" href="../../assets/img/logo.PNG" >
     <!-- Custom fonts for this template-->
-    <link href="../assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="../../assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     
-    <link href="../assets/css/font.css" rel="stylesheet">
+    <link href="../../assets/css/font.css" rel="stylesheet">
     <!-- Custom styles for this template-->
     
-    <link href="../assets/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../../assets/css/sb-admin-2.min.css" rel="stylesheet">
    
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
 
 
 
-<!-- Scripts -->
-<script  src="assets/js/app.js" defer></script>
+
 
 
 <!-- end of header -->

@@ -141,7 +141,7 @@ if (isset($_SESSION['user_id'])) {
 <!-- end of content here -->
 <?php include "../teacherlayout/footer.tlayout.php";
 } else {
-    header("Location: ../canossa/master.blade.php");
+    header("Location: ../../canossa/master.blade.php");
     exit();
 }
 ?>

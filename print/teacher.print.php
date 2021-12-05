@@ -17,7 +17,7 @@ if (isset($_SESSION['username'])) {
     <!-- end of header -->
     <div class="p-5">
         <div class="title mb-3 row text-center">
-            <div class="col-1 "><img src="../assets/img/logo.jpg" alt=""></div>
+            <div class="col-1 "><img src="../assets/img/logo.j  pg" alt=""></div>
         </div>
         <div class="text-right mb-3">
             <a class="btn btn-danger" id="print-btn" href="../admin/teacher/teacherlist.admin.php"><i class="fas fa-arrow-circle-left"></i></a>
