@@ -5,9 +5,8 @@ if (isset($_SESSION['user_id'])) {
     $id = $_SESSION['user_id'];
     $sub = $_GET['sub'];
     $course = $_GET['course'];
-   
-    include "../database/dbconnection.db.php"; 
-
+    $term = $_GET['term'];
+    include_once '../database/dbconnection.db.php';
     
     $sql2 = "SELECT * from subjects where description = '$sub'";
     $result2 = $conn->query($sql2);
@@ -19,14 +18,14 @@ if (isset($_SESSION['user_id'])) {
     }
 
 
-    $sql2 = "SELECT * from gradingstatus ";
-    $result2 = $conn->query($sql2);
-    if ($result2->num_rows > 0) {
-        while ($row2 = $result2->fetch_assoc()) { 
+   // $sql2 = "SELECT * from gradingstatus ";
+   // $result2 = $conn->query($sql2);
+   // if ($result2->num_rows > 0) {
+   //     while ($row2 = $result2->fetch_assoc()) { 
           
-      $term = $row2['term'];
-    
-        }}
+     // $term = $row2['term'];
+    //$term = "prelim";
+    //    }}
 
         // GETTING THE TOTAL OF reporting
 $sql = "SELECT * from teacher_cs where teacher_id = '$id' and course = '$course' and term = '$term' and subject_code = '$subcode'";
@@ -70,8 +69,28 @@ while ($row = $result->fetch_assoc()) {
 }
 }
 
-    ?>
+if($term === "prelim"){
+    $table = "prelims";
+    $th = " ";
+}elseif($term === "midterm"){
+    $table = "prelims";
+    $th = "Prelim";
+}elseif($term === "final"){
+    $table = "midterms";
+    $th = "Midterm";
+}
 
+
+                // GETTING THE TOTAL OF reporting
+                
+
+
+if($term === "prelim"){
+    $dis = "d-none";
+}else{
+    $dis = "d";
+}
+    ?>
 <title>CSIS</title>
     <!-- Custom fonts for this template-->
     <link rel="icon" href="../assets/img/logo.png">
@@ -87,7 +106,7 @@ while ($row = $result->fetch_assoc()) {
             <div class="col-1 "><img src="../assets/img/logo.jpg" alt=""></div>
         </div>
         <div class="text-right mb-3">
-            <a class="btn btn-danger" id="print-btn" href="../teacher/records/ovview.teacher.php?sub=<?php echo $sub;?>&course=<?php echo $course;?>"><i class="fas fa-arrow-circle-left"></i></a>
+            <a class="btn btn-danger" id="print-btn" href="../teacher/records/ovview.teacher.php?sub=<?php echo $sub;?>&course=<?php echo $course;?>&term=<?php echo $term;?>"><i class="fas fa-arrow-circle-left"></i></a>
             <button class="btn btn-danger" onclick="window.print();" id="print-btn"><i class="fas fa-print"></i></button>
         </div>
         <h5 class="title text-dark mb-3"><?php echo $course ."(".$subcode.")-".$sub?></h5>
@@ -105,8 +124,8 @@ while ($row = $result->fetch_assoc()) {
             <th class="">25%</th>
             <th class="">Exam</th>
             <th class="">40%</th>
-            <th class="d-none">Pre-Final</th>
-            <th class="d-none">Midterm</th>
+            <th class="<?php echo $dis; ?>">Pre-Final</th>
+            <th class="<?php echo $dis; ?>"><?php echo $th; ?></th>
             <th class="">Final Grade</th>
         </tr>
     </thead>
@@ -207,14 +226,28 @@ while ($row = $result->fetch_assoc()) {
             
                          <td> <?php  $examtotal = ($exam/$tex*50+50)*.40;  
                             echo number_format($examtotal, 0.0);?> </td>  
-                         <td> 
-                             <?php  
-                         if($term === "prelim"){
-                            echo number_format($cstotal+$reptotal+$examtotal+10, 0.0);
-                           
-                         }else{
-                            echo $cstotal+$reptotal+$examtotal+10; 
-                         }?> </td>
+    
+                         <td> <?php  
+                                    $prefinal = $cstotal+$reptotal+$examtotal+10;
+                            echo number_format($prefinal, 0.0); 
+                         ?> </td>
+                         <td class="<?php echo $dis; ?>"><?php
+                            $prev = "SELECT * from $table where student_id = '$sid' and subject = '$sub'";
+                            $res = $conn->query($prev);
+                            if ($res->num_rows > 0) {
+                            while ($row = $res->fetch_assoc()) {    
+                                     echo $row['grade'];    
+                                     $preg = $row['grade'];   
+                                    }
+                            }
+                            ?></td>
+                            <td class="<?php echo $dis; ?>">
+                                <?php 
+                                
+                                $finalg = ($prefinal*.70)+($preg*.30);
+                                echo number_format($finalg, 0.0);
+                                ?>
+                            </td>
                          <?php 
                         }
                     }?>     

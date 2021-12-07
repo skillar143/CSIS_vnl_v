@@ -98,7 +98,7 @@ if (isset($_SESSION['username'])) {
                 <!-- modal footer -->
                 <div class="modal-footer">
                     <button class="btn btn-sm btn-outline-secondary closemodal" type="button" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-sm btn-outline-primary" type="submit" name="ok">Add</button>
+                    <button class="btn btn-sm btn-outline-primary" type="submit" name="ok">Save</button>
                 </div>
                 <!-- end of modal footer -->
             </form>

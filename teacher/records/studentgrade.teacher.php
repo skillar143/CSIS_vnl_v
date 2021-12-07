@@ -60,12 +60,15 @@ if (isset($_SESSION['user_id'])) {
                     $sql2 = "SELECT * from studentrecords where student_id = '$id' and course = '$course' order by name";
                     $result2 = $conn->query($sql2);
                      $term;
-                    if ($term == "midterm"){
+                     if($term === "prelim"){
                         $table = "prelims";
-                    }elseif($term == "final"){
+                        $th = " ";
+                    }elseif($term === "midterm"){
+                        $table = "prelims";
+                        $th = "Prelim";
+                    }elseif($term === "final"){
                         $table = "midterms";
-                    }else{
-                        $table = "prelims";
+                        $th = "Midterm";
                     }
                     
 
@@ -84,13 +87,13 @@ if (isset($_SESSION['user_id'])) {
                             if ($term == 'prelim'){
                                 
                               
-                                $grade = number_format($csarray[$c] + $examarray[$c] + $reportarray[$c] + $satarray[$c], 0);
+                                $grade = ($csarray[$c] + $examarray[$c] + $reportarray[$c] + $satarray[$c]);
 
                                 $finalgrade = $grade;
 
                             }else{
                                 
-                                $grade = number_format($csarray[$c] + $examarray[$c] + $reportarray[$c] + $satarray[$c], 0);
+                                $grade = ($csarray[$c] + $examarray[$c] + $reportarray[$c] + $satarray[$c]);
 
                                 $finalgrade = ($recentgrade * .30 )+($grade * .70);
 
@@ -106,7 +109,7 @@ if (isset($_SESSION['user_id'])) {
         
 
             <td><input type='text' name="grade[]" class='form-control mb-2 mr-sm-2 mb-sm-0'
-                    value="<?php echo $grade; ?>" autocomplete="off" required></td>
+                    value="<?php  echo number_format($finalgrade, 0.0);; ?>" autocomplete="off" required></td>
             <input type="hidden" name="studentid[]" value="<?php echo $row2['student_id']; ?>"
                 class="border-0 bg-transparent ">
                 <input type="hidden" name="course" value="<?php echo $course; ?>"

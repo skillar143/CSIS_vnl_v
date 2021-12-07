@@ -58,6 +58,42 @@ if (isset($_SESSION['user_id'])) {
 
                             ?>
                         </select>
+                        <select name="term" id="c" class="form-control m-1" required>
+                            <option value="">Term</option>
+                            <?php
+                             
+                            include_once '../../database/dbconnection.db.php';
+
+                            $sql2 = "SELECT * from gradingstatus ";
+                            $result2 = $conn->query($sql2);
+                            if ($result2->num_rows > 0) {
+                                while ($row2 = $result2->fetch_assoc()) { 
+                                  $t = $row2['term'];
+                                   
+                                }}
+
+                                if($t === "prelim"){
+                                    ?>
+                                    <option value="prelim" class='text-uppercase'>Prelim</option>
+                                    <?php
+                                }elseif($t === "midterm"){
+                                    ?>
+                                    <option value="prelim" class='text-uppercase'>Prelim</option>
+                                    <option value="midterm" class='text-uppercase'>Midterm</option>
+                                    <?php
+                                }elseif($t === "final"){
+                                    ?>
+                                    <option value="prelim" class='text-uppercase'>Prelim</option>
+                                    <option value="midterm" class='text-uppercase'>Midterm</option>
+                                    <option value="final" class='text-uppercase'>Final</option>
+                                    <?php
+                                }
+                            
+
+                           
+
+                            ?>
+                        </select>
                     </div>
                     
                     <!-- end student id -->      
