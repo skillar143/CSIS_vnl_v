@@ -33,6 +33,7 @@ if ($result2->num_rows > 0) {
     <a class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#AddCS"><i class="fas fa-plus"></i>Add
         Class Record</i></a>
 </div>
+<p><?php echo $course ?></p>
 <div class="table-responsive">
 <table class="table" id="datatableid">
     <thead class="bg-primary text-light ">
@@ -40,6 +41,7 @@ if ($result2->num_rows > 0) {
             <th class="">Student ID</th>
             <th class="">Name</th>
             <th class="">Score(s)</th>
+            <th class="">Action</th>
         </tr>
     </thead>
     <tbody>
@@ -67,6 +69,10 @@ if ($result2->num_rows > 0) {
                     echo $score. " | "; 
                         }
                     }
+                    $edit = "<a class='btn btn-sm btn-outline-info' href='../edit/classrecord.teacher.php?stid=$row[student_id]&sub=$sub&course=$course'>
+                    <i class='fas fa-edit'></i></a>";
+       
+                   echo "<td>" .$edit. "</td></tr>";
                 }
             }
             ?></td>

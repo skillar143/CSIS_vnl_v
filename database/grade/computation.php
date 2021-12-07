@@ -136,7 +136,7 @@ if ($result->num_rows > 0) {
     } 
 }
 
-// GETTING THE STUDENT EXAM RECORD
+// GETTING THE STUDENT Attendance RECORD
 $sql = "SELECT * from studentrecords where course = '$course'";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
@@ -156,7 +156,7 @@ $sql = "SELECT * from studentrecords where course = '$course'";
                     }
                 }
 
-                $satarray[] = ($sat / 100 * 50 + 50)* .10 ; 
+                $satarray[] = $sat * .10 ; 
             } 
         }
 

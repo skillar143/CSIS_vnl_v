@@ -15,14 +15,14 @@ if(isset($_POST['submit'])){
     if (mysqli_num_rows($result) === 1) {
         $row = mysqli_fetch_assoc($result);
         if ($row['user_id'] === $teacherid && $row['password'] === $opwd) {
-            $con = mysqli_query($conn,"UPDATE teachers set password='$npwd' 
-            where teacher_id = '$teacherid'");
-            header("Location: ../../teacher/changepass.teacher.php?success=Password is successfuly changed");
+            $con = mysqli_query($conn,"UPDATE users set password='$npwd' 
+            where user_id = '$teacherid'");
+            header("Location: ../../teacher/profile/changepass.teacher.php?success=Password is successfuly changed");
             close();
         }
     }
         else{
-            header("Location: ../../teacher/changepass.teacher.php?error=your old password is incorrect");
+            header("Location: ../../teacher/profile/changepass.teacher.php?error=your old password is incorrect");
         }  
        
         

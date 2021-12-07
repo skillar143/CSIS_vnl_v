@@ -32,11 +32,12 @@ if (isset($_SESSION['user_id'])) {
 
     ?>
 <!-- content here -->
-<h5 class="title text-dark mb-3">Class Standing in <?php echo "(".$subcode.")-".$sub?></h5>
+<h5 class="title text-dark mb-3">Exam Record in <?php echo "(".$subcode.")-".$sub?></h5>
 <div class="float-right m-1">
     <a class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#AddCS"><i class="fas fa-plus"></i>Add
         Class Record</i></a>
 </div>
+<p><?php echo $course ?></p>
 <div class="table-responsive">
 <table class="table" id="datatableid">
     <thead class="bg-primary text-light ">
@@ -44,6 +45,7 @@ if (isset($_SESSION['user_id'])) {
             <th class="">Student ID</th>
             <th class="">Name</th>
             <th class="">Score(s)</th>
+            <th class="">Action</th>
         </tr>
     </thead>
 
@@ -70,6 +72,10 @@ if (isset($_SESSION['user_id'])) {
                     echo $score. " | "; 
                         }
                     }
+                    $edit = "<a class='btn btn-sm btn-outline-info' href='../edit/examrecord.teacher.php?stid=$row[student_id]&sub=$sub&course=$course'>
+                    <i class='fas fa-edit'></i></a>";
+       
+                   echo "<td>" .$edit. "</td></tr>";
                 }
             }
             ?></td>
@@ -144,6 +150,7 @@ input::-webkit-inner-spin-button {
                                     <th class="">Student ID</th>
                                     <th class="">Name</th>
                                     <th class="">Score</th>
+                                    
                                 </tr>
                             </thead>
 
