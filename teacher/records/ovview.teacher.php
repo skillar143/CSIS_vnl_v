@@ -110,8 +110,8 @@ if($trep == 0 && $tcs == 0 && $tex == 0){
         <a class="btn btn-sm btn-outline-primary" href="../../print/ov.print.php?sub=<?php echo $sub;?>&course=<?php echo $course;?>&term=<?php echo $term;?>"><i class="fas fa-print"></i>Print
         Records</a>
 </div>
-        <div class="table-responsive">
-<table class="table" id="studentlist">
+<div class="table-responsive">
+<table class="table" id="">
     <thead class="bg-primary text-light ">
         <tr>
             <th class="">Student ID</th>
@@ -128,10 +128,11 @@ if($trep == 0 && $tcs == 0 && $tex == 0){
             <th class="<?php echo $dis; ?>"><?php echo $th; ?></th>
             <th class="">Final Grade</th>
         </tr>
+       
     </thead>
 
     <tbody>
-            <tr>
+    <tr>
                 <td></td>
                 <td></td>
                 <td>100</td>
@@ -143,11 +144,11 @@ if($trep == 0 && $tcs == 0 && $tex == 0){
                 <td><?php echo $tex; ?></td>
                 <td></td>
                 <td></td>
-            </tr>
+            </tr> 
 
 
         <?php
-            $sql = "SELECT * from studentrecords where course = '$course'";
+            $sql = "SELECT * from studentrecords where course = '$course' order by name";
             $result = $conn->query($sql);
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {

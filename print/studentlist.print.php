@@ -74,7 +74,7 @@ if (isset($_SESSION['user_id'])) {
     </tbody>
 </table>
                 <br>
-                <a class="btn btn-danger" id="print-btn" href="../teacher/studentlist.teacher.php?sub=<?php echo $sub;?>"><i class="fas fa-arrow-circle-left"></i></a>
+                <a class="btn btn-danger" id="print-btn" href="../teacher/list/studentlist.teacher.php?sub=<?php echo $sub;?>"><i class="fas fa-arrow-circle-left"></i></a>
                 <button class="btn btn-danger" onclick="window.print();" id="print-btn"><i class="fas fa-print"></i></button>
           
 
