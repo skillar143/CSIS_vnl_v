@@ -1,28 +1,31 @@
 <?php
 session_start();
-
+include_once '../database/dbconnection.db.php';
 if (isset($_SESSION['user_id'])) {
     $id = $_SESSION['user_id'];
     $sub = $_GET['sub'];
     $course = $_GET['course'];
 
-    include "../teacherlayout/head.tlayout.php"; 
-    $sql2 = "SELECT * from subjects where description = '$sub'";
-    $result2 = $conn->query($sql2);
-
-    if ($result2->num_rows > 0) {
-        while ($row2 = $result2->fetch_assoc()) {
-            $subcode = $row2['subcode'];
-        }
-    }?>
-    <!-- content here -->
-    <div class="float-right m-1">
-        <a class="btn btn-sm btn-outline-primary" href="../../print/gradesummary.print.php?sub=<?php echo $sub;?>&course=<?php echo $course;?>"> <i class="fas fa-print"></i>PrintRecords</a>
-</div>
-    <h5 class="title text-dark mb-3"> Grade summary for <?php echo "(".$subcode.")-".$sub?></h5>
-    
+?>
+    <!-- header -->
+    <title>CSIS</title>
+    <!-- Custom fonts for this template-->
+    <link rel="icon" href="../assets/img/logo.png">
+    <!-- Custom fonts for this template-->
+    <link href="../assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="../assets/css/font.css" rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link href="../assets/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../assets/css/print.css" rel="stylesheet" media="print">
+    <!-- end of header -->
    
-    <table class="table" id="studentlist">
+    <div class="p-5">
+        <div class="title mb-3 row text-center">
+            <div class="col-1 "><img src="../assets/img/logo.jpg" alt=""></div>
+        </div>
+        <div class=" mb-3">
+        <h5 class="title text-dark mb-5">Student List in <?php echo $_GET['sub'];?> subject</h5>
+        <table class="table" id="studentlist">
         <thead class="bg-primary text-light" >
             <tr>
                 <th>Student ID</th>
@@ -34,7 +37,7 @@ if (isset($_SESSION['user_id'])) {
         </thead>
         <tbody>
             <?php
-            include_once '../../database/dbconnection.db.php';
+            include_once '../database/dbconnection.db.php';
             $sub = $_GET['sub'];
             $course = $_GET['course'];
             $sql = "SELECT * from studentrecords where course = '$course'";
@@ -85,22 +88,15 @@ if (isset($_SESSION['user_id'])) {
             ?>
         </tbody>
     </table>
-   
-    
-   
-    <?php if (isset($_GET['error'])) { ?>
-        <div class="alert alert-danger text-center">
-            <?php echo $_GET['error']; ?>
-        </div>
-    <?php } elseif (isset($_GET['success'])) { ?> <div class="alert alert-success text-center">
-             <?php echo $_GET['success']; ?>
-        </div> <?php } ?>
+                <br>
+                <a class="btn btn-danger" id="print-btn" href="../teacher/records/gradingsheet.teacher.php?sub=<?php echo $sub;?>&course=<?php echo $course;?>"><i class="fas fa-arrow-circle-left"></i></a>
+                <button class="btn btn-danger" onclick="window.print();" id="print-btn"><i class="fas fa-print"></i></button>
+          
 
-    </form>
-    <!-- end of content here -->
-<?php include "../teacherlayout/footer.tlayout.php";
+        </div>
+    </div>
+<?php
 } else {
-    header("Location: ../../canossa/master.blade.php");
+    header("Location: ../canossa/master.blade.php");
     exit();
-}
-?>
+} ?>

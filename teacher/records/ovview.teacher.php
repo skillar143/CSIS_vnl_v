@@ -107,7 +107,7 @@ if($term === "prelim"){
         Records</a>
 </div>
 <div class="table-responsive">
-<table class="table" id="studentlist">
+<table class="table" id="">
     <thead class="bg-primary text-light ">
         <tr>
             <th class="">Student ID</th>
@@ -124,10 +124,11 @@ if($term === "prelim"){
             <th class="<?php echo $dis; ?>"><?php echo $th; ?></th>
             <th class="">Final Grade</th>
         </tr>
+       
     </thead>
 
     <tbody>
-            <tr>
+    <tr>
                 <td></td>
                 <td></td>
                 <td>100</td>
@@ -139,11 +140,11 @@ if($term === "prelim"){
                 <td><?php echo $tex; ?></td>
                 <td></td>
                 <td></td>
-            </tr>
+            </tr> 
 
 
         <?php
-            $sql = "SELECT * from studentrecords where course = '$course'";
+            $sql = "SELECT * from studentrecords where course = '$course' order by name";
             $result = $conn->query($sql);
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {

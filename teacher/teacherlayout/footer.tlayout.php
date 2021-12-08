@@ -82,6 +82,20 @@ if (stat == "open"){
     );
     });
 
+    $(document).ready(function() {
+        $('#studenttable').DataTable( {
+          "paging":   false,
+        "order": [[1, "asc"]],
+        "ordering": true,
+        "columnDefs": [{
+          "targets": [0,2],
+          "orderable": false,
+        }],
+        "searching": false
+    } 
+    );
+    });
+
     (function() {
     'use strict';
     window.addEventListener('load', function() {
