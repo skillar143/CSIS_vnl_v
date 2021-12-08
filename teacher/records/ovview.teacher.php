@@ -29,18 +29,15 @@ if (isset($_SESSION['user_id'])) {
      // $term = $row2['term'];
     //$term = "prelim";
     //    }}
-
+$zero = 0;
         // GETTING THE TOTAL OF reporting
 $sql = "SELECT * from teacher_cs where teacher_id = '$id' and course = '$course' and term = '$term' and subject_code = '$subcode'";
 $result = $conn->query($sql);
 $tcs = 0; 
 if ($result->num_rows > 0) {
 while ($row = $result->fetch_assoc()) {    
-    if( $row['item'] >= 1){
-        $tcs = $tcs + $row['item']; 
-       }else{
-           $tcs = 1;
-       }                
+
+        $tcs = $tcs + $row['item'];              
 }
 }
 
@@ -50,11 +47,7 @@ while ($row = $result->fetch_assoc()) {
         $trep = 0; 
         if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {    
-            if( $row['item'] >= 1){
-                $trep = $trep + $row['item']; 
-               }else{
-                   $trep = 1;
-               }                
+                $trep = $trep + $row['item'];            
         }
         }
 
@@ -64,11 +57,9 @@ $result = $conn->query($sql);
 $tex = 0; 
 if ($result->num_rows > 0) {
 while ($row = $result->fetch_assoc()) {    
-    if( $row['item'] >= 1){
+ 
         $tex = $tex + $row['item']; 
-       }else{
-           $tex = 1;
-       }                
+                  
 }
 }
 
@@ -93,20 +84,33 @@ if($term === "prelim"){
 }else{
     $dis = "d";
 }
+
+
+
+
     ?>
 
 
 
 
 <!-- content here -->
-<h5 class="title text-dark mb-3"><?php echo $course ."(".$subcode.")-".$sub?></h5>
+
+<?php 
+if($trep == 0 && $tcs == 0 && $tex == 0){
+    ?>
+    <h1>No Record To Show</h1>
+    
+    <?php
+    }else{
+        ?>
+        <h5 class="title text-dark mb-3"><?php echo $course ."(".$subcode.")-".$sub?></h5>
 <div class="float-right m-1">
     <!-- <a class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#AddCS"><i class="fas fa-plus"></i>Add
         Class Record</i></a> -->
         <a class="btn btn-sm btn-outline-primary" href="../../print/ov.print.php?sub=<?php echo $sub;?>&course=<?php echo $course;?>&term=<?php echo $term;?>"><i class="fas fa-print"></i>Print
         Records</a>
 </div>
-<div class="table-responsive">
+        <div class="table-responsive">
 <table class="table" id="studentlist">
     <thead class="bg-primary text-light ">
         <tr>
@@ -251,6 +255,10 @@ if($term === "prelim"){
     </tbody>
 </table>
 </div>
+        <?php
+    }
+?>
+
 <!-- end of content here -->
 <?php include "../teacherlayout/footer.tlayout.php";
 } else {
