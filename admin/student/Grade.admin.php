@@ -1,15 +1,12 @@
-
 <?php
 session_start();
 
-if (isset($_SESSION['user_id'])) {
-    $id = $_SESSION['user_id'];
+if (isset($_SESSION['username'])) {
+   
     $sub = $_GET['sub'];
     $course = $_GET['course'];
-    $term = $_GET['term'];
-   
-
-    include "../teacherlayout/head.tlayout.php"; 
+    // $term = $_GET['term'];
+    include_once '../adminlayout/head.admin.php' ;
 
     
     $sql2 = "SELECT * from subjects where description = '$sub'";
@@ -22,58 +19,76 @@ if (isset($_SESSION['user_id'])) {
     }
 
 
-   // $sql2 = "SELECT * from gradingstatus ";
-   // $result2 = $conn->query($sql2);
-   // if ($result2->num_rows > 0) {
-   //     while ($row2 = $result2->fetch_assoc()) { 
+    $sql2 = "SELECT teacher_id from subjects where description = '$sub'";
+    $result2 = $conn->query($sql2);
+
+    if ($result2->num_rows > 0) {
+        while ($row2 = $result2->fetch_assoc()) {
+            $id = $row2['teacher_id'];
+        }
+    }
+
+
+    $sql2 = "SELECT * from gradingstatus ";
+    $result2 = $conn->query($sql2);
+    if ($result2->num_rows > 0) {
+        while ($row2 = $result2->fetch_assoc()) { 
           
-     // $term = $row2['term'];
-    //$term = "prelim";
-    //    }}
-$zero = 0;
+      $term = $row2['term'];
+   
+        }}
+
         // GETTING THE TOTAL OF reporting
-$sql = "SELECT * from teacher_cs where teacher_id = '$id' and course = '$course' and term = '$term' and subject_code = '$subcode'";
-$result = $conn->query($sql);
-$tcs = 0; 
-if ($result->num_rows > 0) {
-while ($row = $result->fetch_assoc()) {    
-
-        $tcs = $tcs + $row['item'];              
-}
-}
-
+      $sql = "SELECT * from teacher_cs where teacher_id = '$id' and course = '$course' and term = '$term' and subject_code = '$subcode'";
+      $result = $conn->query($sql);
+      $tcs = 0; 
+      if ($result->num_rows > 0) {
+      while ($row = $result->fetch_assoc()) {    
+          if( $row['item'] >= 1){
+              $tcs = $tcs + $row['item']; 
+             }else{
+                 $tcs = 1;
+             }                
+      }
+      }
         // GETTING THE TOTAL OF reporting
         $sql = "SELECT * from teacher_reporting where teacher_id = '$id' and course = '$course' and term = '$term' and subject_code = '$subcode'";
         $result = $conn->query($sql);
         $trep = 0; 
         if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {    
-                $trep = $trep + $row['item'];            
+            if( $row['item'] >= 1){
+                $trep = $trep + $row['item']; 
+               }else{
+                   $trep = 1;
+               }                
         }
         }
 
                 // GETTING THE TOTAL OF reporting
-$sql = "SELECT * from teacher_exam where teacher_id = '$id' and course = '$course' and term = '$term' and subject_code = '$subcode'";
-$result = $conn->query($sql);
-$tex = 0; 
-if ($result->num_rows > 0) {
-while ($row = $result->fetch_assoc()) {    
- 
-        $tex = $tex + $row['item']; 
-                  
-}
-}
-
-if($term === "prelim"){
-    $table = "prelims";
-    $th = " ";
-}elseif($term === "midterm"){
-    $table = "prelims";
-    $th = "Prelim";
-}elseif($term === "final"){
-    $table = "midterms";
-    $th = "Midterm";
-}
+     $sql = "SELECT * from teacher_exam where teacher_id = '$id' and course = '$course' and term = '$term' and subject_code = '$subcode'";
+     $result = $conn->query($sql);
+     $tex = 0; 
+     if ($result->num_rows > 0) {
+     while ($row = $result->fetch_assoc()) {    
+         if( $row['item'] >= 1){
+             $tex = $tex + $row['item']; 
+            }else{
+                $tex = 1;
+            }                
+     }
+     }
+     
+     if($term === "prelim"){
+         $table = "prelims";
+         $th = " ";
+     }elseif($term === "midterm"){
+         $table = "prelims";
+         $th = "Prelim";
+     }elseif($term === "final"){
+         $table = "midterms";
+         $th = "Midterm";
+     }
 
 
                 // GETTING THE TOTAL OF reporting
@@ -85,33 +100,49 @@ if($term === "prelim"){
 }else{
     $dis = "d";
 }
+     
+$sql = "SELECT * from teacher_exam where teacher_id = '$id' and course = '$course' and term = '$term' and subject_code = '$subcode'";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+while ($row = $result->fetch_assoc()) {    
+     $exrecord = 1;     
+}
+}else {
+    $exrecord = 0;
+}
 
 
+$sql = "SELECT * from teacher_cs where teacher_id = '$id' and course = '$course' and term = '$term' and subject_code = '$subcode'";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+while ($row = $result->fetch_assoc()) {    
+     $csrecord = 1;     
+}
+}else {
+    $csrecord = 0;
+}
 
+$sql = "SELECT * from teacher_reporting where teacher_id = '$id' and course = '$course' and term = '$term' and subject_code = '$subcode'";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+while ($row = $result->fetch_assoc()) {    
+     $reprecord = 1;     
+}
+}else {
+    $reprecord = 0;
+}
 
-    ?>
-
-
-
-
-<!-- content here -->
-
-<?php 
-if($trep == 0 && $tcs == 0 && $tex == 0){
-    ?>
-    <h1>No Record To Show</h1>
-    
-    <?php
-    }else{
-        ?>
-        <h5 class="title text-dark mb-3"><?php echo $course ."(".$subcode.")-".$sub?></h5>
+if ($reprecord > 0 and $csrecord > 0 and $exrecord > 0){
+?>
+<h5 class="title text-dark mb-3"><?php echo $course ."(".$subcode.")-".$sub?></h5>
 <div class="float-right m-1">
     <!-- <a class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#AddCS"><i class="fas fa-plus"></i>Add
         Class Record</i></a> -->
-        <a class="btn btn-sm btn-outline-primary" href="../../print/ov.print.php?sub=<?php echo $sub;?>&course=<?php echo $course;?>&term=<?php echo $term;?>"><i class="fas fa-print"></i>Print
-        Records</a>
+        <!-- <a class="btn btn-sm btn-outline-primary" href="../../print/ov.print.php?sub=<?php echo $sub;?>&course=<?php echo $course;?>&term=<?php echo $term;?>"><i class="fas fa-print"></i>Print
+        Records</a> -->
 </div>
 <div class="table-responsive">
+
 <table class="table" id="">
     <thead class="bg-primary text-light ">
         <tr>
@@ -257,12 +288,23 @@ if($trep == 0 && $tcs == 0 && $tex == 0){
     </tbody>
 </table>
 </div>
-        <?php
-    }
-?>
+<?php
+}else{
+    echo "<h1> No Records Yet</h1>";
+}
+
+
+
+    ?>
+
+
+
+
+
+<!-- content here -->
 
 <!-- end of content here -->
-<?php include "../teacherlayout/footer.tlayout.php";
+<?php include_once '../adminlayout/footer.admin.php';
 } else {
     header("Location: ../../canossa/master.blade.php");
     exit();
@@ -270,4 +312,11 @@ if($trep == 0 && $tcs == 0 && $tex == 0){
 ?>
 
 
+<!-- 
+*
+*
+*
+*
+*
+ -->
 

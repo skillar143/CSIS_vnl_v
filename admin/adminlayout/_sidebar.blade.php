@@ -75,11 +75,26 @@
         <span>Grading</span></a>
 </li>
 
+<li class="nav-item">
+    <a class="nav-link" data-toggle="modal" data-target="#StudentGrade">
+    <i class="fas fa-award"></i>
+        <span>Student Grade</span></a>
+</li>
+
+
     <li class="nav-item">
         <a class="nav-link" href="../student/irregularlist.admin.php">
             <i class="fas fa-users"></i>
             <span>Irregular Students</span></a>
     </li>
+
+    <!-- <li class="nav-item"> -->
+        <!-- <a class="nav-link" href="../student/irregularlist.admin.php"> -->
+            <!-- <i class="fas fa-users"></i> -->
+            <!-- <span>Regular Students</span></a> -->
+    <!-- </li> -->
+    
+    
 
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
@@ -116,4 +131,5 @@
 
 
 <!-- MODAL -->
-<?php include "../management/gradingtoggle.admin.php"; ?>
+<?php include "../management/gradingtoggle.admin.php"; 
+ include "../management/studentgrade.admin.php"; ?>
