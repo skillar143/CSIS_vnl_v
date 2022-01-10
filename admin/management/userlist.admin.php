@@ -110,8 +110,8 @@ if (isset($_SESSION['username'])) {
                     <!-- end address -->
                 </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" onclick="document.getElementById('userUpdate').submit()">Update</button>
+            <button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-outline-primary btn-sm" onclick="document.getElementById('userUpdate').submit()">Update</button>
           </div>
         </div>
       </div>

@@ -61,6 +61,14 @@ input:checked+.slider:before {
     transform: translateX(20px);
 
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+</style>
+
 <?php
  $sql = "SELECT * from gradingstatus";
  $result = $conn->query($sql);
@@ -74,8 +82,6 @@ $stat = $row['status'];
  }
 
 ?>
-
-</style>
 <div class="modal fade" id="grading" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">

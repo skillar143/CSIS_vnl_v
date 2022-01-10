@@ -35,8 +35,13 @@ include_once '../adminlayout/head.admin.php' ?>
                         while($row = $result-> fetch_assoc()){
                             $del = "<a class='btn btn-outline-danger m-1 btn-sm' href='../../database/deleterecord/subject.db.php?subcode=$row[subject_code]'>
                             <i class='fas fa-minus'></i></a>";
-                            $edit = "<a class='btn btn-outline-info m-1 btn-sm' href='editsubject.admin.php?subcode=$row[subject_code]'>
-                            <i class='fas fa-edit'></i></a>";
+                           // $edit = "<a class='btn btn-outline-info m-1 btn-sm' href='editsubject.admin.php?subcode=$row[subject_code]'>
+                            //<i class='fas fa-edit'></i></a>";
+                            $edit = "<a class='btn btn-sm btn-outline-info edit-subject' id='subjectEdit' 
+                                data-subcode='$row[subject_code]'   data-units='$row[units]'
+                                data-description='$row[description]'  data-id='$row[subject_code]'   
+                                data-toggle='modal' data-target='#editSubject'>
+                                <i class='fas fa-edit'></i></i></a>";
                             echo "<tr><td>".$row['subject_code']."</td>
                             <td>".$row['description']."</td>
                             <td>".$row['units']."</td>
@@ -55,6 +60,7 @@ include_once '../adminlayout/head.admin.php' ?>
 </div>
 
 <?php include "createsubject.admin.php" ?> 
+<?php include "editsub.admin.php" ?> 
 
 
 <?php include_once '../adminlayout/footer.admin.php';

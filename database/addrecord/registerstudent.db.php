@@ -34,7 +34,7 @@ if (isset($_POST['ok'])) {
     }
 
     if ($studentid == $id) {
-        header("Location: ../../admin/studentlist.admin.php?error=Invalid");
+        header("Location: ../../admin/student/studentlist.admin.php?error=A student I.D. can't be duplicated.");
         exit();
     } 
     else if($status == "regular") {

@@ -14,4 +14,4 @@ WHERE subject_code = '$id';";
 $result = mysqli_query($conn, $sql);
 
 
-header("Location: ../../admin/program/editsubject.admin.php?success=succesfull&subcode=$code");;
+header("Location: ../../admin/program/subjectlist.admin.php?success=succesfull");;
