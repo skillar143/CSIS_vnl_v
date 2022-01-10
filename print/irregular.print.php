@@ -44,7 +44,10 @@ if (isset($_SESSION['username'])) {
         <tbody> 
             <?php
                     include_once '../database/dbconnection.db.php';
-                    $sql = "SELECT * from studentrecords where status = 'irregular'";
+                    $sql = "SELECT sr.*
+                    FROM studentrecords AS sr
+                    INNER JOIN withdrawns AS wd
+                    ON sr.student_id != wd.student_id where status = 'irregular'";
                     $result = $conn-> query($sql);
                 
                     if($result-> num_rows > 0 ){

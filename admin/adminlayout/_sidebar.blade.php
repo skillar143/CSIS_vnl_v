@@ -104,6 +104,27 @@
     </div>
 
     <li class="nav-item">
+        <a class="nav-link collapsed active" href="#" data-toggle="collapse" data-target="#collapsestudentlist"
+            aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-users-slash"></i>
+            <span>Archive</span>
+        </a>
+        <div id="collapsestudentlist" class="collapse" aria-labelledby="headingstudentlist"
+            data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Subjects:</h6>
+                        <a class='collapse-item' href='../student/withdrawnlist.admin.php'><i class="fas fa-user"></i>Student</a>  
+                        <a class='collapse-item' href='../teacher/resignlist.admin.php?sub=$row[description]'><i class="fas fa-user-tie"></i>Teacher</a>  
+            </div>
+        </div>
+    </li>
+
+    <!-- <li class="nav-item">
+        <a class="nav-link" href="../student/withdrawnlist.admin.php">
+        <i class="fas fa-users-slash"></i>
+            <span>Withdrawn</span></a>
+    </li> -->
+    <li class="nav-item">
         <a class="nav-link" href="../management/userlist.admin.php">
             <i class="fas fa-users"></i>
             <span>Users</span></a>

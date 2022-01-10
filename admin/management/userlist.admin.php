@@ -35,7 +35,7 @@ if (isset($_SESSION['username'])) {
       
             <?php
             
-            $sql = "SELECT * from users";
+            $sql = "SELECT * from users where user_id NOT IN (SELECT student_id FROM withdrawns) and user_id NOT IN (SELECT teacher_id FROM resigns)";
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
@@ -47,7 +47,26 @@ if (isset($_SESSION['username'])) {
                             <td><?php echo $row['user_id']?></td>
                             <td><?php echo $row['role']?></td>
                             <td><?php echo $row['password']?></td>
-                            <td><a type="button" class="btn btn-outline-info m-1 btn-sm editbtn" >
+                            <!-- <td><a class="edit-employee text-dark" id="employeeEdit"
+                        data-employeeid="{{ $employee->employee_id }}"
+                        data-name="{{ $employee->name }}"
+                        data-gender="{{ $employee->gender }}"
+                        data-dob="{{ $employee->dob }}"
+                        data-email="{{ $employee->email }}"
+                        data-nationality="{{ $employee->nationality }}"
+                        data-mobile="{{ $employee->mobile_number }}"
+                        data-bs-toggle="modal" data-bs-target="#editModal">
+                        <i class="far fa-edit"></i>
+                    </a>
+                </td> -->
+                            <!-- <td><a type="button" class="btn btn-outline-info m-1 btn-sm editbtn" >
+                            <i class="fas fa-edit"></i></a></td> -->
+
+                            <td><a class="btn btn-outline-info m-1 btn-sm edit-user" id="userEdit"
+                                data-id="<?php echo $row['user_id']?>"
+                                data-role="<?php echo $row['role']?>"
+                                data-password="<?php echo $row['password']?>"
+                                data-toggle="modal" data-target="#editUser">
                             <i class="fas fa-edit"></i></a></td>
 
                 <?php
@@ -62,50 +81,44 @@ if (isset($_SESSION['username'])) {
     </div>
   
 
-    <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal fade" id="editUser" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <!-- modal header -->
-            <div class="modal-header bg-primary">
+        <div class="modal-header bg-primary">
                 <h5 class="modal-title text-light" id="exampleModalLabel">Edit User Password</h5>
                 <button class="close text-light closemodal" type="button" data-dismiss="modal" aria-label="Close">
                     <i class="fa fa-window-close" aria-hidden="true"></i>
                 </button>
             </div>
-            <!-- end of modal header -->
-            <form class="needs-validation" novalidate action="../../database/changepass/user.db.php" method="post">
-                <!-- modal body -->
-                <div class="modal-body">
-                    <!-- text box student id -->
-                    <div class="form-group">
+            <div class="modal-body">
+            <form  method="POST" id="userUpdate"> 
+            <div class="form-group">
                     <input type="text" class="form-control" name="userid" id="userid" autocomplete="off" placeholder="User id">
                     </div>
                     <!-- end student id -->
 
                     <div class="form-group">
-                        <input type="text" class="form-control" name="role" id="role" autocomplete="off" placeholder="Role" disabled required>
+                        <input type="text" class="form-control" name="role" id="userrole" autocomplete="off" placeholder="Role" disabled required>
                     </div>
 
                     <!-- text box contact-->
                     <div class="form-group">
-                        <input type="text" class="form-control" name="password" id="password" autocomplete="off" placeholder="Password" required>
+                        <input type="text" class="form-control" name="password" id="userpassword" autocomplete="off" placeholder="Password" required>
                     </div>
-            
+            </form>
+                    <!-- text box student id -->
                     <!-- end address -->
                 </div>
-                <!-- end of modal body -->
-
-                <!-- modal footer -->
-                <div class="modal-footer">
-                    <button class="btn btn-sm btn-outline-secondary closemodal" type="button" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-sm btn-outline-primary" type="submit" name="ok">Save</button>
-                </div>
-                <!-- end of modal footer -->
-            </form>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" onclick="document.getElementById('userUpdate').submit()">Update</button>
+          </div>
         </div>
+      </div>
     </div>
-</div>
 
+    <script>
+  
 
 <?php include_once '../adminlayout/footer.admin.php';
 } else {

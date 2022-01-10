@@ -2,7 +2,9 @@
                     include_once '../database/dbconnection.db.php';
 
                     if ($_POST['filter'] == "all"){
-                        $sql2 = "SELECT * from studentrecords";
+                        $sql2 = "SELECT *
+                   FROM studentrecords
+                   WHERE student_id NOT IN (SELECT student_id FROM withdrawns);";
                         $result2 = $conn-> query($sql2);
 
                         if($result2-> num_rows > 0 ){
@@ -19,7 +21,12 @@
                         }
 
                     }else{
-                        $sql2 = "SELECT * from studentrecords where course = '$_POST[filter]'";
+
+                        $sql2 = "SELECT *
+                   FROM studentrecords
+                   WHERE course = '$_POST[filter]' and student_id NOT IN (SELECT student_id FROM withdrawns);";
+
+                        
                         $result2 = $conn-> query($sql2);
 
                         if($result2-> num_rows > 0 ){

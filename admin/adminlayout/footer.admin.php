@@ -14,10 +14,11 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-
+<!-- Custom edit users account-->
 <script src="../../assets/vendor/jquery/jquery.min.js"></script>
 
 <script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
 
 <!-- Core plugin JavaScript-->
 <script src="../../assets/vendor/jquery-easing/jquery.easing.min.js"></script>
@@ -29,8 +30,6 @@
 <script src="../../assets/js/datatable/datatable-jquery.js"></script>
 
 <script src="../../assets/js/datatable/datatable-bootstrap.js"></script>
-
-
 
 <script>
 
@@ -62,34 +61,25 @@
     }, false);
   })();
 //opening edit modal
-$(document).ready(function () {
-  $('.editbtn').on('click' , function () {
-
-    $('#editmodal').modal('show');
-
-      $tr =$(this).closest('tr');
-
-      var data = $tr.children("td").map(function (){
-        return $(this).text();
-      }).get();
-      
-      $('#userid').val(data[0]);
-      $('#role').val(data[1]);
-      $('#password').val(data[2]);
-
+$(document).ready(function(){
+    $('.edit-user').each(function() {
+      $(this).click(function(event){
+        $('#userUpdate').attr("action", "../../database/changepass/user.db.php");
+        $('#userid').val($(this).data('id'));
+        $('#userrole').val($(this).data('role'));
+        $('#userpassword').val($(this).data('password'));
+      })
+    })
   });
+
+  
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
   
 });
 
-//closing edit modal
-$(document).ready(function () {
-  $('.closemodal').on('click' , function () {
 
-    $('#editmodal').modal('hide');
-  });
-  
-});
-  
+
 </script>
 
 

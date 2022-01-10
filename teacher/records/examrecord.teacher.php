@@ -52,7 +52,9 @@ if (isset($_SESSION['user_id'])) {
     <tbody>
 
         <?php
-            $sql = "SELECT * from studentrecords where course = '$course'";
+          $sql = "SELECT *
+          FROM studentrecords
+          WHERE course = '$course' and student_id NOT IN (SELECT student_id FROM withdrawns);";
             $result = $conn->query($sql);
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
@@ -157,7 +159,12 @@ input::-webkit-inner-spin-button {
                             <tbody>
 
                                 <?php
-            $sql = "SELECT * from studentsubs where subject = '$sub'";
+           
+
+$sql = "SELECT *
+FROM studentsubs
+WHERE subject = '$sub' and student_id NOT IN (SELECT student_id FROM withdrawns);";
+
             $result = $conn->query($sql);
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {

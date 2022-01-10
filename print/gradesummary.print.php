@@ -40,7 +40,10 @@ if (isset($_SESSION['user_id'])) {
             include_once '../database/dbconnection.db.php';
             $sub = $_GET['sub'];
             $course = $_GET['course'];
-            $sql = "SELECT * from studentrecords where course = '$course'";
+            $sql = "SELECT sr.*
+            FROM studentrecords AS sr
+            INNER JOIN withdrawns AS wd
+            ON sr.student_id != wd.student_id where sr.course = '$course'";
             $result = $conn-> query($sql);
             if($result-> num_rows > 0 ){
                 while($row = $result-> fetch_assoc()){

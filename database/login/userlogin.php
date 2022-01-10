@@ -17,7 +17,16 @@ include "../dbconnection.db.php";
             	$_SESSION['role'] = $row['role'];
 
                 if($_SESSION['role'] == "student"){
-                    header("Location: ../../student/sublist.student.php");
+					$sql3 = "SELECT * from withdrawns where student_id = '$_SESSION[user_id]'";
+					$result3 = $conn->query($sql3);
+					if ($result3->num_rows > 0) {
+						while ($row3 = $result3->fetch_assoc()) {
+							header("Location: ../../index.php?error=Your account is Lock");
+							exit();
+						}
+					}
+					header("Location: ../../student/sublist.student.php");
+					
 		        exit();
                 }elseif($_SESSION['role'] == "faculty"){
                     header("Location: ../../teacher/teacherlayout/master_layout.tlayout.php");

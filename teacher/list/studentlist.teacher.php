@@ -32,9 +32,14 @@ if (isset($_SESSION['user_id'])) {
     <tbody>
       
     <?php
+
+
                     include_once '../../database/dbconnection.db.php';
                     $sub = $_GET['sub'];
-                    $sql = "SELECT * from studentsubs where subject = '$sub'";
+
+                    $sql = "SELECT *
+                   FROM studentsubs
+                   WHERE subject = '$sub' and student_id NOT IN (SELECT student_id FROM withdrawns);";
                     $result = $conn-> query($sql);
 
                     

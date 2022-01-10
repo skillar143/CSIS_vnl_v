@@ -39,8 +39,9 @@ if (isset($_SESSION['user_id'])) {
     <?php
                     include_once '../database/dbconnection.db.php';
 
-                    $sub = $_GET['sub'];
-                    $sql = "SELECT * from studentsubs where subject = '$sub'";
+                    $sql = "SELECT *
+                   FROM studentsubs
+                   WHERE subject = '$_GET[sub]' and student_id NOT IN (SELECT student_id FROM withdrawns);";
                     $result = $conn-> query($sql);
 
                     
@@ -74,7 +75,7 @@ if (isset($_SESSION['user_id'])) {
     </tbody>
 </table>
                 <br>
-                <a class="btn btn-danger" id="print-btn" href="../teacher/list/studentlist.teacher.php?sub=<?php echo $sub;?>"><i class="fas fa-arrow-circle-left"></i></a>
+                <a class="btn btn-danger" id="print-btn" href="../teacher/list/studentlist.teacher.php?sub=<?php echo $_GET['sub'];?>"><i class="fas fa-arrow-circle-left"></i></a>
                 <button class="btn btn-danger" onclick="window.print();" id="print-btn"><i class="fas fa-print"></i></button>
           
 

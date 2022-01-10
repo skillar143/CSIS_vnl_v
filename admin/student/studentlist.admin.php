@@ -34,16 +34,20 @@ if (isset($_SESSION['username'])) {
             </tr>
         </thead>
         <tbody>  
+       
             <?php
                     include_once '../../database/dbconnection.db.php';
-                    $sql = "SELECT * from studentrecords";
-                    $result = $conn-> query($sql);
 
+                   $sql = "SELECT *
+                   FROM studentrecords
+                   WHERE student_id NOT IN (SELECT student_id FROM withdrawns);";
+
+                    $result = $conn-> query($sql);  
                     if($result-> num_rows > 0 ){
                         while($row = $result-> fetch_assoc()){
-                            $del = "<a class='btn btn-outline-danger m-1 btn-sm' href='../../database/deleterecord/student.db.php?stid=$row[student_id]'>
+                            $del = "<a class='btn btn-outline-danger m-1 btn-sm' data-toggle='tooltip' data-placement='top' title='Withdraw' href='../../database/withdraws/student.db.php?stid=$row[student_id]'>
                             <i class='fas fa-user-minus'></i></a>";
-                            $edit = "<a class='btn btn-outline-info m-1 btn-sm' href='editstudentrecord.admin.php?stid=$row[student_id]'>
+                            $edit = "<a class='btn btn-outline-info m-1 btn-sm' data-toggle='tooltip' data-placement='top' title='Edit' href='editstudentrecord.admin.php?stid=$row[student_id]'>
                             <i class='fas fa-edit'></i></a>";
                             echo "<tr><td>".$row['student_id']."</td>
                             <td>".$row['name']."</td>
@@ -57,12 +61,13 @@ if (isset($_SESSION['username'])) {
                             <td>".$del.$edit."</td></tr>";
                         }
                     }
-                
                 ?>  
         </tbody>
     </table>
   </div>
   <?php include "create.admin.php" ?>  
+  <?php include "edit.admin.php" ?>  
+
 <?php include_once '../adminlayout/footer.admin.php';
 } else {
     header("Location: ../adminlayout/master_layout.blade.php");

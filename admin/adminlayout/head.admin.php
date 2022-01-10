@@ -7,6 +7,7 @@
 <!-- Custom styles for this template-->
 <link href="../../assets/css/sb-admin-2.min.css" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/css/datatable.css">
+
 <!-- end of header -->
 <!-- page content -->
 <!-- Page Wrapper -->

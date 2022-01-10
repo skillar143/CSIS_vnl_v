@@ -111,7 +111,7 @@ if($term === "prelim"){
         </div>
         <h5 class="title text-dark mb-3"><?php echo $course ."(".$subcode.")-".$sub?></h5>
 <div class="table-responsive">
-<table class="table" id="studentlist">
+<table class="table" id="">
     <thead class="bg-primary text-light ">
         <tr>
             <th class="">Student ID</th>
@@ -128,32 +128,36 @@ if($term === "prelim"){
             <th class="<?php echo $dis; ?>"><?php echo $th; ?></th>
             <th class="">Final Grade</th>
         </tr>
+       
     </thead>
 
     <tbody>
-            <tr>
+    <tr>
                 <td></td>
                 <td></td>
-                <td>100</td>
+                <td class="text-primary font-weight-bold font-italic">100</td>
                 <td></td>
-                <td><?php echo $tcs; ?></td>
+                <td class="text-primary font-weight-bold font-italic"><?php echo $tcs; ?></td>
                 <td></td>
-                <td><?php echo $trep; ?></td>
+                <td class="text-primary font-weight-bold font-italic"><?php echo $trep; ?></td>
                 <td></td>
-                <td><?php echo $tex; ?></td>
+                <td class="text-primary font-weight-bold font-italic"><?php echo $tex; ?></td>
                 <td></td>
                 <td></td>
-            </tr>
+            </tr> 
 
 
         <?php
-            $sql = "SELECT * from studentrecords where course = '$course' order by name";
+       $sql = "SELECT *
+            FROM studentrecords
+            WHERE course = '$course' and student_id NOT IN (SELECT student_id FROM withdrawns);";
+            
             $result = $conn->query($sql);
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     $sid = $row['student_id'];
                     $name =$row['name'];
-                    $sql2 = "SELECT * from student_attendance where student_id = '$sid' and term = '$term'";
+                    $sql2 = "SELECT * from student_attendance where student_id = '$sid' and term = '$term' and subject_code = '$subcode'";
                     $result2 = $conn->query($sql2);
                     $attendance = 0;
 ?>
@@ -174,7 +178,7 @@ if($term === "prelim"){
                     <td> <?php  $atotal = $attendance*.10; 
                         echo number_format($atotal, 0.0);
                     ?> </td>
-                    <?php $classrecord = "SELECT * from student_cs where student_id = '$sid' and term = '$term'";
+                    <?php $classrecord = "SELECT * from student_cs where student_id = '$sid' and term = '$term' and subject_code = '$subcode'";
                     $resulte = $conn->query($classrecord);
                     $cs = 0;
                     ?> <td>
@@ -192,7 +196,7 @@ if($term === "prelim"){
                  <td> <?php  $cstotal = ($cs/$tcs*50+50)*.25;
                  echo number_format($cstotal, 0.0);?> </td>
                  <!-- reporting -->
-                    <?php $report = "SELECT * from student_reporting where student_id = '$sid' and term = '$term'";
+                    <?php $report = "SELECT * from student_reporting where student_id = '$sid' and term = '$term' and subject_code = '$subcode'";
                     $resulte = $conn->query($report);
                     $rep = 0;
                     ?> <td>
@@ -210,7 +214,7 @@ if($term === "prelim"){
                  <td> <?php  $reptotal = ($rep/$trep*50+50)*.25;
                  echo number_format($reptotal, 0.0); ?> </td>
 <!-- exam -->
-                <?php $exam = "SELECT * from student_exam where student_id = '$sid' and term = '$term'";
+                <?php $exam = "SELECT * from student_exam where student_id = '$sid' and term = '$term' and subject_code = '$subcode'";
                     $resultr = $conn->query($exam);
                     $exam = 0;
                     ?> <td>

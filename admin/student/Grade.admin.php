@@ -167,26 +167,29 @@ if ($reprecord > 0 and $csrecord > 0 and $exrecord > 0){
     <tr>
                 <td></td>
                 <td></td>
-                <td>100</td>
+                <td class="text-primary font-weight-bold font-italic">100</td>
                 <td></td>
-                <td><?php echo $tcs; ?></td>
+                <td class="text-primary font-weight-bold font-italic"><?php echo $tcs; ?></td>
+                <td ></td>
+                <td class="text-primary font-weight-bold font-italic"><?php echo $trep; ?></td>
                 <td></td>
-                <td><?php echo $trep; ?></td>
-                <td></td>
-                <td><?php echo $tex; ?></td>
+                <td class="text-primary font-weight-bold font-italic"><?php echo $tex; ?></td>
                 <td></td>
                 <td></td>
             </tr> 
 
 
         <?php
-            $sql = "SELECT * from studentrecords where course = '$course' order by name";
+
+$sql = "SELECT *
+FROM studentrecords
+WHERE course = '$course' and student_id NOT IN (SELECT student_id FROM withdrawns) order by name;";
             $result = $conn->query($sql);
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     $sid = $row['student_id'];
                     $name =$row['name'];
-                    $sql2 = "SELECT * from student_attendance where student_id = '$sid' and term = '$term'";
+                    $sql2 = "SELECT * from student_attendance where student_id = '$sid' and term = '$term' and subject_code = '$subcode'";
                     $result2 = $conn->query($sql2);
                     $attendance = 0;
 ?>
@@ -207,7 +210,7 @@ if ($reprecord > 0 and $csrecord > 0 and $exrecord > 0){
                     <td> <?php  $atotal = $attendance*.10; 
                         echo number_format($atotal, 0.0);
                     ?> </td>
-                    <?php $classrecord = "SELECT * from student_cs where student_id = '$sid' and term = '$term'";
+                    <?php $classrecord = "SELECT * from student_cs where student_id = '$sid' and term = '$term' and subject_code = '$subcode'";
                     $resulte = $conn->query($classrecord);
                     $cs = 0;
                     ?> <td>
@@ -225,7 +228,7 @@ if ($reprecord > 0 and $csrecord > 0 and $exrecord > 0){
                  <td> <?php  $cstotal = ($cs/$tcs*50+50)*.25;
                  echo number_format($cstotal, 0.0);?> </td>
                  <!-- reporting -->
-                    <?php $report = "SELECT * from student_reporting where student_id = '$sid' and term = '$term'";
+                    <?php $report = "SELECT * from student_reporting where student_id = '$sid' and term = '$term' and subject_code = '$subcode'";
                     $resulte = $conn->query($report);
                     $rep = 0;
                     ?> <td>
@@ -243,7 +246,7 @@ if ($reprecord > 0 and $csrecord > 0 and $exrecord > 0){
                  <td> <?php  $reptotal = ($rep/$trep*50+50)*.25;
                  echo number_format($reptotal, 0.0); ?> </td>
 <!-- exam -->
-                <?php $exam = "SELECT * from student_exam where student_id = '$sid' and term = '$term'";
+                <?php $exam = "SELECT * from student_exam where student_id = '$sid' and term = '$term' and subject_code = '$subcode'";
                     $resultr = $conn->query($exam);
                     $exam = 0;
                     ?> <td>
