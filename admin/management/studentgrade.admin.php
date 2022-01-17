@@ -18,7 +18,7 @@ $stat = $row['status'];
         <div class="modal-content">
             <!-- modal header -->
             <div class="modal-header bg-primary">
-                <h5 class="modal-title text-light" id="exampleModalLabel">Activate Grading Period</h5>
+                <h5 class="modal-title text-light" id="exampleModalLabel">Student Grade</h5>
                 <button class="close text-light" type="button" data-dismiss="modal" aria-label="Close">
                     <i class="fa fa-window-close" aria-hidden="true"></i>
                 </button>

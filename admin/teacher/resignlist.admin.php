@@ -28,7 +28,7 @@ include_once '../adminlayout/head.admin.php' ?>
                 
                     if($result-> num_rows > 0 ){
                         while($row = $result-> fetch_assoc()){
-                            $edit = "<a class='btn btn-sm btn-outline-info' data-toggle='tooltip' data-placement='top' title='Re-Enroll' href='../../database/deleterecord/teacher.db.php?tid=$row[teacher_id]'>
+                            $edit = "<a class='btn btn-sm btn-outline-info' href='../../database/deleterecord/teacher.db.php?tid=$row[teacher_id]'>
                             <i class='fas fa-edit'></i></a>";
                             echo "<tr><td>".$row['teacher_id']."</td>
                             <td>".$row['name']."</td>
