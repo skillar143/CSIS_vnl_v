@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+$page ="subject";
 if (isset($_SESSION['user_id'])) {
     include_once '../database/dbconnection.db.php';
     include "../layout/head.layout.php"; 

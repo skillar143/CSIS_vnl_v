@@ -14,21 +14,22 @@
     </div>
      <!-- Nav Item - Enroll Menu -->
      <li class="nav-item">
-        <a class="nav-link" href="../student/sublist.student.php">
-        <i class="fas fa-list"></i>
+     
+        <a class="nav-link  <?php if($page == 'subject'){echo"bg-light text-primary active";}?>" href="../student/sublist.student.php">
+        <i class="fas fa-list <?php if($page == 'subject'){echo"text-primary";}?>"></i>
             <span>Subject</span></a>
     </li>
     <!-- Nav Item - Grade Menu -->
-    
+  
     <!-- <li class="nav-item">
     <a class="nav-link" href="../student/grade.student.php">
     <i class="fas fa-chart-line" href="../student/grade.student.php"></i>
         <span>Grade</span></a>
 </li> -->
 <li class="nav-item">
-                <a class="nav-link collapsed active" href="#" data-toggle="collapse" data-target="#collapsegrade"
+                <a class="nav-link collapsed btn <?php if($page == 'grade'){echo" bg-light text-primary active";}?>" href="#" data-toggle="collapse" data-target="#collapsegrade"
                     aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-chart-line"></i>
+                    <i class="fas fa-chart-line <?php if($page == 'grade'){echo"text-primary";}?>"></i>
                     <span>Grade</span>
                 </a>
                 <div id="collapsegrade" class="collapse" aria-labelledby="headingstudentlist" data-parent="#accordionSidebar">
@@ -49,14 +50,14 @@
     </div>
     
     <li class="nav-item">
-        <a class="nav-link" href="../student/changepass.student.php">
-        <i class="fas fa-key"></i>
+        <a class="nav-link btn <?php if($page == 'changepass'){echo" bg-light text-primary active";}?>" href="../student/changepass.student.php">
+        <i class="fas fa-key <?php if($page == 'changepass'){echo"text-primary";}?>"></i>
             <span>Change Password</span></a>
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="../student/profile.student.php">
-        <i class="fas fa-users-cog"></i>
+        <a class="nav-link btn <?php if($page == 'profile'){echo" bg-light text-primary active";}?>" href="../student/profile.student.php">
+        <i class="fas fa-users-cog <?php if($page == 'profile'){echo"text-primary";}?>"></i>
             <span>Profile</span></a>
     </li>
 

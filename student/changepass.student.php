@@ -1,6 +1,6 @@
 <?php 
 session_start();
-
+$page ="changepass";
 if (isset($_SESSION['user_id'])) {
  
  include "../layout/head.layout.php"; ?>
