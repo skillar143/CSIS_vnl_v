@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+$page ="user";
 if (isset($_SESSION['username'])) {
   
     include_once '../adminlayout/head.admin.php' ?>

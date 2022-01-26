@@ -70,6 +70,8 @@ input::-webkit-inner-spin-button {
 </style>
 
 <?php
+
+
  $sql = "SELECT * from gradingstatus";
  $result = $conn->query($sql);
 
@@ -80,7 +82,7 @@ $stat = $row['status'];
 
      }
  }
-
+ $page ="grading";
 ?>
 <div class="modal fade" id="grading" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -100,7 +102,7 @@ $stat = $row['status'];
                     <!-- text box student id -->
                     <div class=" row">
                         <label class="switch mt-2">
-                            <input type="checkbox" name="status" <?php if ($stat == 'open') {?> checked <?php } ?>>
+                            <input type="checkbox" name="status" <?php  if ($stat == 'open') {?> checked <?php } ?>>
                             <span class="slider"></span>
                         </label>
                         <h1 class="">Open Grade Record</h1>

@@ -1,5 +1,5 @@
-
 <?php
+$page ="grade";
  $sql = "SELECT * from gradingstatus";
  $result = $conn->query($sql);
 

@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+$page ="grade";
 if (isset($_SESSION['username'])) {
    
     $sub = $_GET['sub'];

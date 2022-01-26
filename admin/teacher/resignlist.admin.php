@@ -1,5 +1,6 @@
 <?php 
 session_start();
+$page ="archive";
 if (isset($_SESSION['username'])) {
 include_once '../adminlayout/head.admin.php' ?>      
 <nav class="navbar navbar-expand navbar-light  topbar  static-top ">

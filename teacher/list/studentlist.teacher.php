@@ -1,6 +1,6 @@
 <?php 
 session_start();
-
+$page ="student";
 if (isset($_SESSION['user_id'])) {
  $sub = $_GET['sub'];
     include "../teacherlayout/head.tlayout.php"; 

@@ -1,7 +1,7 @@
 
 <?php
 session_start();
-
+$page ="ovall";
 if (isset($_SESSION['user_id'])) {
     $id = $_SESSION['user_id'];
     $sub = $_GET['sub'];

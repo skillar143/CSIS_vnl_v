@@ -24,7 +24,7 @@
     <div id="wrapper">
         <!-- Sidebar -->
 
-<?php include "_sidebar.tlayout.php" ?>
+<?php $pages ="student"; include "_sidebar.tlayout.php" ?>
 
 
         

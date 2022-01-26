@@ -40,25 +40,25 @@
     </div>
     <!-- Nav Item - admit Student Menu -->
     <li class="nav-item">
-        <a class="nav-link" href="../student/studentlist.admin.php">
-            <i class="fas fa-users"></i>
+        <a class="nav-link <?php if($page == 'student'){echo"bg-light text-primary active";}?>" href="../student/studentlist.admin.php">
+            <i class="fas fa-users <?php if($page == 'student'){echo"text-primary";}?>"></i>
             <span>Students</span></a>
     </li>
     <!-- Nav Item - admit Teachers Menu -->
     <li class="nav-item">
-        <a class="nav-link" href="../teacher/teacherlist.admin.php">
-            <i class="fas fa-users"></i>
+        <a class="nav-link <?php if($page == 'teacher'){echo"bg-light text-primary active";}?>" href="../teacher/teacherlist.admin.php">
+            <i class="fas fa-users <?php if($page == 'teacher'){echo"text-primary";}?>"></i>
             <span>Teachers</span></a>
     </li>
     <!-- Nav Item -reg subject Menu -->
     <li class="nav-item">
-        <a class="nav-link" href="../program/subjectlist.admin.php">
-            <i class="fas fa-book"></i>
+        <a class="nav-link <?php if($page == 'subject'){echo"bg-light text-primary active";}?>" href="../program/subjectlist.admin.php">
+            <i class="fas fa-book <?php if($page == 'subject'){echo"text-primary";}?>"></i>
             <span>Subjects</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="../program/courselist.admin.php">
-            <i class="fas fa-book"></i>
+        <a class="nav-link <?php if($page == 'course'){echo"bg-light text-primary active";}?>" href="../program/courselist.admin.php">
+            <i class="fas fa-book <?php if($page == 'course'){echo"text-primary";}?>"></i>
             <span>Courses</span></a>
     </li>
 
@@ -70,21 +70,21 @@
 </div>
 
 <li class="nav-item">
-    <a class="nav-link" data-toggle="modal" data-target="#grading">
-    <i class="fas fa-toggle-on"></i>
+    <a class="nav-link <?php if($page == 'grading'){echo"bg-light text-primary active";}?>" data-toggle="modal" data-target="#grading">
+    <i class="fas fa-toggle-on <?php if($page == 'grading'){echo"text-primary";}?>"></i>
         <span>Grading</span></a>
 </li>
 
 <li class="nav-item">
-    <a class="nav-link" data-toggle="modal" data-target="#StudentGrade">
-    <i class="fas fa-award"></i>
+    <a class="nav-link <?php if($page == 'grade'){echo"bg-light text-primary active";}?>" data-toggle="modal" data-target="#StudentGrade">
+    <i class="fas fa-award <?php if($page == 'grade'){echo"text-primary";}?>"></i>
         <span>Student Grade</span></a>
 </li>
 
 
     <li class="nav-item">
-        <a class="nav-link" href="../student/irregularlist.admin.php">
-            <i class="fas fa-users"></i>
+        <a class="nav-link <?php if($page == 'irregstudent'){echo"bg-light text-primary active";}?>" href="../student/irregularlist.admin.php">
+            <i class="fas fa-users <?php if($page == 'irregstudent'){echo"text-primary";}?>"></i>
             <span>Irregular Students</span></a>
     </li>
 
@@ -104,15 +104,14 @@
     </div>
 
     <li class="nav-item">
-        <a class="nav-link collapsed active" href="#" data-toggle="collapse" data-target="#collapsestudentlist"
+        <a class="nav-link collapsed  <?php if($page == 'archive'){echo"bg-light text-primary active";}?>" href="#" data-toggle="collapse" data-target="#collapsestudentlist"
             aria-expanded="true" aria-controls="collapseTwo">
-            <i class="fas fa-users-slash"></i>
+            <i class="fas fa-users-slash <?php if($page == 'archive'){echo"text-primary";}?>"></i>
             <span>Archive</span>
         </a>
         <div id="collapsestudentlist" class="collapse" aria-labelledby="headingstudentlist"
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Subjects:</h6>
                         <a class='collapse-item' href='../student/withdrawnlist.admin.php'><i class="fas fa-user"></i>Student</a>  
                         <a class='collapse-item' href='../teacher/resignlist.admin.php?sub=$row[description]'><i class="fas fa-user-tie"></i>Teacher</a>  
             </div>
@@ -125,14 +124,14 @@
             <span>Withdrawn</span></a>
     </li> -->
     <li class="nav-item">
-        <a class="nav-link" href="../management/userlist.admin.php">
-            <i class="fas fa-users"></i>
+        <a class="nav-link <?php if($page == 'user'){echo"bg-light text-primary active";}?>" href="../management/userlist.admin.php">
+            <i class="fas fa-users <?php if($page == 'user'){echo"text-primary";}?>"></i>
             <span>Users</span></a>
     </li>
     <div class="sidebar-heading">admin account</div>
     <li class="nav-item">
-        <a class="nav-link" href="../management/changepass.admin.php">
-            <i class="fas fa-key"></i>
+        <a class="nav-link <?php if($page == 'changepass'){echo"bg-light text-primary active";}?>" href="../management/changepass.admin.php">
+            <i class="fas fa-key <?php if($page == 'changepass'){echo"text-primary";}?>"></i>
             <span>Change Password</span></a>
     </li>
 
