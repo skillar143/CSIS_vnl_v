@@ -25,8 +25,9 @@ if (isset($_SESSION['username'])) {
 
 
         </div>
-
+        <h5 class="title text-dark mb-5">Irregular Student List</h5>
         <div class="table-responsive">
+
     <table class="table table-striped table-hover table-borderless" id="datatableid">
         <thead class="bg-primary text-light ">
             <tr>
@@ -44,10 +45,9 @@ if (isset($_SESSION['username'])) {
         <tbody> 
             <?php
                     include_once '../database/dbconnection.db.php';
-                    $sql = "SELECT sr.*
-                    FROM studentrecords AS sr
-                    INNER JOIN withdrawns AS wd
-                    ON sr.student_id != wd.student_id where status = 'irregular'";
+                    $sql = "SELECT *
+                    FROM studentrecords
+                    WHERE status = 'irregular' and student_id NOT IN (SELECT student_id FROM withdrawns);";
                     $result = $conn-> query($sql);
                 
                     if($result-> num_rows > 0 ){

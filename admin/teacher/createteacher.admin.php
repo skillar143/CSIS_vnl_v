@@ -27,7 +27,7 @@
                     <!-- selection for gender -->
                     <div class="form-group">
                         <select name="gender" id="gender" class="form-control" required>
-                            <option selected disabled value="">Gender</option>
+                            <option selected disabled value="">Sex</option>
                             <option value="male">Male</option>
                             <option value="female">Female</option>
                         </select>

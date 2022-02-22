@@ -29,7 +29,7 @@ if (isset($_SESSION['username'])) {
             <tr>
                 <th>Student ID</th>
                 <th>Name</th>
-                <th>Gender</th>
+                <th>Sex</th>
                 <th>Cell No.</th>
                 <th>Birthday</th>
                 <th>Birth place</th>

@@ -41,7 +41,10 @@ if (isset($_SESSION['user_id'])) {
 
 
               <?php include "../../studentgrading/_first.grading.php"; ?>
-
+              <div class="mx-auto" style="width: 355px;">
+              <p class="m-5 font-italic">This is an electronic copy of grades.</p>
+              </div>
+              
                 <br>
                 <a class="btn btn-danger" id="print-btn" href="../../student/first.student.php"><i class="fas fa-arrow-circle-left"></i></a>
                 <button class="btn btn-danger" onclick="window.print();" id="print-btn"><i class="fas fa-print"></i></button>

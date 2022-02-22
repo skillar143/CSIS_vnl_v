@@ -23,7 +23,7 @@ if (isset($_SESSION['username'])) {
             <a class="btn btn-danger" id="print-btn" href="../admin/student/studentlist.admin.php"><i class="fas fa-arrow-circle-left"></i></a>
             <button class="btn btn-danger" onclick="window.print();" id="print-btn"><i class="fas fa-print"></i></button>
         </div>
-
+        <h5 class="title text-dark mb-5">Student List</h5>
         <table class="table">
             <thead class="bg-primary text-light ">
                 <tr>

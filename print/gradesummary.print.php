@@ -24,7 +24,7 @@ if (isset($_SESSION['user_id'])) {
             <div class="col-1 "><img src="../assets/img/logo.jpg" alt=""></div>
         </div>
         <div class=" mb-3">
-        <h5 class="title text-dark mb-5">Student List in <?php echo $_GET['sub'];?> subject</h5>
+        <h5 class="title text-dark mb-5"> Summary of Grades <?php echo $_GET['sub'];?> subject</h5>
         <table class="table" id="studentlist">
         <thead class="bg-primary text-light" >
             <tr>

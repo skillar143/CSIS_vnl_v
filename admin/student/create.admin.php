@@ -34,7 +34,7 @@
                             <input type="tel" class="form-control" name="contact" autocomplete="off" pattern="[0-9]{11}" required>
                         </label>
 
-                        <label for="gender" style="width: 20%; padding:1px">Gender
+                        <label for="gender" style="width: 20%; padding:1px">Sex
                             <select name="gender" id="gender" class="form-control " required>
                                 <option value="male">M</option>
                                 <option value="female">F</option>
@@ -113,5 +113,7 @@
                 <!-- end of modal footer -->
             </form>
         </div>
+       
     </div>
+    
 </div>

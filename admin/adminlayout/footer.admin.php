@@ -44,6 +44,8 @@
 
 
     (function() {
+
+      
     'use strict';
     window.addEventListener('load', function() {
       // Fetch all the forms we want to apply custom Bootstrap validation styles to
@@ -60,6 +62,8 @@
       });
     }, false);
   })();
+
+  
 //opening edit modal
 $(document).ready(function(){
     $('.edit-user').each(function() {
@@ -104,7 +108,7 @@ $(document).ready(function(){
 
 
   });
-
+  
   
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()

@@ -61,7 +61,7 @@ $stat = $row['status'];
                             if ($result->num_rows > 0) {
                                 while ($row = $result->fetch_assoc()) {
 
-                                    echo "<option value='" . $row['description'] . "' class='text-uppercase'>".$row['subcode']."-(".$row['description']."</option>";
+                                    echo "<option value='" . $row['description'] . "' class='text-uppercase'>".$row['subcode']."-".$row['description']."</option>";
                                 }
                             } else {
                                 echo "<tr><td>No records</td></tr>";

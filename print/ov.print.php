@@ -110,7 +110,7 @@ if($term === "prelim"){
             <button class="btn btn-danger" onclick="window.print();" id="print-btn"><i class="fas fa-print"></i></button>
         </div>
         <h5 class="title text-dark mb-3"><?php echo $course ."(".$subcode.")-".$sub?></h5>
-<div class="table-responsive">
+
 <table class="table" id="">
     <thead class="bg-primary text-light ">
         <tr>
@@ -258,7 +258,7 @@ if($term === "prelim"){
            </tr>
     </tbody>
 </table>
-</div>
+
 <!-- end of content here -->
 <?php //include "../teacher/teacherlayout/footer.tlayout.php";
 } else {

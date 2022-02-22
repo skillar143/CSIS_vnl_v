@@ -21,7 +21,7 @@ if (isset($_SESSION['username'])) {
             <tr>
                 <th >Teacher ID</th>
                 <th>Name</th>
-                <th>Gender</th>
+                <th>Sex</th>
                 <th>Cell No.</th>
                 <th>Address</th>
                 <th>Action</th>
