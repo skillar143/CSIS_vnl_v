@@ -46,22 +46,12 @@ if (isset($_POST['ok'])) {
     else if($status == "regular") {
 
         if($age >= 15){
-            $sql = "SELECT * from programs where course = '$course' && year = '$year'";
-            $result = $conn->query($sql);
-    
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    $sqlcourse = "INSERT INTO studentsubs (student_id, subject) 
-                    VALUES ('$studentid', '$row[subject]');";
-                    $query = mysqli_query($conn, $sqlcourse) or die(mysqli_error($conn));
-                }
+            
                 $query = mysqli_query($conn, $sqlstudent) or die(mysqli_error($conn));
                 $quey = mysqli_query($conn, $sqladmin) or die(mysqli_error($conn));
     
                 header("Location: ../../admin/student/studentlist.admin.php?succesfull");;
-            } else {
-                header("Location: ../../admin/student/studentlist.admin.php?error= The course is not yet done");;
-            }
+            
 
         }else {
             header("Location: ../../admin/student/studentlist.admin.php?error= The age is below 15");;
