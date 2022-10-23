@@ -7,7 +7,7 @@
 <!-- Custom styles for this template-->
 <link href="../../assets/css/sb-admin-2.min.css" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/css/datatable.css">
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <!-- end of header -->
 <!-- page content -->
 <!-- Page Wrapper -->

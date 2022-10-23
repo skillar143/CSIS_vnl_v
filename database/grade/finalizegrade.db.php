@@ -4,6 +4,8 @@ $id = $_POST['studentid'];
 $sub = $_GET['sub'];
 $course = $_POST['course'];
 $grade = $_POST['grade'];
+$year = $_POST['year'];
+
 
 
 $sql2 = "SELECT * from gradingstatus ";
@@ -39,5 +41,5 @@ for($j = 0; $j < $i; $j++) {
   $sql = "INSERT INTO $term (student_id, subject, grade) 
   VALUES ('$sid[$j]','$sub','$grad[$j]');";
   $result = mysqli_query($conn, $sql);
- header("Location: ../../teacher/records/studentgrade.teacher.php?success=Grade is successfuly submitted &sub=$sub&course=$course");
+ header("Location: ../../admin/student/gradeassess.admin.php?success=Grade is successfuly submitted &sub=$sub&course=$course&year=$year");
 }

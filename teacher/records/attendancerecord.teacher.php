@@ -5,10 +5,8 @@ if (isset($_SESSION['user_id'])) {
     $id = $_SESSION['user_id'];
     $sub = $_GET['sub'];
     $course = $_GET['course'];
-   
-
+    $year = $_GET['year'];
     include "../teacherlayout/head.tlayout.php"; 
-
     $sql2 = "SELECT * from gradingstatus ";
 $result2 = $conn->query($sql2);
 if ($result2->num_rows > 0) {
@@ -26,6 +24,7 @@ if ($result2->num_rows > 0) {
             $subcode = $row2['subcode'];
         }
     }
+
     ?>
 <!-- content here -->
 <h5 class="title text-dark mb-3">Attendance in <?php echo "(".$subcode.")-".$sub?></h5>
@@ -40,6 +39,7 @@ if ($result2->num_rows > 0) {
         <tr>
             <th class="">Student ID</th>
             <th class="">Name</th>
+            <th class="">Year</th>
             <th class="">Score(s)</th> 
             <th class="">Action</th>
         </tr>
@@ -47,36 +47,46 @@ if ($result2->num_rows > 0) {
     <tbody>
 
         <?php
-            
-            $sql = "SELECT *
+            $q = "SELECT *
+            FROM studentsubs
+            WHERE subject = '$sub' and student_id NOT IN (SELECT student_id FROM withdrawns);";
+            $res = $conn->query($q);
+            if($res->num_rows > 0){
+                while($row = $res->fetch_assoc()){
+                    $sid = $row['student_id'];
+                    $sql = "SELECT *
             FROM studentrecords
-            WHERE course = '$course' and student_id NOT IN (SELECT student_id FROM withdrawns);";
-
+            WHERE course = '$course' and student_id = '$sid' and year = '$year';";
             $result = $conn->query($sql);
+
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     $sid = $row['student_id'];
                     $name =$row['name'];
+                    $yearlevel =$row['year'];
                     $sql2 = "SELECT * from student_attendance where student_id = '$sid' and term = '$term' and subject_code = '$subcode'";
                     $result2 = $conn->query($sql2);
 ?>
         <tr>
             <td><?php echo $sid; ?></td>
             <td><?php echo $name; ?></td>
-            
+            <td><?php echo $yearlevel; ?></td>
+
 
             <td>
             <?php
                     if ($result2->num_rows > 0) {
                         while ($row2 = $result2->fetch_assoc()) {    
                             $score = $row2['score']; 
-                    echo $score. " | "; 
+                    echo $score. "  "; 
                         }
                     }
-                    $edit = "<a class='btn btn-sm btn-outline-info' href='../edit/attendance.teacher.php?stid=$row[student_id]&sub=$sub&course=$course'>
+                    $edit = "<a class='btn btn-sm btn-outline-info' href='../edit/attendance.teacher.php?stid=$row[student_id]&sub=$sub&course=$course&year=$year'>
                     <i class='fas fa-edit'></i></a>";
        
                    echo "<td>" .$edit. "</td></tr>";
+                }
+            }
                 }
             }
             ?></td>
@@ -129,7 +139,8 @@ input::-webkit-inner-spin-button {
                     <!-- text box student id -->
 
                     <input type="hidden" name="sub" id="" class="form-control" value="<?php echo $sub; ?>">
-                    <input type="hidden" name="tid" id="" class="form-control" value="<?php echo $id; ?>">
+                    <input type="hidden" name="year" id="" class="form-control" value="<?php echo $year; ?>">
+                    <input type="hidden"  name="tid" id="" class="form-control" value="<?php echo $id; ?>">
                     <input type="hidden" name="course" id="" class="form-control"
                         value="<?php echo $_GET['course']; ?>">
 
@@ -147,16 +158,14 @@ input::-webkit-inner-spin-button {
                             <tbody>
 
                                 <?php
-            $sql = "SELECT *
-            FROM studentsubs
-            WHERE subject = '$sub' and student_id NOT IN (SELECT student_id FROM withdrawns);";
+            $sql = "SELECT *FROM studentsubs  WHERE subject = '$sub' and student_id NOT IN (SELECT student_id FROM withdrawns);";
             $result = $conn->query($sql);
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     $sid = $row['student_id'];
-                    $sql2 = "SELECT * from studentrecords where student_id = '$sid' and course = '$_GET[course]'";
+                    $sql2 = "SELECT * from studentrecords where student_id = '$sid' and course = '$course' and year = '$year';";
                     $result2 = $conn->query($sql2);
-
+                  
                     if ($result2->num_rows > 0) {
                         while ($row2 = $result2->fetch_assoc()) {
                             

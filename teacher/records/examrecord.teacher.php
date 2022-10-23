@@ -2,13 +2,18 @@
 session_start();
 $page ="exam";
 if (isset($_SESSION['user_id'])) {
-    $id = $_SESSION['user_id'];
+    $uid = $_SESSION['user_id'];
     $sub = $_GET['sub'];
     $course = $_GET['course'];
-   
-
+    $year = $_GET['year'];
     include "../teacherlayout/head.tlayout.php"; 
-
+    if(isset($_GET['success'])){
+        $chars = str_split($sub);
+        $sub = "";
+        for($i = 0; $i < count($chars) -1 ; $i++){
+            $sub = $sub . $chars[$i];
+        }
+    }
     
     $sql2 = "SELECT * from subjects where description = '$sub'";
     $result2 = $conn->query($sql2);
@@ -39,48 +44,93 @@ if (isset($_SESSION['user_id'])) {
 </div>
 <p><?php echo $course ?></p>
 <div class="table-responsive">
-<table class="table" id="datatableid">
+<table class="table table-bordered text-center" id="datatableid">
     <thead class="bg-primary text-light ">
         <tr>
             <th class="">Student ID</th>
             <th class="">Name</th>
+            <th class="">Year</th>
             <th class="">Score(s)</th>
             <th class="">Action</th>
         </tr>
     </thead>
-
     <tbody>
+    <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="p-0">
+                     <table style = "margin:0px; width: 100%; " class = "text-center">
+            <tr> 
+                    <?php
+                $sql = "SELECT * from teacher_exam where teacher_id = '$uid' and term = '$term' and subject_code = '$subcode'";
+                    $result = $conn->query($sql);
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {    
+                            $item = $row['item']; 
+                    echo "<td id = \"border\"> $item </td>"; 
+                        }
+                    }
+                   
+            ?>
+            </tr>
+                </table>
+            </td>
+            <td></td>  
+                
+    </tr>           
 
         <?php
-          $sql = "SELECT *
+          $q = "SELECT *
+          FROM studentsubs
+          WHERE subject = '$sub' and student_id NOT IN (SELECT student_id FROM withdrawns);";
+          $res = $conn->query($q);
+          if($res->num_rows > 0){
+              while($row = $res->fetch_assoc()){
+                  $id = $row['student_id'];
+                  $sql = "SELECT *
           FROM studentrecords
-          WHERE course = '$course' and student_id NOT IN (SELECT student_id FROM withdrawns);";
-            $result = $conn->query($sql);
+          WHERE course = '$course' and student_id = '$id' and year = '$year';";
+          $result = $conn->query($sql);
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     $sid = $row['student_id'];
                     $name =$row['name'];
+                    $yearlevel =$row['year'];
                     $sql2 = "SELECT * from student_exam where student_id = '$sid' and term = '$term' and subject_code = '$subcode'";
                     $result2 = $conn->query($sql2);
 ?>
         <tr>
             <td><?php echo $sid; ?></td>
             <td><?php echo $name; ?></td>
-            <td>
+            <td><?php echo $yearlevel; ?></td>
+            <td class ="p-0">
+                        <table style = "margin:0px; width: 100%;" class = "text-center">
+                <tr> 
             <?php
                     if ($result2->num_rows > 0) {
                         while ($row2 = $result2->fetch_assoc()) {    
                             $score = $row2['score']; 
-                    echo $score. " | "; 
+                            echo "<td id = \"border\"> $score </td>"; 
                         }
                     }
-                    $edit = "<a class='btn btn-sm btn-outline-info' href='../edit/examrecord.teacher.php?stid=$row[student_id]&sub=$sub&course=$course'>
-                    <i class='fas fa-edit'></i></a>";
-       
-                   echo "<td>" .$edit. "</td></tr>";
+                   
+            ?>
+            </tr>
+                </table>    
+        </td>
+
+            <?php
+
+                $edit = "<a class='btn btn-sm btn-outline-info' href='../edit/examrecord.teacher.php?stid=$row[student_id]&sub=$sub&course=$course&year=$year'>
+                <i class='fas fa-edit'></i></a>";
+
+                echo "<td>" .$edit. "</td>";
+                    }
                 }
             }
-            ?></td>
+          }
+            ?>
            </tr>
     </tbody>
 </table>
@@ -140,6 +190,7 @@ input::-webkit-inner-spin-button {
                     <hr class="divider">
 
                     <input type="hidden" name="sub" id="" class="form-control" value="<?php echo $sub; ?>">
+                    <input type="hidden" name="year" id="" class="form-control" value="<?php echo $year; ?>">
                     <input type="hidden" name="tid" id="" class="form-control" value="<?php echo $id; ?>">
                     <input type="hidden" name="course" id="" class="form-control"
                         value="<?php echo $_GET['course']; ?>">
@@ -169,7 +220,7 @@ WHERE subject = '$sub' and student_id NOT IN (SELECT student_id FROM withdrawns)
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     $sid = $row['student_id'];
-                    $sql2 = "SELECT * from studentrecords where student_id = '$sid' and course = '$_GET[course]'";
+                    $sql2 = "SELECT * from studentrecords where student_id = '$sid' and course = '$_GET[course]' and year = '$year'";
                     $result2 = $conn->query($sql2);
 
                     if ($result2->num_rows > 0) {
@@ -182,6 +233,8 @@ WHERE subject = '$sub' and student_id NOT IN (SELECT student_id FROM withdrawns)
                                     <td><input type="number" name="score[]" id="" class="form-control" required></td>
                                     <input type="hidden" name="id[]" id="" class="form-control"
                                         value="<?php echo $row2['student_id']; ?>">
+                                        <input type="hidden" name="tcid" id="" class="form-control"
+                                        value="<?php echo $uid ?>">
 
                                 </tr>
                                 <?php

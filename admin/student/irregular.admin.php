@@ -56,7 +56,7 @@ if (isset($_SESSION['username'])) {
             <label>Semester</label>
             <select class="custom-select" name="semester"required>
               <option selected disabled value="">Choose...</option>
-              <option>1nd Sem</option>
+              <option>1st Sem</option>
               <option>2nd Sem</option>
             </select>
         </div>

@@ -2,12 +2,12 @@
 include_once '../dbconnection.db.php';
 $sub = $_POST['sub'];
 $course = $_POST['course'];
-$tid = $_POST['tid'];
+$stid = $_POST['tid'];
 $score = $_POST['score'];
 $id = $_POST['id'];
+$year = $_POST['year'];
 $uid = array();
 $sc = array();
-
     //getting the term
 $sql = "SELECT * from gradingstatus";
 $result = $conn->query($sql);
@@ -46,13 +46,13 @@ for($j = 0; $j < $i; $j++) {
   
 //  print $uid[$j];
 //  print $code;
-//  print $tid;
+//  print $stid;
 //  print $term;
 //  print $course;
 //  print $sc[$j];
 
 $sql = "INSERT INTO student_attendance (subject_code, teacher_id, student_id, term, score,   course) 
- VALUES ('$code', '$tid', '$uid[$j]', '$term', '$sc[$j]', '$course');";
+ VALUES ('$code', '$stid', '$uid[$j]', '$term', '$sc[$j]', '$course');";
  $result = mysqli_query($conn, $sql);
- header("Location: ../../teacher/records/attendancerecord.teacher.php?course=$course & sub=$sub & success=Recorded Successfuly ");
+header("Location: ../../teacher/records/attendancerecord.teacher.php?course=$course & sub=$sub & success=Recorded Successfuly&year=$year");
 }

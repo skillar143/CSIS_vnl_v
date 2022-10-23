@@ -4,7 +4,7 @@
 <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
     <i class="fa fa-bars"></i>
 </button>
-<h5 class="title ml-auto">Canossa College Department Grading System</h5>
+<h5 class="title ml-auto" style='font-size:30px';>Canossa College Department Grading System</h5>
 <!-- Topbar Search -->
 
 <!-- Topbar Navbar -->

@@ -1,16 +1,15 @@
 <?php
 include_once '../dbconnection.db.php';
-
-$tid = $_POST['tid'];
+$sid = $_POST['tid'];
 $item = $_POST['item'];
 $sub = $_POST['sub'];
 $course = $_POST['course'];
-
+$year = $_POST['year'];
 $score = $_POST['score'];
 $id = $_POST['id'];
+$tid = $_POST['uid'];
 $uid = array();
 $sc = array();
-
     //getting the term
 $sql = "SELECT * from gradingstatus";
 $result = $conn->query($sql);
@@ -57,7 +56,7 @@ for($j = 0; $j < $i; $j++) {
   
 //  print $uid[$j];
 //  print $code;
-//  print $tid;
+//  print $sid;
 //  print $term;
 //  print $course;
 //  print $sc[$j];
@@ -65,5 +64,5 @@ for($j = 0; $j < $i; $j++) {
 $sql = "INSERT INTO student_reporting (subject_code, teacher_id, student_id, term, score,   course) 
  VALUES ('$code', '$tid', '$uid[$j]', '$term', '$sc[$j]', '$course');";
  $result = mysqli_query($conn, $sql);
- header("Location: ../../teacher/records/reportrecord.teacher.php?course=$course & sub=$sub & success=Recorded Successfuly ");
+ header("Location: ../../teacher/records/reportrecord.teacher.php?course=$course & sub=$sub & success=Recorded Successfuly&year=$year ");
 }

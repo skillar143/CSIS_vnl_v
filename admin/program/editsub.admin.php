@@ -1,17 +1,17 @@
 
-<div class="modal fade" id="editSubject" tabindex="-1" role="dialog" 
+<div style = "background:rgba(0,0,0,.5)" class="modal" id="editSubject" tabindex="-1" role="dialog" 
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <!-- modal header -->
             <div class="modal-header bg-primary">
                 <h5 class="modal-title text-light" id="exampleModalLabel">Edit Subject</h5>
-                <button class="close text-light" type="button" data-dismiss="modal" aria-label="Close">
-                <i class="fa fa-window-close" aria-hidden="true"></i>
+                <button onclick = "closeEditSubject()" class="close text-light btn btn-sm" type="button" data-dismiss="modal" aria-label="Close">
+                    <i class="fa fa-window-close" aria-hidden="true"></i>
                 </button>
             </div>
             <!-- end of modal header -->
-            <form class="needs-validation" id="subjectUpdate"  method="post" novalidate>
+            <form class="needs-validation" id="subjectUpdate" action = "../../database/editprofile/subject.db.php"  method="post" novalidate>
                 <!-- modal body -->
                 <div class="modal-body">
                 <input type="text" class="form-control" name="id" id="id" autocomplete="off" hidden> 
@@ -38,7 +38,7 @@
 
                 <!-- modal footer -->
                 <div class="modal-footer">
-                    <button class="btn btn-sm btn-outline-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <button class="btn btn-sm btn-outline-secondary" type="button" onclick = "closeEditSubject()">Cancel</button>
                     <button class="btn btn-sm btn-outline-primary" type="submit" onclick="document.getElementById('subjectUpdate').submit()">Update</button>
                 </div>
                     <!-- end of modal footer -->

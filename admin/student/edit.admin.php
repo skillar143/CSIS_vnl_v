@@ -1,22 +1,22 @@
 
-<div class="modal fade" id="editStudent" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal" id="editStudent" tabindex="-1" role="dialog" aria-hidden="true" style = "background:rgba(0,0,0,0.5);">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
             <!-- modal header -->
             <div class="modal-header bg-primary">
                 <h5 class="modal-title text-light" id="exampleModalLabel">Edit Student Record</h5>
-                <button class="close text-light btn btn-sm" type="button" data-dismiss="modal" aria-label="Close">
+                <button onclick = "closeEditStudent()" class="close text-light btn btn-sm" type="button" data-dismiss="modal" aria-label="Close">
                     <i class="fa fa-window-close" aria-hidden="true"></i>
                 </button>
             </div>
             <!-- end of modal header -->
-            <form class="needs-validation" id="studentUpdate"  method="post" novalidate>
+            <form class="needs-validation" action = "../../database/editprofile/student.db.php" id="studentUpdate"  method="post" novalidate>
                 <!-- modal body -->
                 <div class="modal-body">
                     <!-- text box student id -->
                     <div class="form-group d-flex" >
                         <label for="studentid" style="width: 20%; padding:1px">Student ID</label>
-                        <input type="text" class="form-control" name="studentid" id="studentid" autocomplete="off"  required>
+                        <input type="text" class="form-control" name="studentid" id="studentid" autocomplete="off" required>
                         <input type="text" class="form-control" name="id" autocomplete="off" id="id" hidden> 
                     </div>
                     
@@ -62,7 +62,7 @@
                     </div>
                     <!-- end address -->
                     <!-- selection of course -->
-                    <div class="form-group d-flex">
+                    <!-- <div class="form-group d-flex">
                        <label for="course" style="width: 70%; padding:1px"> Program
                         <select name="course" id="course" class="form-control" required>
                         <option selected disabled value="">Choose...</option>
@@ -82,9 +82,10 @@
                                 }
                                 ?>
                             </select>
-                        </label>
+                        </label> -->
                         
-                        <!-- <label for="year" style="width: 20%; padding:1px">Year Level
+                        <div class="form-group">
+                        <label for="year" style="width: 20%; padding:1px">Year Level
                         <select name="year" id="year" class="form-control" required>
                         <option selected disabled value="">Choose...</option>
                                 <option value="first">1st</option>
@@ -92,7 +93,7 @@
                                 <option value="third">3rd</option>
                                 <option value="4th">4th</option>
                             </select>
-                        </label> -->
+                        </label>
 
                         <label for="status" style="width: 30%; padding:1px">Status
                             <select name="status" id="status" class="form-control" required>
@@ -108,7 +109,7 @@
 
                 <!-- modal footer -->
                 <div class="modal-footer">
-                    <button class="btn btn-sm btn-outline-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-sm btn-outline-secondary" type="button" onclick = "closeEditStudent()">Cancel</button>
                     
                     <button class="btn btn-sm btn-outline-primary" type="submit" onclick="document.getElementById('studentUpdate').submit()">Update</button>
                 </div>

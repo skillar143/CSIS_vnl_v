@@ -58,6 +58,13 @@ if (isset($_SESSION['user_id'])) {
 
                             ?>
                         </select>
+                        <select name="year" id="d" class="form-control m-1" required>
+                            <option value="">Year level</option>
+                            <option value="first">first</option>
+                            <option value="second">second</option>
+                            <option value="third">third</option>
+                            <option value="4th">fourth</option>
+                        </select>
                     </div>
                     <!-- end student id -->      
                     <!-- end of course selection -->

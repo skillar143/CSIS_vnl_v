@@ -5,7 +5,7 @@ $tid = $_POST['tid'];
 $item = $_POST['item'];
 $sub = $_POST['sub'];
 $course = $_POST['course'];
-
+$year = $_POST['year'];
 $score = $_POST['score'];
 $id = $_POST['id'];
 $uid = array();
@@ -59,5 +59,5 @@ for($j = 0; $j < $i; $j++) {
   $sql = "INSERT INTO student_cs (subject_code, teacher_id, student_id, term, score, course) 
   VALUES ('$code', '$tid', '$uid[$j]', '$term', '$sc[$j]', '$course');";
   $result = mysqli_query($conn, $sql);
- header("Location: ../../teacher/records/csrecord.teacher.php?course=$course & sub=$sub & success=Recorded Successfuly ");
+ header("Location: ../../teacher/records/csrecord.teacher.php?course=$course & sub=$sub & success=Recorded Successfuly&year=$year");
 }

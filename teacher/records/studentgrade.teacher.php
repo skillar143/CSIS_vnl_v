@@ -5,6 +5,8 @@ if (isset($_SESSION['user_id'])) {
     $id = $_SESSION['user_id'];
     $sub = $_GET['sub'];
     $course = $_GET['course'];
+    $year = $_GET['year'];
+    //echo $year;
     $c = 0;
    
  
@@ -27,23 +29,25 @@ if (isset($_SESSION['user_id'])) {
 
 
 <!-- content here -->
-<h5 class="title text-dark mb-3">Input Grade in <?php echo "(".$subcode.")-".$sub?></h5>
-<?php echo "<form action='../../database/grade/finalizegrade.db.php?sub=$sub'&course=$course method='post'>"; ?>
+<h5 class="title text-dark mb-3; text-capitalize"><?php echo $term." "."Grade"?></h5>
+<h5 class="title text-dark mb-3">Grades for <?php echo " ".$subcode." - ".$sub?></h5>
+<!-- <?php echo "<form action='../../database/grade/finalizegrade.db.php?sub=$sub'&course=$course method='post'>"; ?>
 <div class="row mb-2">
 
     <div class="form-group col">
-        <input type="submit" value="Assess" name="submit" class="btn btn-sm btn-outline-primary">
+        <input type="submit" value="Submit" name="submit" class="btn btn-sm btn-outline-primary">
     </div>
 
-</div>
+</div> -->
 
 
-<table class="table" id="datatableid">
+<table class="table">
     <thead class="bg-primary text-light ">
         <tr>
             <th class="">Student ID</th>
             <th class="">Name</th>
             <th>Course</th>
+            <th>Year</th>
             <th class="">Grade</th>
         </tr>
     </thead>
@@ -53,14 +57,15 @@ if (isset($_SESSION['user_id'])) {
         <?php
 $sql = "SELECT *
 FROM studentsubs
-WHERE subject = '$sub' and student_id NOT IN (SELECT student_id FROM withdrawns);";
+WHERE subject = '$sub' and student_id NOT IN (SELECT student_id FROM withdrawns)";
 
 
             $result = $conn->query($sql);
+            $finalgrade = 0;
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     $id = $row['student_id'];
-                    $sql2 = "SELECT * from studentrecords where student_id = '$id' and course = '$course' order by name";
+                    $sql2 = "SELECT * from studentrecords where student_id = '$id' and year = '$year' and course = '$course' order by name";
                     $result2 = $conn->query($sql2);
                      $term;
                      if($term === "prelim"){
@@ -89,16 +94,21 @@ WHERE subject = '$sub' and student_id NOT IN (SELECT student_id FROM withdrawns)
 // finalizing
                             if ($term == 'prelim'){
                                 
-                              
-                                $grade = ($csarray[$c] + $examarray[$c] + $reportarray[$c] + $satarray[$c]);
-
-                                $finalgrade = $grade;
+                                if(count($csarray) > $c){
+                                    $grade = ($csarray[$c] + $examarray[$c] + $reportarray[$c] + $satarray[$c]);
+                                    $finalgrade = $grade;
+                                
+                                }
 
                             }else{
+                                if(count($csarray) > $c){
+
                                 
                                 $grade = ($csarray[$c] + $examarray[$c] + $reportarray[$c] + $satarray[$c]);
 
                                 $finalgrade = ($recentgrade * .30 )+($grade * .70);
+
+                                }
 
                             }
 
@@ -108,11 +118,12 @@ WHERE subject = '$sub' and student_id NOT IN (SELECT student_id FROM withdrawns)
             <td><?php echo $row2['student_id']; ?></td>
             <td><?php echo $row2['name']; ?></td>
             <td><?php echo $row2['course']; ?></td>
-            
+            <td><?php echo $row2['year']; ?></td>
+
         
 
             <td><input type='text' name="grade[]" class='form-control mb-2 mr-sm-2 mb-sm-0'
-                    value="<?php  echo number_format($finalgrade, 0.0);; ?>" autocomplete="off" required></td>
+                    value="<?php  echo number_format($finalgrade, 0);; ?>" autocomplete="off" required></td>
             <input type="hidden" name="studentid[]" value="<?php echo $row2['student_id']; ?>"
                 class="border-0 bg-transparent ">
                 <input type="hidden" name="course" value="<?php echo $course; ?>"

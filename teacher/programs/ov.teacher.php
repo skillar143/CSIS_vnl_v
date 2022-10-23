@@ -44,7 +44,7 @@ if (isset($_SESSION['user_id'])) {
                              
                             include_once '../../database/dbconnection.db.php';
 
-                            $sql = "SELECT * from subjects where teacher_id = '$tid'";
+                            $sql = "SELECT * from subjects  where teacher_id = '$tid'";
                             $result = $conn->query($sql);
 
                             if ($result->num_rows > 0) {
@@ -93,6 +93,13 @@ if (isset($_SESSION['user_id'])) {
                            
 
                             ?>
+                        </select>
+                        <select name="year" id="d" class="form-control m-1" required>
+                            <option value="">Year level</option>
+                            <option value="first">first</option>
+                            <option value="second">second</option>
+                            <option value="third">third</option>
+                            <option value="4th">fourth</option>
                         </select>
                     </div>
                     

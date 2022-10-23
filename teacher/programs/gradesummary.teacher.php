@@ -39,6 +39,15 @@ if (isset($_SESSION['user_id'])) {
 
                             ?>
                         </select>
+                    
+                    
+                        <select name="level" id="d" class="form-control" required>
+                            <option value="">Year level</option>
+                            <option value="first">first</option>
+                            <option value="second">second</option>
+                            <option value="third">third</option>
+                            <option value="4th">fourth</option>
+                        </select>
                     </div>
                     <input type="hidden" name="sub" value="<?php echo $sub?>">
                     <!-- end student id -->      

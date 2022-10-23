@@ -62,11 +62,7 @@ if (isset($_SESSION['username'])) {
                             <!-- <td><a type="button" class="btn btn-outline-info m-1 btn-sm editbtn" >
                             <i class="fas fa-edit"></i></a></td> -->
 
-                            <td><a class="btn btn-outline-info m-1 btn-sm edit-user" id="userEdit"
-                                data-id="<?php echo $row['user_id']?>"
-                                data-role="<?php echo $row['role']?>"
-                                data-password="<?php echo $row['password']?>"
-                                data-toggle="modal" data-target="#editUser">
+                            <td><a class="btn btn-outline-info m-1 btn-sm edit-user" id="userEdit"  onclick = "editUser(<?php echo $row['id'] ?>)">
                             <i class="fas fa-edit"></i></a></td>
 
                 <?php
@@ -81,19 +77,19 @@ if (isset($_SESSION['username'])) {
     </div>
   
 
-    <div class="modal fade" id="editUser" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div style = "background:rgba(0,0,0,0.5)" class="modal" id="editUser" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
         <div class="modal-header bg-primary">
                 <h5 class="modal-title text-light" id="exampleModalLabel">Edit User Password</h5>
-                <button class="close text-light closemodal" type="button" data-dismiss="modal" aria-label="Close">
+                <button class="close text-light closemodal" type="button" data-dismiss="modal" onclick = "closeEditUser()" aria-label="Close">
                     <i class="fa fa-window-close" aria-hidden="true"></i>
                 </button>
             </div>
             <div class="modal-body">
-            <form  method="POST" id="userUpdate"> 
+            <form  method="POST" id="userUpdateForm" action = "../../database/changepass/user.db.php"> 
             <div class="form-group">
-                    <input type="text" class="form-control" name="userid" id="userid" autocomplete="off" placeholder="User id">
+                    <input disabled type="text" class="form-control" name="userid" id="userid" autocomplete="off" placeholder="User id">
                     </div>
                     <!-- end student id -->
 
@@ -105,20 +101,48 @@ if (isset($_SESSION['username'])) {
                     <div class="form-group">
                         <input type="text" class="form-control" name="password" id="userpassword" autocomplete="off" placeholder="Password" required>
                     </div>
+                    <input type="text" class="form-control" name="id" id="id" autocomplete="off" placeholder="Password" hidden>
             </form>
                     <!-- text box student id -->
                     <!-- end address -->
                 </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-outline-primary btn-sm" onclick="document.getElementById('userUpdate').submit()">Update</button>
+            <button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal" onclick = "closeEditUser()">Close</button>
+            <button type="button" class="btn btn-outline-primary btn-sm" onclick="document.getElementById('userUpdateForm').submit()">Update</button>
           </div>
         </div>
       </div>
     </div>
 
     <script>
-  
+        function editUser(id){
+        $.get('../../database/userlist',{
+            id: id
+        },function (data, status){
+            try {
+                let editUser = $("#editUser");
+                let User = JSON.parse(data)[0];
+                $("#id").val(User.id);
+                $("#userid").val(User.user_id);
+                $("#userrole").val(User.role);
+                $("#userpassword").val(User.password);
+                editUser.show();
+            } catch (error) {
+                alert(error);
+            }
+        });
+        
+    }
+    function closeEditUser(){
+        try {
+            let editSubject = $("#editUser");
+            editSubject.hide();
+        } catch (error) {
+            alert(error);
+        }
+    }
+
+    </script>
 
 <?php include_once '../adminlayout/footer.admin.php';
 } else {

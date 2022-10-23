@@ -23,7 +23,7 @@
 
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
-                        $del = "<a class='btn btn-sm btn-outline-danger' href='../database/deleterecord/program.db.php?subcode=$row[subject]&des=$_GET[des]'>
+                        $del = "<a class='btn btn-sm btn-outline-danger' href='../../database/deleterecord/program.db.php?subcode=$row[subject]&des=$_GET[des]'>
                             <i class='fas fa-user-minus'></i></a>";
                             $des = $row['subject'];
                             $sub = "SELECT * from sublists where  description = '$des'";
@@ -101,7 +101,7 @@
 
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
-                        $del = "<a class='btn btn-sm btn-outline-danger' href='../database/deleterecord/program.db.php?subcode=$row[subject]&des=$_GET[des]'>
+                        $del = "<a class='btn btn-sm btn-outline-danger' href='../../database/deleterecord/program.db.php?subcode=$row[subject]&des=$_GET[des]'>
                             <i class='fas fa-user-minus'></i></a>";
                             $des = $row['subject'];
                             $sub = "SELECT * from sublists where  description = '$des'";

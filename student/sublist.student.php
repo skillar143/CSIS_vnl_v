@@ -7,7 +7,7 @@ if (isset($_SESSION['user_id'])) {
     
     $sq = "SELECT * from studentrecords where student_id = '$id'";
     $resul = $conn->query($sq);
-
+    echo $_SESSION['user_id'];
     if ($resul->num_rows > 0) {
         while ($row = $resul->fetch_assoc()) {
             $name = $row['name'];
@@ -23,7 +23,9 @@ if (isset($_SESSION['user_id'])) {
     </nav>
     <div>
     <table class="table">
-    <h6 class="text-gray-800 mr-auto text-uppercase"><?php echo $course . "(" . $name . "(". $id ."))"; ?></h6>
+    <h6 class="text-gray-800 mr-auto text-uppercase"><?php echo $course?></h6>
+    <h6 class="text-gray-800 mr-auto text-uppercase"><?php echo $id. ", ".$name?></h6>
+    
         <thead class="bg-primary text-light">
             <tr>
                 <th>Subject code</th>

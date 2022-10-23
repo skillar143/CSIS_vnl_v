@@ -5,7 +5,7 @@ if (isset($_SESSION['user_id'])) {
     $id = $_SESSION['user_id'];
     $sub = $_GET['sub'];
     $course = $_GET['course'];
-   
+    $year = $_GET['year'];
 
     include "../teacherlayout/head.tlayout.php"; 
 
@@ -95,7 +95,7 @@ input::-webkit-inner-spin-button {
 
                     <!-- modal footer -->
                     <div class="modal-footer">
-                      <?php echo  "<a class='btn btn-sm btn-outline-secondary' href='../records/examrecord.teacher.php?stid=&sub=$sub&course=$course'>Cancel</a>"; ?>
+                    <?php echo  "<a class='btn btn-sm btn-outline-secondary' href='../records/examrecord.teacher.php?stid=&sub=$sub&course=$course&year=$year'>Cancel</a>"; ?>
                     </div>
                     <!-- end of modal footer -->
         </div>
@@ -119,6 +119,7 @@ input::-webkit-inner-spin-button {
                     <div class="form-group">
                     <input type="hidden" class="form-control" name="sid" id="sid" autocomplete="off" >
                     <input type="hidden" name="sub" id="" class="form-control" value="<?php echo $sub; ?>">
+                    <input type="hidden" name="year" id="" class="form-control" value="<?php echo $year; ?>">
                     <input type="hidden" name="subcode" id="" class="form-control" value="<?php echo $subcode; ?>">
                     <input type="hidden" name="tid" id="" class="form-control" value="<?php echo $id; ?>">
                     <input type="hidden" name="course" id="" class="form-control" value="<?php echo $_GET['course']; ?>">

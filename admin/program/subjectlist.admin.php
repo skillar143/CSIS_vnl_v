@@ -37,10 +37,7 @@ include_once '../adminlayout/head.admin.php' ?>
                             <i class='fas fa-minus'></i></a>";
                            // $edit = "<a class='btn btn-outline-info m-1 btn-sm' href='editsubject.admin.php?subcode=$row[subject_code]'>
                             //<i class='fas fa-edit'></i></a>";
-                            $edit = "<a class='btn btn-sm btn-outline-info edit-subject' id='subjectEdit' 
-                                data-subcode='$row[subject_code]'   data-units='$row[units]'
-                                data-description='$row[description]'  data-id='$row[subject_code]'   
-                                data-toggle='modal' data-target='#editSubject'>
+                            $edit = "<a class='btn btn-sm btn-outline-info edit-subject' id='subjectEdit' onclick = 'editSubject(`" . $row['id']  . "`)'>
                                 <i class='fas fa-edit'></i></i></a>";
                             echo "<tr><td>".$row['subject_code']."</td>
                             <td>".$row['description']."</td>
@@ -58,7 +55,34 @@ include_once '../adminlayout/head.admin.php' ?>
     </tbody>
 </table>
 </div>
-
+<script>
+    function editSubject(id){
+        $.get('../../database/sublist',{
+            id: id
+        },function (data, status){
+            try {
+                let editSubject = $("#editSubject");
+                let subject = JSON.parse(data)[0];
+                $("#id").val(subject.id);
+                $("#subcode").val(subject.subject_code);
+                $("#description").val(subject.description);
+                $("#units").val(subject.units);
+                editSubject.show();
+            } catch (error) {
+                alert(error);
+            }
+        });
+        
+    }
+    function closeEditSubject(){
+        try {
+            let editSubject = $("#editSubject");
+            editSubject.hide();
+        } catch (error) {
+            alert(error);
+        }
+    }
+</script>
 <?php include "createsubject.admin.php" ?> 
 <?php include "editsub.admin.php" ?> 
 

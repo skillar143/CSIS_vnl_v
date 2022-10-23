@@ -9,7 +9,7 @@ $contact = $_POST['contact'];
 $address = $_POST['address'];
 
 
-$sql = "UPDATE teacherrecords set teacher_id ='$tid' ,name ='$name'
+$sql = "UPDATE teacherrecords set name ='$name'
 ,gender = '$gender' ,cellphone = '$contact' ,address = '$address'
     where teacher_id = '$id';";
 

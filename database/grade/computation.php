@@ -50,11 +50,11 @@ $sql = "SELECT * from studentrecords where course = '$course'";
                     while ($row2 = $result2->fetch_assoc()) {    
                         $score = $row2['score']; 
                         $scs = $scs + $score;
-           
                     }
+                    $csarray[] = ($scs / $tcs * 50 + 50)* .25 ; 
+
                 }
 
-                $csarray[] = ($scs / $tcs * 50 + 50)* .25 ; 
             }
         }
         // GETTING THE TOTAL OF EXAM
@@ -90,9 +90,10 @@ $sql = "SELECT * from studentrecords where course = '$course'";
                         $scs = $scs + $score;
            
                     }
+                    $examarray[] = ($scs / $tex * 50 + 50)* .40 ; 
+
                 }
 
-                $examarray[] = ($scs / $tex * 50 + 50)* .40 ; 
             } 
         }
 
@@ -128,11 +129,11 @@ if ($result->num_rows > 0) {
               
                 $score = $row2['score']; 
                 $srep = $srep + $score;
-   
+                $reportarray[] = ($srep / $trep * 50 + 50)* .25; 
+
             }
         }
 
-        $reportarray[] = ($srep / $trep * 50 + 50)* .25; 
     } 
 }
 
@@ -140,6 +141,7 @@ if ($result->num_rows > 0) {
 $sql = "SELECT * from studentrecords where course = '$course'";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
+            $satarray = [];
             while ($row = $result->fetch_assoc()) {
                 $sid = $row['student_id'];
                 $name =$row['name'];
@@ -147,16 +149,17 @@ $sql = "SELECT * from studentrecords where course = '$course'";
                 $result2 = $conn->query($sql2);
                 $sat = 0;
 
-       
                 if ($result2->num_rows > 0) {
                     while ($row2 = $result2->fetch_assoc()) {    
                         $score = $row2['score']; 
                         $sat = $sat + $score;
-           
+                        $satarray[] = $sat * .10 ; 
                     }
                 }
 
-                $satarray[] = $sat * .10 ; 
+               
+              
+
             } 
         }
 

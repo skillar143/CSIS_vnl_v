@@ -9,7 +9,7 @@ $course = $_POST['course'];
 $subcode = $_POST['subcode'];
 $score = $_POST['score'];
 $stid = $_POST['stid'];
-
+$year = $_POST['year'];
 
 
 
@@ -19,6 +19,6 @@ $stid = $_POST['stid'];
   $sql = "UPDATE student_reporting SET score = '$score' WHERE id = '$sid' and subject_code = '$subcode' and teacher_id = '$tid' and term = '$term' and course = '$course' and student_id = '$stid'";
   $result = mysqli_query($conn, $sql);
 
-   header("Location: ../../teacher/records/reportrecord.teacher.php?course=$course&sub=$sub");
+   header("Location: ../../teacher/records/reportrecord.teacher.php?course=$course&sub=$sub&year=$year");
    exit();
   } 

@@ -114,7 +114,7 @@ if (isset($_POST['fy-fs'])) {
     
 
             $sqlstudent = "INSERT INTO programs (course, subject, year, sem) 
-            VALUES ('$course', '$_POST[tyfssub]', 'third', 'second');";
+            VALUES ('$course', '$_POST[tysssub]', 'third', 'second');";
 
             $sql = "SELECT * from programs where course = '$course' && subject = '$_POST[tysssub]'";
             $result = $conn->query($sql);
@@ -135,7 +135,7 @@ if (isset($_POST['fy-fs'])) {
 } elseif (isset($_POST['ff-fs'])) {
 
             $sqlstudent = "INSERT INTO programs (course, subject, year, sem) 
-            VALUES ('$course', '$_POST[ffffsub]', 'forth', 'first');";
+            VALUES ('$course', '$_POST[fffssub]', 'forth', 'first');";
 
             $sql = "SELECT * from programs where course = '$course' && subject = '$_POST[fffssub]'";
             $result = $conn->query($sql);

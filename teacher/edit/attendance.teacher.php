@@ -5,8 +5,7 @@ if (isset($_SESSION['user_id'])) {
     $id = $_SESSION['user_id'];
     $sub = $_GET['sub'];
     $course = $_GET['course'];
-   
-
+    $year = $_GET['year'];
     include "../teacherlayout/head.tlayout.php"; 
 
     $sql2 = "SELECT * from gradingstatus ";
@@ -68,7 +67,6 @@ input::-webkit-inner-spin-button {
                             $c = 1;
                             $sql2 = "SELECT * from student_attendance where subject_code = '$subcode' and student_id = '$stid' and teacher_id = '$id' and term = '$term' and course = '$course'";
                             $result2 = $conn->query($sql2);
-
                             if ($result2->num_rows > 0) {
                                 while ($row2 = $result2->fetch_assoc()) {
                                     $score = $row2['score'];
@@ -95,7 +93,7 @@ input::-webkit-inner-spin-button {
 
                     <!-- modal footer -->
                     <div class="modal-footer">
-                      <?php echo  "<a class='btn btn-sm btn-outline-secondary' href='../records/attendancerecord.teacher.php?stid=&sub=$sub&course=$course'>Cancel</a>"; ?>
+                      <?php echo  "<a class='btn btn-sm btn-outline-secondary' href='../records/attendancerecord.teacher.php?stid=&sub=$sub&course=$course&year=$year'>Cancel</a>"; ?>
                     </div>
                     <!-- end of modal footer -->
         </div>
@@ -121,6 +119,7 @@ input::-webkit-inner-spin-button {
                     <input type="hidden" name="sub" id="" class="form-control" value="<?php echo $sub; ?>">
                     <input type="hidden" name="subcode" id="" class="form-control" value="<?php echo $subcode; ?>">
                     <input type="hidden" name="tid" id="" class="form-control" value="<?php echo $id; ?>">
+                    <input type="hidden" name="year" id="" class="form-control" value="<?php echo $year; ?>">
                     <input type="hidden" name="course" id="" class="form-control" value="<?php echo $_GET['course']; ?>">
                     <input type="hidden" name="term" id="" class="form-control" value="<?php echo $term; ?>">
                     <input type="hidden" name="stid" id="" class="form-control" value="<?php echo $_GET['stid']; ?>">

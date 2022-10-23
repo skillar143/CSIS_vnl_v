@@ -3,6 +3,7 @@ session_start();
 $page ="student";
 if (isset($_SESSION['user_id'])) {
  $sub = $_GET['sub'];
+ $year = $_GET['year'];
     include "../teacherlayout/head.tlayout.php"; 
     $sql2 = "SELECT * from subjects where description = '$sub'";
     $result2 = $conn->query($sql2);
@@ -13,8 +14,8 @@ if (isset($_SESSION['user_id'])) {
         }
     }?>
        <!-- content here -->
-       <h5 class="title text-dark mb-5">Student List in <?php echo "(".$subcode.")-".$sub?></h5>
-<a class="btn btn-sm btn-outline-primary" href="../../print/studentlist.print.php?sub=<?php echo $sub;?>"><i class="fas fa-print"></i></a>
+       <h5 class="title text-dark mb-5">Student List in <?php echo " ".$subcode." - ".$sub?></h5>
+<a class="btn btn-sm btn-outline-primary" href="../../print/studentlist.print.php?sub=<?php echo $sub;?>&year=<?php echo $year;?>"><i class="fas fa-print"></i></a>
 
        <div class="table-responsive">
        <table class="table" id="studentlist">
@@ -22,6 +23,7 @@ if (isset($_SESSION['user_id'])) {
         <tr>
             <th>Student ID</th>
             <th>Name</th>
+            <th>Year</th>
             <th>Gender</th>
             <th>Cell No.</th>
             <th>Program Title</th>
@@ -46,7 +48,7 @@ if (isset($_SESSION['user_id'])) {
                     if($result-> num_rows > 0 ){
                         while($row = $result-> fetch_assoc()){
                             $id = $row['student_id'];
-                            $sql2 = "SELECT * from studentrecords where student_id = '$id'";
+                            $sql2 = "SELECT * from studentrecords where student_id = '$id' and year = '$year'";
                             $result2 = $conn-> query($sql2);
 
                             if($result2-> num_rows > 0 ){
@@ -54,6 +56,7 @@ if (isset($_SESSION['user_id'])) {
                            
                             echo "<tr><td>".$row2['student_id']."</td>
                             <td>".$row2['name']."</td>
+                            <td>".$row2['year']."</td>
                             <td>".$row2['gender']."</td>
                             <td>".$row2['cellphone']."</td>
                             <td>".$row2['course']."</td>

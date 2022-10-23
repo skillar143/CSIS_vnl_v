@@ -3,6 +3,7 @@ session_start();
 include_once '../database/dbconnection.db.php';
 if (isset($_SESSION['user_id'])) {
     $id = $_SESSION['user_id'];
+    $year = $_GET['year'];
 
 ?>
     <!-- header -->
@@ -28,27 +29,30 @@ if (isset($_SESSION['user_id'])) {
         <tr>
             <th>Student ID</th>
             <th>Name</th>
+            <th>Year</th>
             <th>Gender</th>
-            <th>Cell No.</th>
-            <th>Course</th>
+            <th>Contact</th>
             <th>Address</th>
         </tr>
     </thead>
     <tbody>
       
     <?php
+
+
                     include_once '../database/dbconnection.db.php';
+                    $sub = $_GET['sub'];
 
                     $sql = "SELECT *
                    FROM studentsubs
-                   WHERE subject = '$_GET[sub]' and student_id NOT IN (SELECT student_id FROM withdrawns);";
+                   WHERE subject = '$sub' and student_id NOT IN (SELECT student_id FROM withdrawns);";
                     $result = $conn-> query($sql);
 
                     
                     if($result-> num_rows > 0 ){
                         while($row = $result-> fetch_assoc()){
                             $id = $row['student_id'];
-                            $sql2 = "SELECT * from studentrecords where student_id = '$id'";
+                            $sql2 = "SELECT * from studentrecords where student_id = '$id' and year = '$year'";
                             $result2 = $conn-> query($sql2);
 
                             if($result2-> num_rows > 0 ){
@@ -56,10 +60,10 @@ if (isset($_SESSION['user_id'])) {
                            
                             echo "<tr><td>".$row2['student_id']."</td>
                             <td>".$row2['name']."</td>
+                            <td>".$row2['year']."</td>
                             <td>".$row2['gender']."</td>
                             <td>".$row2['cellphone']."</td>
                             <td>".$row2['course']."</td>
-                            <td>".$row2['address']."</td>
                             </tr>";
                                 }
                             }
@@ -75,7 +79,7 @@ if (isset($_SESSION['user_id'])) {
     </tbody>
 </table>
                 <br>
-                <a class="btn btn-danger" id="print-btn" href="../teacher/list/studentlist.teacher.php?sub=<?php echo $_GET['sub'];?>"><i class="fas fa-arrow-circle-left"></i></a>
+                <a class="btn btn-danger" id="print-btn" href="../teacher/list/studentlist.teacher.php?sub=<?php echo $_GET['sub'];?>&year=<?php echo $year;?>"><i class="fas fa-arrow-circle-left"></i></a>
                 <button class="btn btn-danger" onclick="window.print();" id="print-btn"><i class="fas fa-print"></i></button>
           
 

@@ -5,7 +5,7 @@ if (isset($_SESSION['user_id'])) {
     $id = $_SESSION['user_id'];
     $sub = $_GET['sub'];
     $course = $_GET['course'];
-
+    $year = $_GET['level'];
     include "../teacherlayout/head.tlayout.php"; 
     $sql2 = "SELECT * from subjects where description = '$sub'";
     $result2 = $conn->query($sql2);
@@ -17,16 +17,17 @@ if (isset($_SESSION['user_id'])) {
     }?>
     <!-- content here -->
     <div class="float-right m-1">
-        <a class="btn btn-sm btn-outline-primary" href="../../print/gradesummary.print.php?sub=<?php echo $sub;?>&course=<?php echo $course;?>"> <i class="fas fa-print"></i>PrintRecords</a>
+        <a class="btn btn-sm btn-outline-primary" href="../../print/gradesummary.print.php?sub=<?php echo $sub;?>&course=<?php echo $course;?>&level=<?php echo $year;?>"> <i class="fas fa-print"></i>PrintRecords</a>
 </div>
-    <h5 class="title text-dark mb-3"> Grade summary for <?php echo "(".$subcode.")-".$sub?></h5>
-    
+    <h5 class="title text-dark mb-3"> Grade Summary for <?php echo " ".$subcode." ".$sub?></h5>
+    <p><?php echo $course ?></p>
    
     <table class="table" id="studentlist">
         <thead class="bg-primary text-light" >
             <tr>
                 <th>Student ID</th>
                 <th>Name</th>
+                <th>Year</th>
                 <th >Prelims</th>
                 <th >Midterms</th>
                 <th >Finals</th>
@@ -39,7 +40,7 @@ if (isset($_SESSION['user_id'])) {
             $course = $_GET['course'];
             $sql = "SELECT *
             FROM studentrecords
-            WHERE course = '$course' and student_id NOT IN (SELECT student_id FROM withdrawns);";
+            WHERE course = '$course' and student_id NOT IN (SELECT student_id FROM withdrawns) and year = '$year';";
             $result = $conn-> query($sql);
             if($result-> num_rows > 0 ){
                 while($row = $result-> fetch_assoc()){
@@ -47,7 +48,8 @@ if (isset($_SESSION['user_id'])) {
                     $name = $row['name'];
                     
                     echo "<tr><td>".$id."</td>
-                            <td>".$row['name']."</td>";
+                            <td>".$row['name']."</td> 
+                            <td>".$row['year']."</td>";
                             $sql2 = "SELECT * from prelims where subject = '$sub' and student_id = '$id'";
                             $result2 = $conn-> query($sql2);
                             if($result2-> num_rows > 0 ){
@@ -56,7 +58,7 @@ if (isset($_SESSION['user_id'])) {
                                            
                                 }
                             }else{
-                                echo "<td>No records</td>";
+                                echo "<td>No record</td>";
                             }
                             $sql2 = "SELECT * from midterms where subject = '$sub' and student_id = '$id'";
                             $result2 = $conn-> query($sql2);
@@ -66,7 +68,7 @@ if (isset($_SESSION['user_id'])) {
                                            
                                 }
                             }else{
-                                echo "<td>No records</td>";
+                                echo "<td>No record</td>";
                             }
                             $sql2 = "SELECT * from finals where subject = '$sub' and student_id = '$id'";
                             $result2 = $conn-> query($sql2);
@@ -76,13 +78,13 @@ if (isset($_SESSION['user_id'])) {
                                            
                                 }
                             }else{
-                                echo "<td>No records</td>";
+                                echo "<td>No record</td>";
                             }
                            
                 }
             }
             else{
-                echo "<tr><td>No records</td></tr>";
+                echo "<tr><td>No record</td></tr>";
             }
             ?>
         </tbody>

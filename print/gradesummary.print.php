@@ -5,6 +5,7 @@ if (isset($_SESSION['user_id'])) {
     $id = $_SESSION['user_id'];
     $sub = $_GET['sub'];
     $course = $_GET['course'];
+    $year = $_GET['level'];
 
 ?>
     <!-- header -->
@@ -24,25 +25,27 @@ if (isset($_SESSION['user_id'])) {
             <div class="col-1 "><img src="../assets/img/logo.jpg" alt=""></div>
         </div>
         <div class=" mb-3">
-        <h5 class="title text-dark mb-5"> Summary of Grades <?php echo $_GET['sub'];?> subject</h5>
+        <h5 class="title text-dark mb-5"> Summary of Grades <?php echo $_GET['sub'];?></h5>
+        <p><?php echo $course ?></p>
         <table class="table" id="studentlist">
         <thead class="bg-primary text-light" >
             <tr>
                 <th>Student ID</th>
                 <th>Name</th>
+                <th>Year</th>
                 <th >Prelims</th>
                 <th >Midterms</th>
                 <th >Finals</th>
             </tr>
         </thead>
         <tbody>
-            <?php
+        <?php
             include_once '../database/dbconnection.db.php';
             $sub = $_GET['sub'];
             $course = $_GET['course'];
             $sql = "SELECT *
             FROM studentrecords
-            WHERE course = '$course' and student_id NOT IN (SELECT student_id FROM withdrawns);";
+            WHERE course = '$course' and student_id NOT IN (SELECT student_id FROM withdrawns) and year = '$year';";
             $result = $conn-> query($sql);
             if($result-> num_rows > 0 ){
                 while($row = $result-> fetch_assoc()){
@@ -50,7 +53,8 @@ if (isset($_SESSION['user_id'])) {
                     $name = $row['name'];
                     
                     echo "<tr><td>".$id."</td>
-                            <td>".$row['name']."</td>";
+                            <td>".$row['name']."</td> 
+                            <td>".$row['year']."</td>";
                             $sql2 = "SELECT * from prelims where subject = '$sub' and student_id = '$id'";
                             $result2 = $conn-> query($sql2);
                             if($result2-> num_rows > 0 ){
@@ -59,7 +63,7 @@ if (isset($_SESSION['user_id'])) {
                                            
                                 }
                             }else{
-                                echo "<td>No records</td>";
+                                echo "<td>No record</td>";
                             }
                             $sql2 = "SELECT * from midterms where subject = '$sub' and student_id = '$id'";
                             $result2 = $conn-> query($sql2);
@@ -69,7 +73,7 @@ if (isset($_SESSION['user_id'])) {
                                            
                                 }
                             }else{
-                                echo "<td>No records</td>";
+                                echo "<td>No record</td>";
                             }
                             $sql2 = "SELECT * from finals where subject = '$sub' and student_id = '$id'";
                             $result2 = $conn-> query($sql2);
@@ -79,19 +83,19 @@ if (isset($_SESSION['user_id'])) {
                                            
                                 }
                             }else{
-                                echo "<td>No records</td>";
+                                echo "<td>No record</td>";
                             }
                            
                 }
             }
             else{
-                echo "<tr><td>No records</td></tr>";
+                echo "<tr><td>No record</td></tr>";
             }
             ?>
         </tbody>
     </table>
                 <br>
-                <a class="btn btn-danger" id="print-btn" href="../teacher/records/gradingsheet.teacher.php?sub=<?php echo $sub;?>&course=<?php echo $course;?>"><i class="fas fa-arrow-circle-left"></i></a>
+                <a class="btn btn-danger" id="print-btn" href="../teacher/records/gradingsheet.teacher.php?sub=<?php echo $sub;?>&course=<?php echo $course;?>&level=<?php echo $year;?>"><i class="fas fa-arrow-circle-left"></i></a>
                 <button class="btn btn-danger" onclick="window.print();" id="print-btn"><i class="fas fa-print"></i></button>
           
 

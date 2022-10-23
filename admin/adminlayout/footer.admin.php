@@ -76,23 +76,6 @@ $(document).ready(function(){
     })
 
 
-    $('.edit-student').each(function() {
-      $(this).click(function(event){
-        $('#studentUpdate').attr("action", "../../database/editprofile/student.db.php");
-        $('#studentid').val($(this).data('studentid'));
-        $('#name').val($(this).data('name'));
-        $('#cellphone').val($(this).data('cellphone'));
-        $('#bday').val($(this).data('bday'));
-        $('#bplace').val($(this).data('bplace'));
-        $('#address').val($(this).data('address'));
-        $('#course').val($(this).data('course'));
-        $('#status').val($(this).data('status'));
-        $('#sex').val($(this).data('gender'));
-        $('#id').val($(this).data('id'));
-       
-      })
-    })
-
 
 
     $('.edit-subject').each(function() {

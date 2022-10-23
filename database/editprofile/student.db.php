@@ -9,14 +9,14 @@ $contact = $_POST['contact'];
 $address = $_POST['address'];
 $bday = $_POST['bday'];
 $bplace = $_POST['bplace'];
-$bplace = $_POST['bplace'];
+$status =$_POST['status'];
+//$course = $_POST['course'];
+$year = $_POST['year'];
 
+$sql = "UPDATE studentrecords set name ='$name', year = '$year'
+,gender = '$gender' ,cellphone = '$contact' ,address = '$address' ,bday ='$bday' ,bplace ='$bplace',status='$status'
+    where id = $id;";
 
-
-$sql = "UPDATE studentrecords set student_id ='$studentid' ,name ='$name'
-,gender = '$gender' ,cellphone = '$contact' ,address = '$address' ,bday ='$bday' ,bplace ='$bplace'
-    where student_id = '$id';";
-
-                $result = mysqli_query($conn, $sql);
-            header("Location: ../../admin/student/studentlist.admin.php?success=The Record is updated");
+                $result = mysqli_query($conn, $sql) or die($conn->error);
+                header("Location: ../../admin/student/studentlist.admin.php?success=The Record is updated");
        
