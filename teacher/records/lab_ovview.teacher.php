@@ -23,17 +23,17 @@ if (isset($_SESSION['user_id'])) {
 <h5 class="title text-dark mb-3"><?php echo $course?></h5>
 <h5 class="title text-dark mb-3"><?php echo $subcode." - ".$sub?></h5> 
     <?php
-         $current = "lec";
+         $current = "lab";
          $lab = "lab_ovview.teacher.php";
          $lec = "ovview.teacher.php";
-         include "lab.teacher.php" 
+         include "lab.teacher.php" ;
         
     ?>
 
 <div class="float-right">
     <!-- <a class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#AddCS"><i class="fas fa-plus"></i>Add
         Class Record</i></a> -->
-        <a class="btn btn-sm btn-outline-primary" href="../../print/ov.print.php?sub=<?php echo $sub;?>&course=<?php echo $course;?>&term=<?php echo $term;?>&year=<?php echo $year?>"><i class="fas fa-print"></i> Print
+        <a class="btn btn-sm btn-outline-primary" href="../../print/lab_ov.print.php?sub=<?php echo $sub;?>&course=<?php echo $course;?>&term=<?php echo $term;?>&year=<?php echo $year?>"><i class="fas fa-print"></i> Print
         Records</a>
 </div>
 <div class="table-responsive">
@@ -50,8 +50,8 @@ if (isset($_SESSION['user_id'])) {
             <th class="">25%</th>
             <th class="">Exam</th>
             <th class="">40%</th>
-            <th class="<?php echo $display; ?>">Lec Grade</th>
             <th class="<?php echo $display; ?>">Lab Grade</th>
+            <th class="<?php echo $display; ?>">Lec Grade</th>
             <th class="<?php echo $dis; ?>">Pre-Final</th>
             <th class="<?php echo $dis; ?>"><?php echo $th; ?></th>
             <th class="">Final Grade</th>
@@ -65,11 +65,11 @@ if (isset($_SESSION['user_id'])) {
                 <td></td>
                 <td class="text-primary font-weight-bold font-italic">100</td>
                 <td></td>
-                <td class="text-primary font-weight-bold font-italic"><?php echo $tcs; ?></td>
+                <td class="text-primary font-weight-bold font-italic"><?php echo $lab_tcs; ?></td>
                 <td></td>
-                <td class="text-primary font-weight-bold font-italic"><?php echo $trep; ?></td>
+                <td class="text-primary font-weight-bold font-italic"><?php echo $lab_trep; ?></td>
                 <td></td>
-                <td class="text-primary font-weight-bold font-italic"><?php echo $tex; ?></td>
+                <td class="text-primary font-weight-bold font-italic"><?php echo $lab_tex; ?></td>
                 <td></td>
                 <td></td>
                 
@@ -85,7 +85,7 @@ if (isset($_SESSION['user_id'])) {
                 while ($row = $result->fetch_assoc()) {
                     $sid = $row['student_id'];
                     $name =$row['name'];
-                    $sql2 = "SELECT * from student_attendance where student_id = '$sid' and term = '$term' and subject_code = '$subcode'";
+                    $sql2 = "SELECT * from student_laboratory_attendance where student_id = '$sid' and term = '$term' and subject_code = '$subcode'";
                     $result2 = $conn->query($sql2);
                     $attendance = 0;
 ?>
@@ -116,18 +116,22 @@ if (isset($_SESSION['user_id'])) {
                         ?> 
                     </td>
 
-                    <?php $classrecord = "SELECT * from student_cs where student_id = '$sid' and term = '$term' and subject_code = '$subcode'";
+                    <?php $classrecord = "SELECT * from student_laboratory_cs where student_id = '$sid' and term = '$term' and subject_code = '$subcode'";
                     $resulte = $conn->query($classrecord);
                     $cs = 0;
                     ?> 
                     
+                    
                     <td class = "p-0">
+
                         <table style = "margin:0px; width: 100%; " class = "text-center">
                             <tr>
                                 <?php
                                     if ($resulte->num_rows > 0) {
+                       
                                         while ($rowe = $resulte->fetch_assoc()) { 
                                             $scoree = $rowe['score']; 
+                
                                             $cs = $scoree + $cs;
                                     echo "<td> $scoree </td>"; 
                                          }
@@ -136,10 +140,11 @@ if (isset($_SESSION['user_id'])) {
                         </table>
                     </td>
 
-                 <td> <?php  $cstotal = number_format(($cs/$tcs*50+50)*.25, 0);
+
+                 <td> <?php  $cstotal = number_format(($cs/$lab_tcs*50+50)*.25, 0);
                  echo $cstotal;?> </td>
                  <!-- reporting -->
-                    <?php $report = "SELECT * from student_reporting where student_id = '$sid' and term = '$term' and subject_code = '$subcode'";
+                    <?php $report = "SELECT * from student_laboratory_reporting where student_id = '$sid' and term = '$term' and subject_code = '$subcode'";
                     $resulte = $conn->query($report);
                     $rep = 0;
                     ?> 
@@ -164,10 +169,10 @@ if (isset($_SESSION['user_id'])) {
                     </td>
 
 
-                 <td> <?php  $reptotal = number_format(($rep/$trep*50+50)*.25, 0);
+                 <td> <?php  $reptotal = number_format(($rep/$lab_trep*50+50)*.25, 0);
                  echo $reptotal; ?> </td>
 <!-- exam -->
-                <?php $exam = "SELECT * from student_exam where student_id = '$sid' and term = '$term' and subject_code = '$subcode'";
+                <?php $exam = "SELECT * from student_laboratory_exam where student_id = '$sid' and term = '$term' and subject_code = '$subcode'";
                     $resultr = $conn->query($exam);
                     $exam = 0;
                     ?>
@@ -190,21 +195,25 @@ if (isset($_SESSION['user_id'])) {
                         </table>
                     </td>
 
-                         <td> <?php  $examtotal = number_format(($exam/$tex*50+50)*.40, 0);  
-                            echo $examtotal;?></td>
+                         <td> <?php  $examtotal = number_format(($exam/$lab_tex*50+50)*.40, 0);  
+                            echo $examtotal;?> </td>
+                            
+                            
+
+                    
+
 
                          <td> <?php  
-                    
-                                 $prefinal = $atotal+$cstotal+$reptotal+$examtotal;
-                            echo $prefinal; 
+                                    $lab_g = $atotal+$cstotal+$reptotal+$examtotal;
+                            echo $lab_g; 
                          ?> </td>
 
 <td class="<?php echo $display; ?>">
-<?php include "lab.php"; ?>
+<?php include "lec.php"; ?>
 </td>
 
                 <td class="<?php echo $display; ?>">
-                <?php $sfinal = number_format(($prefinal*.60)+($lab_g*.40), 0);
+                <?php $sfinal = number_format(($lab_g*.40)+($lec_g*.60), 0);
                             echo $sfinal; ?>
             </td>
                     
@@ -221,15 +230,10 @@ if (isset($_SESSION['user_id'])) {
                             <td class="<?php echo $dis; ?>">
                                 <?php 
                                 
-                                if($sb_st == "with lab")
-                                {
                                     $finalg = number_format(($sfinal*.70)+($preg*.30), 0);
                                 echo $finalg;
                                 
-                                }else{
-                                    $finalg = number_format(($prefinal*.70)+($preg*.30), 0);
-                                    echo $finalg;
-                                }
+                              
                                 ?>
                             </td>
                          <?php 

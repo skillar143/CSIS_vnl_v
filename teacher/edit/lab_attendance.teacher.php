@@ -1,12 +1,11 @@
 <?php
 session_start();
-$page ="rep";
+$page ="attendance";
 if (isset($_SESSION['user_id'])) {
     $id = $_SESSION['user_id'];
     $sub = $_GET['sub'];
     $course = $_GET['course'];
     $year = $_GET['year'];
-
     include "../teacherlayout/head.tlayout.php"; 
 
     $sql2 = "SELECT * from gradingstatus ";
@@ -43,7 +42,7 @@ input::-webkit-inner-spin-button {
         <div class="modal-content">
             <!-- modal header -->
             <div class="modal-header bg-primary">
-                <h5 class="modal-title text-light" id="exampleModalLabel">Edit Lecture Reporting</h5>
+                <h5 class="modal-title text-light" id="exampleModalLabel">Edit Laboratory Attendance</h5>
             </div>
             <!-- end of modal header -->
                 <!-- modal body -->
@@ -55,17 +54,16 @@ input::-webkit-inner-spin-button {
                         <table class="table" >
                             <thead>
                                 <td class="d-none">ID</td>
-                                <th>Reporting</th>
+                                <th>Attendance</th>
                                 <th>Score</th>
-                                <th>Edit</th>
+                                <th>Action</th>
                             </thead>
                             <tbody>
                             <?php 
                             $stid = $_GET['stid']; 
                             $c = 1;
-                            $sql2 = "SELECT * from student_reporting where subject_code = '$subcode' and student_id = '$stid' and teacher_id = '$id' and term = '$term' and course = '$course'";
+                            $sql2 = "SELECT * from student_laboratory_attendance where subject_code = '$subcode' and student_id = '$stid' and teacher_id = '$id' and term = '$term' and course = '$course'";
                             $result2 = $conn->query($sql2);
-
                             if ($result2->num_rows > 0) {
                                 while ($row2 = $result2->fetch_assoc()) {
                                     $score = $row2['score'];
@@ -74,7 +72,7 @@ input::-webkit-inner-spin-button {
                             ?>
                                     <tr>
                                         <td class="d-none"><?php  echo $sid ?></td>
-                                        <td><?php  echo "Report". $c++ ?></td>
+                                        <td><?php  echo "A". $c++ ?></td>
                                         <td><?php echo $score?></td>
                                         <td><a type="button" class="btn btn-outline-info m-1 btn-sm editbtn" >
                                         <i class="fas fa-edit"></i></a></td>
@@ -92,7 +90,7 @@ input::-webkit-inner-spin-button {
 
                     <!-- modal footer -->
                     <div class="modal-footer">
-                      <?php echo  "<a class='btn btn-sm btn-outline-secondary' href='../records/reportrecord.teacher.php?stid=&sub=$sub&course=$course&year=$year'>Cancel</a>"; ?>
+                      <?php echo  "<a class='btn btn-sm btn-outline-secondary' href='../records/lab_attendancerecord.teacher.php?stid=&sub=$sub&course=$course&year=$year'>Cancel</a>"; ?>
                     </div>
                     <!-- end of modal footer -->
         </div>
@@ -109,7 +107,7 @@ input::-webkit-inner-spin-button {
                 </button>
             </div>
             <!-- end of modal header -->
-            <form class="needs-validation" novalidate action="../../database/changescore/reporting.db.php" method="post">
+            <form class="needs-validation" novalidate action="../../database/changescore/lab_attendance.db.php" method="post">
                 <!-- modal body -->
                 <div class="modal-body">
                     <!-- text box student id -->

@@ -1,6 +1,6 @@
 <?php
 session_start();
-$page ="rep";
+$page ="cs";
 if (isset($_SESSION['user_id'])) {
     $id = $_SESSION['user_id'];
     $sub = $_GET['sub'];
@@ -43,7 +43,7 @@ input::-webkit-inner-spin-button {
         <div class="modal-content">
             <!-- modal header -->
             <div class="modal-header bg-primary">
-                <h5 class="modal-title text-light" id="exampleModalLabel">Edit Lecture Reporting</h5>
+                <h5 class="modal-title text-light" id="exampleModalLabel">Edit Laboratory Class Record</h5>
             </div>
             <!-- end of modal header -->
                 <!-- modal body -->
@@ -55,7 +55,7 @@ input::-webkit-inner-spin-button {
                         <table class="table" >
                             <thead>
                                 <td class="d-none">ID</td>
-                                <th>Reporting</th>
+                                <th>Class Record</th>
                                 <th>Score</th>
                                 <th>Edit</th>
                             </thead>
@@ -63,7 +63,7 @@ input::-webkit-inner-spin-button {
                             <?php 
                             $stid = $_GET['stid']; 
                             $c = 1;
-                            $sql2 = "SELECT * from student_reporting where subject_code = '$subcode' and student_id = '$stid' and teacher_id = '$id' and term = '$term' and course = '$course'";
+                            $sql2 = "SELECT * from student_laboratory_cs where subject_code = '$subcode' and student_id = '$stid' and teacher_id = '$id' and term = '$term' and course = '$course'";
                             $result2 = $conn->query($sql2);
 
                             if ($result2->num_rows > 0) {
@@ -74,7 +74,7 @@ input::-webkit-inner-spin-button {
                             ?>
                                     <tr>
                                         <td class="d-none"><?php  echo $sid ?></td>
-                                        <td><?php  echo "Report". $c++ ?></td>
+                                        <td><?php  echo "CS". $c++ ?></td>
                                         <td><?php echo $score?></td>
                                         <td><a type="button" class="btn btn-outline-info m-1 btn-sm editbtn" >
                                         <i class="fas fa-edit"></i></a></td>
@@ -92,7 +92,7 @@ input::-webkit-inner-spin-button {
 
                     <!-- modal footer -->
                     <div class="modal-footer">
-                      <?php echo  "<a class='btn btn-sm btn-outline-secondary' href='../records/reportrecord.teacher.php?stid=&sub=$sub&course=$course&year=$year'>Cancel</a>"; ?>
+                    <?php echo  "<a class='btn btn-sm btn-outline-secondary' href='../records/lab_csrecord.teacher.php?stid=&sub=$sub&course=$course&year=$year'>Cancel</a>"; ?>
                     </div>
                     <!-- end of modal footer -->
         </div>
@@ -109,16 +109,16 @@ input::-webkit-inner-spin-button {
                 </button>
             </div>
             <!-- end of modal header -->
-            <form class="needs-validation" novalidate action="../../database/changescore/reporting.db.php" method="post">
+            <form class="needs-validation" novalidate action="../../database/changescore/lab_cs.db.php" method="post">
                 <!-- modal body -->
                 <div class="modal-body">
                     <!-- text box student id -->
                     <div class="form-group">
                     <input type="hidden" class="form-control" name="sid" id="sid" autocomplete="off" >
                     <input type="hidden" name="sub" id="" class="form-control" value="<?php echo $sub; ?>">
+                    <input type="hidden" name="year" id="" class="form-control" value="<?php echo $year; ?>">
                     <input type="hidden" name="subcode" id="" class="form-control" value="<?php echo $subcode; ?>">
                     <input type="hidden" name="tid" id="" class="form-control" value="<?php echo $id; ?>">
-                    <input type="hidden" name="year" id="" class="form-control" value="<?php echo $year; ?>">
                     <input type="hidden" name="course" id="" class="form-control" value="<?php echo $_GET['course']; ?>">
                     <input type="hidden" name="term" id="" class="form-control" value="<?php echo $term; ?>">
                     <input type="hidden" name="stid" id="" class="form-control" value="<?php echo $_GET['stid']; ?>">

@@ -5,29 +5,46 @@
  $exam = array();
 
 // getting the term
-$sql2 = "SELECT * from gradingstatus ";
-$result2 = $conn->query($sql2);
-if ($result2->num_rows > 0) {
-    while ($row2 = $result2->fetch_assoc()) { 
+$gs = "SELECT * from gradingstatus ";
+$gs_r = $conn->query($gs);
+if ($gs_r->num_rows > 0) {
+    while ($gs_d = $gs_r->fetch_assoc()) { 
       
-  $term = $row2['term'];
+  $term = $gs_d['term'];
 
     }
 }
 
 
-// GETTING THE TOTAL OF CLASSRECORD
-$sql = "SELECT * from teacher_cs where teacher_id = '$id' and course = '$course' and term = '$term' and subject_code = '$subcode'";
-$result = $conn->query($sql);
-$tcs = 0;
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {    
+// GETTING THE TOTAL OF LECTURE CLASSRECORD
+$lec_cs = "SELECT * from teacher_cs where teacher_id = '$id' and course = '$course' and term = '$term' and subject_code = '$subcode'";
+$r_lec_cs = $conn->query($lec_cs);
+$lec_t_cs = 0;
+if ($r_lec_cs->num_rows > 0) {
+    while ($d_lec_cs = $r_lec_cs->fetch_assoc()) {    
          
        
-       if( $row['item'] >= 1){
-        $tcs = $tcs + $row['item']; 
+       if( $d_lec_cs['item'] >= 1){
+        $lec_t_cs = $lec_t_cs + $d_lec_cs['item']; 
        }else{
-           $tcs = 1;
+           $lec_t_cs = 1;
+       }
+
+    }
+}
+
+// GETTING THE TOTAL OF LABORATORY CLASSRECORD
+$lab_cs = "SELECT * from teacher_laboratory_cs where teacher_id = '$id' and course = '$course' and term = '$term' and subject_code = '$subcode'";
+$r_lab_cs = $conn->query($lab_cs);
+$lab_t_cs = 0;
+if ($r_lab_cs->num_rows > 0) {
+    while ($d_lab_cs = $r_lab_cs->fetch_assoc()) {    
+         
+       
+       if( $d_lab_cs['item'] >= 1){
+        $lab_t_cs = $lab_t_cs + $d_lab_cs['item']; 
+       }else{
+           $lab_t_cs = 1;
        }
 
     }
@@ -35,138 +52,51 @@ if ($result->num_rows > 0) {
 
 
 // GETTING THE STUDENT CS RECORD
-$sql = "SELECT * from studentrecords where course = '$course'";
-        $result = $conn->query($sql);
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $sid = $row['student_id'];
-                $name =$row['name'];
-                $sql2 = "SELECT * from student_cs where student_id = '$sid' and term = '$term' and subject_code = '$subcode'";
-                $result2 = $conn->query($sql2);
-                $scs = 0;
-
-       
-                if ($result2->num_rows > 0) {
-                    while ($row2 = $result2->fetch_assoc()) {    
-                        $score = $row2['score']; 
-                        $scs = $scs + $score;
+$cs_sr = "SELECT * from studentrecords where course = '$course'";
+        $r_cs_sr = $conn->query($cs_sr);
+        if ($r_cs_sr->num_rows > 0) {
+            while ($d_cs_sr = $r_cs_sr->fetch_assoc()) {
+                $sid = $d_cs_sr['student_id'];
+                $name =$d_cs_sr['name'];
+                
+                //lecture
+                $lec_s_cs = "SELECT * from student_cs where student_id = '$sid' and term = '$term' and subject_code = '$subcode'";
+                $r_lec_s_cs = $conn->query($lec_s_cs);
+                $lec_scs = 0;
+                if ($r_lec_s_cs->num_rows > 0) {
+                    while ($d_lec_cs = $r_lec_s_cs->fetch_assoc()) {    
+                        $lec_score = $d_lec_cs['score']; 
+                        $lec_scs = $lec_scs + $lec_score;
                     }
-                    $csarray[] = ($scs / $tcs * 50 + 50)* .25 ; 
+
 
                 }
+                
+                //laboratory
+
+                $lab_s_cs = "SELECT * from student_laboratory_cs where student_id = '$sid' and term = '$term' and subject_code = '$subcode'";
+                $r_lec_s_cs = $conn->query($lab_s_cs);
+                $lab_scs = 0;
+                if ($r_lec_s_cs->num_rows > 0) {
+                    while ($d_lab_cs = $r_lec_s_cs->fetch_assoc()) {    
+                        $lab_score = $d_lab_cs['score']; 
+                        $lab_scs = $lab_scs + $lab_score;
+                    }
+
+
+                }
+
+        
+                if (mysqli_num_rows($r_lab_cs) === 1) {
+                   
+                else{
+                    exit();
+                }
+
+                $csarray[] = ($scs / $lec_t_cs * 50 + 50)* .25 ; 
 
             }
         }
-        // GETTING THE TOTAL OF EXAM
-$sql = "SELECT * from teacher_exam where teacher_id = '$id' and course = '$course' and term = '$term' and subject_code = '$subcode'";
-$result = $conn->query($sql);
- $tex = 0; 
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {    
-        if($row['item'] > 0){
-            $tex = $tex + $row['item']; 
-           }else{
-             $tex = 1;
-           }               
-    }
-}
-
-
-// GETTING THE STUDENT EXAM RECORD
-$sql = "SELECT * from studentrecords where course = '$course'";
-        $result = $conn->query($sql);
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $sid = $row['student_id'];
-                $name =$row['name'];
-                $sql2 = "SELECT * from student_exam where student_id = '$sid' and term = '$term' and subject_code = '$subcode'";
-                $result2 = $conn->query($sql2);
-                $scs = 0;
-
        
-                if ($result2->num_rows > 0) {
-                    while ($row2 = $result2->fetch_assoc()) {    
-                        $score = $row2['score']; 
-                        $scs = $scs + $score;
-           
-                    }
-                    $examarray[] = ($scs / $tex * 50 + 50)* .40 ; 
 
-                }
-
-            } 
-        }
-
-// GETTING THE TOTAL OF reporting
-$sql = "SELECT * from teacher_reporting where teacher_id = '$id' and course = '$course' and term = '$term' and subject_code = '$subcode'";
-$result = $conn->query($sql);
-$trep = 0; 
-if ($result->num_rows > 0) {
-while ($row = $result->fetch_assoc()) {    
-    if( $row['item'] >= 1){
-        $trep = $trep + $row['item']; 
-       }else{
-           $trep = 1;
-       }                
-}
-}
-
-
-// GETTING THE STUDENT reporting RECORD
-$sql = "SELECT * from studentrecords where course = '$course' ";
-$result = $conn->query($sql);
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $sid = $row['student_id'];
-        $name =$row['name'];
-        $sql2 = "SELECT * from student_reporting where student_id = '$sid' and term = '$term' and subject_code = '$subcode'";
-        $result2 = $conn->query($sql2);
-        $srep = 0;
-
-
-        if ($result2->num_rows > 0) {
-            while ($row2 = $result2->fetch_assoc()) { 
-              
-                $score = $row2['score']; 
-                $srep = $srep + $score;
-                $reportarray[] = ($srep / $trep * 50 + 50)* .25; 
-
-            }
-        }
-
-    } 
-}
-
-// GETTING THE STUDENT Attendance RECORD
-$sql = "SELECT * from studentrecords where course = '$course'";
-        $result = $conn->query($sql);
-        if ($result->num_rows > 0) {
-            $satarray = [];
-            while ($row = $result->fetch_assoc()) {
-                $sid = $row['student_id'];
-                $name =$row['name'];
-                $sql2 = "SELECT * from student_attendance where student_id = '$sid' and term = '$term' and subject_code = '$subcode'";
-                $result2 = $conn->query($sql2);
-                $sat = 0;
-
-                if ($result2->num_rows > 0) {
-                    while ($row2 = $result2->fetch_assoc()) {    
-                        $score = $row2['score']; 
-                        $sat = $sat + $score;
-                        $satarray[] = $sat * .10 ; 
-                    }
-                }
-
-               
-              
-
-            } 
-        }
-
-
-
-
-
-
-
-//print_r($reportarray);
+print_r($csarray);

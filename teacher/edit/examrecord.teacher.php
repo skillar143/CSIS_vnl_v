@@ -43,10 +43,7 @@ input::-webkit-inner-spin-button {
         <div class="modal-content">
             <!-- modal header -->
             <div class="modal-header bg-primary">
-                <h5 class="modal-title text-light" id="exampleModalLabel">Edit Record Exam</h5>
-                <button class="close text-light btn btn-sm" type="button" data-dismiss="modal" aria-label="Close">
-                    <i class="fa fa-window-close" aria-hidden="true"></i>
-                </button>
+                <h5 class="modal-title text-light" id="exampleModalLabel">Edit Lecture Exam</h5>
             </div>
             <!-- end of modal header -->
                 <!-- modal body -->

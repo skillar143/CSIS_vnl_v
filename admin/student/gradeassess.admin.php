@@ -5,7 +5,7 @@ if (isset($_SESSION['username'])) {
     $sub = $_GET['sub'];
     $course = $_GET['course'];
     $year = $_GET['year'];
-    $c = 0;
+    
    
  
 
@@ -36,9 +36,48 @@ if (isset($_SESSION['username'])) {
             $name = $row['name'];
         }
     }
-    
 
-    include "../../database/grade/computation.php"; 
+
+    $sub_sql = "SELECT * from sublists where description = '$sub'";
+    $sub_result = $conn->query($sub_sql);
+
+    if ($sub_result->num_rows > 0) {
+        while ($sub_data = $sub_result->fetch_assoc()) {
+            $sub_status = $sub_data['status'];
+        }
+    }
+
+    $term;
+    if($term === "prelim"){
+       $table = "prelims";
+       $th = " ";
+   }elseif($term === "midterm"){
+       $table = "prelims";
+       $th = "Prelim";
+   }elseif($term === "final"){
+       $table = "midterms";
+       $th = "Midterm";
+   }
+    
+   $sub_sql = "SELECT * from sublists where description = '$sub'";
+   $sub_result = $conn->query($sub_sql);
+
+   if ($sub_result->num_rows > 0) {
+       while ($sub_data = $sub_result->fetch_assoc()) {
+           $sub_status = $sub_data['status'];
+       }
+   }
+
+
+   if($sub_status == 'with lab'){
+       
+       include "../../database/grade/lab_computation.php"; 
+       include "../../database/grade/lec_computation.php";
+   }else{
+       
+       include "../../database/grade/lec_computation.php";
+   }
+    $c = 0;
     
     ?>
 
@@ -92,17 +131,7 @@ WHERE subject = '$sub' and student_id NOT IN (SELECT student_id FROM withdrawns)
                     $id = $row['student_id'];
                     $sql2 = "SELECT * from studentrecords where student_id = '$id' and year = '$year' and course = '$course' order by name";
                     $result2 = $conn->query($sql2);
-                     $term;
-                     if($term === "prelim"){
-                        $table = "prelims";
-                        $th = " ";
-                    }elseif($term === "midterm"){
-                        $table = "prelims";
-                        $th = "Prelim";
-                    }elseif($term === "final"){
-                        $table = "midterms";
-                        $th = "Midterm";
-                    }
+                    
                     
 
                     if ($result2->num_rows > 0) {
@@ -116,20 +145,46 @@ WHERE subject = '$sub' and student_id NOT IN (SELECT student_id FROM withdrawns)
                                    $recentgrade = $row3['grade'];
                                 }
                             }
-// finalizing
+
+
                             if ($term == 'prelim'){
-                                
-                                if(count($csarray) > $c){
-                                    $grade = ($csarray[$c] + $examarray[$c] + $reportarray[$c] + $satarray[$c]);
-                                    $finalgrade = $grade;
+
+                                if($sub_status == 'no lab'){
+                                    
+                                    if(count($csarray) > $c){
+                                        $grade = ($csarray[$c] + $examarray[$c] + $reportarray[$c] + $satarray[$c]);
+                                        $finalgrade = $grade;
+                                    
+                                    }
+
+                                    }else{
+                                    if(count($csarray) > $c){
+                                        $lec_grade = ($csarray[$c] + $examarray[$c] + $reportarray[$c] + $satarray[$c]);
+                                        $lab_grade = ($lab_csarray[$c] + $lab_examarray[$c] + $lab_reportarray[$c] + $lab_satarray[$c]);
+                                        $grade = ($lec_grade * .60) + ($lab_grade * .40);
+                                        $finalgrade = $grade;
+                                    
+                                    }
                                 }
                                 
-
                             }else{
-                                
-                                $grade = ($csarray[$c] + $examarray[$c] + $reportarray[$c] + $satarray[$c]);
 
-                                $finalgrade = ($recentgrade * .30 )+($grade * .70);
+                                if($sub_status == 'no lab'){
+                                    
+                                    if(count($csarray) > $c){
+                                        $grade = ($csarray[$c] + $examarray[$c] + $reportarray[$c] + $satarray[$c]);
+                                        $finalgrade = ($recentgrade * .30 )+($grade * .70);
+                                        }
+
+                                    }else{
+                                    if(count($csarray) > $c){
+                                        $lec_grade = ($csarray[$c] + $examarray[$c] + $reportarray[$c] + $satarray[$c]);
+                                        $lab_grade = ($lab_csarray[$c] + $lab_examarray[$c] + $lab_reportarray[$c] + $lab_satarray[$c]);
+                                        $grade = ($lec_grade * .60) + ($lab_grade * .40);
+                                        $finalgrade = ($recentgrade * .30 )+($grade * .70);
+                                    
+                                    }
+                                }
 
                             }
 

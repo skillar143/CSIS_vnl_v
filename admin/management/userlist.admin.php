@@ -26,6 +26,7 @@ if (isset($_SESSION['username'])) {
         <thead class="bg-primary text-light ">
             <tr>
                 <th scope="col">User ID</th>
+                <th scope="col">Name</th>
                 <th scope="col">Role</th>
                 <th scope="col">Password</th>
                 <th scope="col">Action</th>
@@ -45,6 +46,38 @@ if (isset($_SESSION['username'])) {
 
                     <tr>
                             <td><?php echo $row['user_id']?></td>
+                            <td><?php 
+
+                                      if( $row['role'] == "student"){
+                                        
+                                        $studentsql = "SELECT * from studentrecords where student_id = '$row[user_id]'";
+                                        $student_result = $conn->query($studentsql);
+                            
+                                        if ($student_result->num_rows > 0) {
+                                            while ($student_data = $student_result->fetch_assoc()) {
+                                                echo $student_data['name'];
+                                            }
+                                        } 
+
+                                      
+                                      }  else{
+
+                                        $teachersql = "SELECT * from teacherrecords where teacher_id = '$row[user_id]'";
+                                        $teacher_result = $conn->query($teachersql);
+                            
+                                        if ($teacher_result->num_rows > 0) {
+                                            while ($teacher_date = $teacher_result->fetch_assoc()) {
+                                                echo $teacher_date['name'];
+                                            }
+                                        }
+
+                             
+                                      }                              
+                            
+
+                                
+
+                            ?></td>
                             <td><?php echo $row['role']?></td>
                             <td><?php echo $row['password']?></td>
                             <!-- <td><a class="edit-employee text-dark" id="employeeEdit"

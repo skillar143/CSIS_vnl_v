@@ -1,47 +1,29 @@
- 
- 
- <?php
+<?php
 session_start();
 
-if (isset($_SESSION['username'])) {
-   
-    include_once '../database/dbconnection.db.php';
-    
+if (isset($_SESSION['user_id'])) {
+    $id = $_SESSION['user_id'];
     $sub = $_GET['sub'];
     $course = $_GET['course'];
-    $year = $_GET['year'];
     $term = $_GET['term'];
+    $year = $_GET['year'];
+    include_once '../database/dbconnection.db.php';
     
-
-    
-    $sql2 = "SELECT * from subjects where description = '$sub'";
-    $result2 = $conn->query($sql2);
-
-    if ($result2->num_rows > 0) {
-        while ($row2 = $result2->fetch_assoc()) {
-            $subcode = $row2['subcode'];
-        }
-    }
    
-    $sb_ls = "SELECT * from sublists where description = '$sub'";
-    $sb_rs = $conn->query($sb_ls);
-    
-    if ($sb_rs->num_rows > 0) {
-        while ($sb_data = $sb_rs->fetch_assoc()) {
-            $sb_st = $sb_data['status'];
-        }
-    }
 
-    $sql2 = "SELECT teacher_id from subjects where description = '$sub'";
-    $result2 = $conn->query($sql2);
+    include "../teacher/records/teacher_score_computation.php"; 
+  
 
-    if ($result2->num_rows > 0) {
-        while ($row2 = $result2->fetch_assoc()) {
-            $id = $row2['teacher_id'];
-        }
-    }
-
-    include "../admin/student/teacher_score_computation.php";
+if($term === "prelim"){
+    $table = "prelims";
+    $th = " ";
+}elseif($term === "midterm"){
+    $table = "prelims";
+    $th = "Prelim";
+}elseif($term === "final"){
+    $table = "midterms";
+    $th = "Midterm";
+}
 
     ?>
 <title>CSIS</title>
@@ -59,7 +41,7 @@ if (isset($_SESSION['username'])) {
             <div class="col-1 "><img src="../assets/img/logo.jpg" alt=""></div>
         </div>
         <div class="text-right mb-3">
-            <a class="btn btn-danger" id="print-btn" href="../admin/student/gradingst.admin.php?sub=<?php echo $sub;?>&course=<?php echo $course;?>&term=<?php echo $term;?>&year=<?php echo $year;?>"><i class="fas fa-arrow-circle-left"></i></a>
+            <a class="btn btn-danger" id="print-btn" href="../teacher/records/ovview.teacher.php?sub=<?php echo $sub;?>&course=<?php echo $course;?>&term=<?php echo $term;?>&year=<?php echo $year?>"><i class="fas fa-arrow-circle-left"></i></a>
             <button class="btn btn-danger" onclick="window.print();" id="print-btn"><i class="fas fa-print"></i></button>
         </div>
         <h5 class="title text-dark mb-3; text-capitalize"><?php echo $term." "."Grade"?></h5>
@@ -68,7 +50,7 @@ if (isset($_SESSION['username'])) {
         <h5 class="title text-dark mb-3"><?php echo "Instructor: ".$name?></h5>
 
         <div class="table-responsive">
-<table class="table table-bordered text-center" id="">
+        <table class="table table-bordered text-center" id="">
     <thead class="bg-primary text-light ">
         <tr>
             <th class="">Student ID</th>
@@ -81,8 +63,8 @@ if (isset($_SESSION['username'])) {
             <th class="">25%</th>
             <th class="">Exam</th>
             <th class="">40%</th>
-            <th class="<?php echo $display; ?>">Lec Grade</th>
             <th class="<?php echo $display; ?>">Lab Grade</th>
+            <th class="<?php echo $display; ?>">Lec Grade</th>
             <th class="<?php echo $dis; ?>">Pre-Final</th>
             <th class="<?php echo $dis; ?>"><?php echo $th; ?></th>
             <th class="">Final Grade</th>
@@ -96,11 +78,11 @@ if (isset($_SESSION['username'])) {
                 <td></td>
                 <td class="text-primary font-weight-bold font-italic">100</td>
                 <td></td>
-                <td class="text-primary font-weight-bold font-italic"><?php echo $tcs; ?></td>
+                <td class="text-primary font-weight-bold font-italic"><?php echo $lab_tcs; ?></td>
                 <td></td>
-                <td class="text-primary font-weight-bold font-italic"><?php echo $trep; ?></td>
+                <td class="text-primary font-weight-bold font-italic"><?php echo $lab_trep; ?></td>
                 <td></td>
-                <td class="text-primary font-weight-bold font-italic"><?php echo $tex; ?></td>
+                <td class="text-primary font-weight-bold font-italic"><?php echo $lab_tex; ?></td>
                 <td></td>
                 <td></td>
                 
@@ -116,7 +98,7 @@ if (isset($_SESSION['username'])) {
                 while ($row = $result->fetch_assoc()) {
                     $sid = $row['student_id'];
                     $name =$row['name'];
-                    $sql2 = "SELECT * from student_attendance where student_id = '$sid' and term = '$term' and subject_code = '$subcode'";
+                    $sql2 = "SELECT * from student_laboratory_attendance where student_id = '$sid' and term = '$term' and subject_code = '$subcode'";
                     $result2 = $conn->query($sql2);
                     $attendance = 0;
 ?>
@@ -142,12 +124,12 @@ if (isset($_SESSION['username'])) {
             </td>
 
                     <td> 
-                        <?php  $atotal = number_format($attendance*.10, 0); 
-                        echo $atotal;
+                        <?php  $atotal = $attendance*.10; 
+                        echo number_format($atotal, 1);
                         ?> 
                     </td>
 
-                    <?php $classrecord = "SELECT * from student_cs where student_id = '$sid' and term = '$term' and subject_code = '$subcode'";
+                    <?php $classrecord = "SELECT * from student_laboratory_cs where student_id = '$sid' and term = '$term' and subject_code = '$subcode'";
                     $resulte = $conn->query($classrecord);
                     $cs = 0;
                     ?> 
@@ -172,10 +154,10 @@ if (isset($_SESSION['username'])) {
                     </td>
 
 
-                 <td> <?php  $cstotal = number_format(($cs/$tcs*50+50)*.25, 0);
-                 echo $cstotal;?> </td>
+                 <td> <?php  $cstotal = ($cs/$lab_tcs*50+50)*.25;
+                 echo number_format($cstotal, 1);?> </td>
                  <!-- reporting -->
-                    <?php $report = "SELECT * from student_reporting where student_id = '$sid' and term = '$term' and subject_code = '$subcode'";
+                    <?php $report = "SELECT * from student_laboratory_reporting where student_id = '$sid' and term = '$term' and subject_code = '$subcode'";
                     $resulte = $conn->query($report);
                     $rep = 0;
                     ?> 
@@ -200,10 +182,10 @@ if (isset($_SESSION['username'])) {
                     </td>
 
 
-                 <td> <?php  $reptotal = number_format(($rep/$trep*50+50)*.25, 0);
-                 echo $reptotal; ?> </td>
+                 <td> <?php  $reptotal = ($rep/$trep*50+50)*.25;
+                 echo number_format($reptotal, 1); ?> </td>
 <!-- exam -->
-                <?php $exam = "SELECT * from student_exam where student_id = '$sid' and term = '$term' and subject_code = '$subcode'";
+                <?php $exam = "SELECT * from student_laboratory_exam where student_id = '$sid' and term = '$term' and subject_code = '$subcode'";
                     $resultr = $conn->query($exam);
                     $exam = 0;
                     ?>
@@ -226,8 +208,8 @@ if (isset($_SESSION['username'])) {
                         </table>
                     </td>
 
-                         <td> <?php  $examtotal = number_format(($exam/$tex*50+50)*.40, 0);  
-                            echo $examtotal;?> </td>
+                         <td> <?php  $examtotal = ($exam/$tex*50+50)*.40;  
+                            echo number_format($examtotal, 1);?> </td>
                             
                             
 
@@ -236,16 +218,16 @@ if (isset($_SESSION['username'])) {
 
                          <td> <?php  
                                     $prefinal = $atotal+$cstotal+$reptotal+$examtotal;
-                            echo $prefinal; 
+                            echo number_format($prefinal, 0); 
                          ?> </td>
 
 <td class="<?php echo $display; ?>">
-<?php include "../admin/student/lab.php"; ?>
+<?php include "../teacher/records/lec.php"; ?>
 </td>
 
                 <td class="<?php echo $display; ?>">
-                <?php $sfinal = number_format(($prefinal*.60)+($lab_g*.40), 0);
-                            echo $sfinal; ?>
+                <?php $sfinal = ($prefinal*.40)+($lec_g*.60);
+                            echo number_format($sfinal, 0); ?>
             </td>
                     
                          <td class="<?php echo $dis; ?>"><?php
@@ -261,17 +243,9 @@ if (isset($_SESSION['username'])) {
                             <td class="<?php echo $dis; ?>">
                                 <?php 
                                 
-                                if($sb_st == "with lab")
-                                {
-                                    $finalg = number_format(($sfinal*.70)+($preg*.30), 0);
-                                echo $finalg;
-                                
-                                }else{
-                                    $finalg = number_format(($prefinal*.70)+($preg*.30), 0);
-                                    echo $finalg;
-                                }
+                                $finalg = ($prefinal*.70)+($preg*.30);
+                                echo number_format($finalg, 0);
                                 ?>
-                                
                             </td>
                          <?php 
                         }
@@ -288,3 +262,115 @@ if (isset($_SESSION['username'])) {
     exit();
 }
 ?>
+
+
+<!-- 
+*
+*
+*
+*
+*
+ -->
+
+
+<!--  modal for record -->
+<style>
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+</style>
+
+<div class="modal fade" id="AddCS" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <!-- modal header -->
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title text-light" id="exampleModalLabel">Add New Score</h5>
+                <button class="close text-light btn btn-sm" type="button" data-dismiss="modal" aria-label="Close">
+                    <i class="fa fa-window-close" aria-hidden="true"></i>
+                </button>
+            </div>
+            <!-- end of modal header -->
+            <form class="needs-validation" action="../database/grade/exam.db.php" method="post" novalidate>
+                <!-- modal body -->
+                <div class="modal-body">
+                    <!-- text box student id -->
+                    <a href="">Enter The Perfect Score</a>
+                    <div class="form-group d-flex ">
+                        <label for="studentid" class="p-1 m-1">Subject </label>
+                        <input type="text" class="form-control m-1" style="width: 30%;" value="<?php echo $sub; ?>"
+                            name="studentid" autocomplete="off" disabled>
+                        <label for="studentid" class="p-1 m-1">Total Items: </label>
+                        <input type="number" class="form-control m-1" style="width: 10%; " name="item"
+                            autocomplete="off" required>
+                    </div>
+
+                    <hr class="divider">
+
+                    <input type="hidden" name="sub" id="" class="form-control" value="<?php echo $sub; ?>">
+                    <input type="hidden" name="tid" id="" class="form-control" value="<?php echo $id; ?>">
+                    <input type="hidden" name="course" id="" class="form-control"
+                        value="<?php echo $_GET['course']; ?>">
+
+
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="bg-primary text-light ">
+                                <tr>
+                                    <th class="">Student ID</th>
+                                    <th class="">Name</th>
+                                    <th class="">Score</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                <?php
+            $sql = "SELECT * from studentsubs where subject = '$sub'";
+            $result = $conn->query($sql);
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $sid = $row['student_id'];
+                    $sql2 = "SELECT * from studentrecords where student_id = '$sid' and course = '$_GET[course]'";
+                    $result2 = $conn->query($sql2);
+
+                    if ($result2->num_rows > 0) {
+                        while ($row2 = $result2->fetch_assoc()) {
+                            
+            ?>
+                                <tr>
+                                    <td><?php echo $row2['student_id']; ?></td>
+                                    <td><?php echo $row2['name']; ?></td>
+                                    <td><input type="number" name="score[]" id="" class="form-control" required></td>
+                                    <input type="hidden" name="id[]" id="" class="form-control"
+                                        value="<?php echo $row2['student_id']; ?>">
+
+                                </tr>
+                                <?php
+                        }
+                    }
+                }
+            } else {
+                echo "<tr><td>No records</td></tr>";
+            }
+
+            ?>
+                            </tbody>
+                        </table>
+                    </div> <!-- end of course selection -->
+
+                    <!-- end of modal body -->
+
+                    <!-- modal footer -->
+                    <div class="modal-footer">
+                        <button class="btn btn-sm btn-outline-secondary" type="button"
+                            data-dismiss="modal">Cancel</button>
+                        <button class="btn btn-sm btn-outline-primary" type="submit" name="ok">Add</button>
+                    </div>
+                    <!-- end of modal footer -->
+            </form>
+        </div>
+    </div>
+</div>

@@ -5,6 +5,7 @@ include_once '../dbconnection.db.php';
 $id = $_POST['id'];
 $name = $_POST['name'];
 $units = $_POST['units'];
+$status = $_POST['status'];
 $code = $_POST['code'];
 
 // GETTING THE OLD DATA OF THE FILE
@@ -30,7 +31,7 @@ $SB_NAME = $SECONDARY_SB["description"];
 
 
 $sql = "UPDATE sublists
-SET description = '$name', units = '$units' 
+SET description = '$name', units = '$units' , status = '$status' 
 WHERE id = '$id';";
 
 

@@ -26,16 +26,26 @@ if ($result2->num_rows > 0) {
             $subcode = $row2['subcode'];
         }
     }
+
     ?>
 <!-- content here -->
 
 
 <h5 class="title text-dark mb-3">Class Standing in <?php echo "(".$subcode.")-".$sub?></h5>
 <div class="float-right m-1">
-    <a class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#AddCS"><i class="fas fa-plus"></i>Add
-        Class Record</i></a>
+    <a class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#LecCS"><i class="fas fa-plus"></i> Lecture Record</a>
 </div>
 <p><?php echo $course ?></p>
+
+<?php 
+   $current = "lec";
+   $lab = "lab_csrecord.teacher.php";
+   $lec = "csrecord.teacher.php";
+
+include "laboratory.teacher.php" 
+
+?>
+
 <div class="table-responsive">
 <table class="table table-bordered text-center" id="datatableid">
     <thead class="bg-primary text-light ">
@@ -147,18 +157,18 @@ input::-webkit-inner-spin-button {
 }
 </style>
 
-<div class="modal fade" id="AddCS" role="dialog" aria-hidden="true">
+<div class="modal fade" id="LecCS" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <!-- modal header -->
             <div class="modal-header bg-primary">
-                <h5 class="modal-title text-light" id="exampleModalLabel">Add New Record</h5>
+                <h5 class="modal-title text-light" id="exampleModalLabel">Lecture Class Record</h5>
                 <button class="close text-light btn btn-sm" type="button" data-dismiss="modal" aria-label="Close">
                     <i class="fa fa-window-close" aria-hidden="true"></i>
                 </button>
             </div>
             <!-- end of modal header -->
-            <form class="needs-validation" action="../../database/grade/classrecord.db.php" method="post" novalidate>
+            <form class="needs-validation" action="../../database/grade/lecture_classrecord.db.php" method="post" novalidate>
                 <!-- modal body -->
                 <div class="modal-body">
                     <!-- text box student id -->

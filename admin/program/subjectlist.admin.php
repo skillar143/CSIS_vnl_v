@@ -20,6 +20,7 @@ include_once '../adminlayout/head.admin.php' ?>
         <tr>
             <th>Subject Code</th>
             <th>Subject Title</th>
+            <th>Subject Status</th>
             <th>Units</th>
             <th>Action</th>
         </tr>
@@ -35,12 +36,11 @@ include_once '../adminlayout/head.admin.php' ?>
                         while($row = $result-> fetch_assoc()){
                             $del = "<a class='btn btn-outline-danger m-1 btn-sm' href='../../database/deleterecord/subject.db.php?subcode=$row[subject_code]'>
                             <i class='fas fa-minus'></i></a>";
-                           // $edit = "<a class='btn btn-outline-info m-1 btn-sm' href='editsubject.admin.php?subcode=$row[subject_code]'>
-                            //<i class='fas fa-edit'></i></a>";
                             $edit = "<a class='btn btn-sm btn-outline-info edit-subject' id='subjectEdit' onclick = 'editSubject(`" . $row['id']  . "`)'>
                                 <i class='fas fa-edit'></i></i></a>";
                             echo "<tr><td>".$row['subject_code']."</td>
                             <td>".$row['description']."</td>
+                            <td>".$row['status']."</td>
                             <td>".$row['units']."</td>
                             <td>".$del.$edit."</td> </tr>";
                         }
@@ -66,6 +66,7 @@ include_once '../adminlayout/head.admin.php' ?>
                 $("#id").val(subject.id);
                 $("#subcode").val(subject.subject_code);
                 $("#description").val(subject.description);
+                $("#status").val(subject.status);
                 $("#units").val(subject.units);
                 editSubject.show();
             } catch (error) {

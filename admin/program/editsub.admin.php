@@ -26,6 +26,14 @@
                         <input type="text" class="form-control" name="name" id="description" autocomplete="off"
                             placeholder="Subject Title" required>
                     </div>
+
+                    <div class="form-group">
+                    <select name="status" id="status" class="form-control" required>
+                            <option selected disabled value="">status</option>
+                            <option value="with lab">With Lab</option>
+                            <option value="no lab">No Lab</option>
+                        </select>
+                    </div> 
                     <!-- end student id -->
                     <!-- text box student id -->
                     <div class="form-group">

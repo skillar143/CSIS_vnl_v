@@ -24,21 +24,21 @@ if ($result2->num_rows > 0) {
             $subcode = $row2['subcode'];
         }
     }
-
-    $current = "lec";
+    $current = "lab";
     $lab = "lab_attendancerecord.teacher.php";
     $lec = "attendancerecord.teacher.php";
+
     ?>
 <!-- content here -->
 <h5 class="title text-dark mb-3">Attendance in <?php echo "(".$subcode.")-".$sub?></h5>
 <div class="float-right m-1">
-    <a class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#AddAttendance"><i class="fas fa-plus"></i> Lecture Attendance</a>
+    <a class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#LabAttendance"><i class="fas fa-plus"></i> Laboratory Attendance</a>
 </div>
 
 
 <p><?php echo $course ?></p>
 
-<?php include "laboratory.teacher.php"; ?>
+<?php include "laboratory.teacher.php" ?>
 
 <div class="table-responsive">
 <table class="table table-bordered text-center" id="datatableid">
@@ -71,7 +71,7 @@ if ($result2->num_rows > 0) {
                     $sid = $row['student_id'];
                     $name =$row['name'];
                     $yearlevel =$row['year'];
-                    $sql2 = "SELECT * from student_attendance where student_id = '$sid' and term = '$term' and subject_code = '$subcode'";
+                    $sql2 = "SELECT * from student_laboratory_attendance where student_id = '$sid' and term = '$term' and subject_code = '$subcode'";
                     $result2 = $conn->query($sql2);
 ?>
         <tr>
@@ -88,7 +88,7 @@ if ($result2->num_rows > 0) {
                     echo $score. "  "; 
                         }
                     }
-                    $edit = "<a class='btn btn-sm btn-outline-info' href='../edit/attendance.teacher.php?stid=$row[student_id]&sub=$sub&course=$course&year=$year'>
+                    $edit = "<a class='btn btn-sm btn-outline-info' href='../edit/lab_attendance.teacher.php?stid=$row[student_id]&sub=$sub&course=$course&year=$year'>
                     <i class='fas fa-edit'></i></a>";
        
                    echo "<td>" .$edit. "</td></tr>";
@@ -130,18 +130,18 @@ input::-webkit-inner-spin-button {
 }
 </style>
 
-<div class="modal fade" id="AddAttendance" role="dialog" aria-hidden="true">
+<div class="modal fade" id="LabAttendance" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <!-- modal header -->
             <div class="modal-header bg-primary">
-                <h5 class="modal-title text-light" id="exampleModalLabel">Lecture Attendance</h5>
+                <h5 class="modal-title text-light" id="exampleModalLabel">Laboratory Attendance</h5>
                 <button class="close text-light btn btn-sm" type="button" data-dismiss="modal" aria-label="Close">
                     <i class="fa fa-window-close" aria-hidden="true"></i>
                 </button>
             </div>
             <!-- end of modal header -->
-            <form class="needs-validation" action="../../database/grade/lecture_attendance.db.php" method="post" novalidate>
+            <form class="needs-validation" action="../../database/grade/laboratory_attendance.db.php" method="post" novalidate>
                 <!-- modal body -->
                 <div class="modal-body">
                     <!-- text box student id -->
