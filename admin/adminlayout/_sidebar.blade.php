@@ -39,11 +39,22 @@
         registration
     </div>
     <!-- Nav Item - admit Student Menu -->
+
     <li class="nav-item">
-        <a class="nav-link <?php if($page == 'student'){echo"bg-light text-primary active";}?>" href="../student/studentlist.admin.php">
+        <a class="nav-link collapsed  <?php if($page == 'student'){echo"bg-light text-primary active";}?>" href="#" data-toggle="collapse" data-target="#collapsestudentlist"
+            aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-users <?php if($page == 'student'){echo"text-primary";}?>"></i>
-            <span style='font-size:18px';>Students</span></a>
+            <span style='font-size:18px';>Student</span>
+        </a>
+        <div id="collapsestudentlist" class="collapse" aria-labelledby="headingstudentlist"
+            data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                        <a class='collapse-item' href='../student/studentlist.admin.php'><i class="fas fa-users"></i>Regular List</a>  
+                        <a class='collapse-item' href='../student/irregularlist.admin.php'><i class="fas fa-users"></i>Irregular List</a>  
+            </div>
+        </div>
     </li>
+
     <!-- Nav Item - admit Teachers Menu -->
     <li class="nav-item">
         <a class="nav-link <?php if($page == 'teacher'){echo"bg-light text-primary active";}?>" href="../teacher/teacherlist.admin.php">
@@ -61,11 +72,7 @@
             <i class="fas fa-book <?php if($page == 'course'){echo"text-primary";}?>"></i>
             <span style='font-size:18px';>Courses</span></a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link <?php if($page == 'irregstudent'){echo"bg-light text-primary active";}?>" href="../student/irregularlist.admin.php">
-            <i class="fas fa-users <?php if($page == 'irregstudent'){echo"text-primary";}?>"></i>
-            <span style='font-size:18px';>Irregular Students</span></a>
-    </li>
+   
 
      <!-- Divider -->
      <hr class="sidebar-divider my-0">
@@ -98,12 +105,6 @@
         <span style='font-size:18px';>Assess Grade</span></a>
 </li>
 
-
-    <!-- <li class="nav-item"> -->
-        <!-- <a class="nav-link" href="../student/irregularlist.admin.php"> -->
-            <!-- <i class="fas fa-users"></i> -->
-            <!-- <span>Regular Students</span></a> -->
-    <!-- </li> -->
     
     
 
@@ -111,29 +112,25 @@
     <hr class="sidebar-divider my-0">
 
     <div class="sidebar-heading">
-        Others
+       user management
     </div>
 
     <li class="nav-item">
-        <a class="nav-link collapsed  <?php if($page == 'archive'){echo"bg-light text-primary active";}?>" href="#" data-toggle="collapse" data-target="#collapsestudentlist"
+        <a class="nav-link collapsed  <?php if($page == 'archive'){echo"bg-light text-primary active";}?>" href="#" data-toggle="collapse" data-target="#collapsearchive"
             aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-users-slash <?php if($page == 'archive'){echo"text-primary";}?>"></i>
             <span style='font-size:18px';>Archive</span>
         </a>
-        <div id="collapsestudentlist" class="collapse" aria-labelledby="headingstudentlist"
+        <div id="collapsearchive" class="collapse" aria-labelledby="headingstudentlist"
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                         <a class='collapse-item' href='../student/withdrawnlist.admin.php'><i class="fas fa-user"></i>Student</a>  
-                        <a class='collapse-item' href='../teacher/resignlist.admin.php?sub=$row[description]'><i class="fas fa-user-tie"></i>Teacher</a>  
+                        <a class='collapse-item' href='../teacher/resignlist.admin.php?'><i class="fas fa-user-tie"></i>Teacher</a>  
             </div>
         </div>
     </li>
 
-    <!-- <li class="nav-item">
-        <a class="nav-link" href="../student/withdrawnlist.admin.php">
-        <i class="fas fa-users-slash"></i>
-            <span>Withdrawn</span></a>
-    </li> -->
+   
     <li class="nav-item">
         <a class="nav-link <?php if($page == 'user'){echo"bg-light text-primary active";}?>" href="../management/userlist.admin.php">
             <i class="fas fa-users <?php if($page == 'user'){echo"text-primary";}?>"></i>
