@@ -12,7 +12,6 @@ if (isset($_SESSION['username'])) {
                         <div class="brand-icon text-center">
             <img class="img-fluid rounded mx-auto d-block w-50" alt="Responsive image" src="../../assets/img/logo.PNG">
         </div>
-
 <?php include_once '../adminlayout/footer.admin.php';
 } else {
     header("Location: ../canossa/master.blade.php");

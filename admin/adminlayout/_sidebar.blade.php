@@ -136,7 +136,17 @@
             <i class="fas fa-users <?php if($page == 'user'){echo"text-primary";}?>"></i>
             <span style='font-size:18px';>Users</span></a>
     </li>
-    <div class="sidebar-heading">Account Settings</div>
+
+    <hr class="sidebar-divider my-0">
+    <div class="sidebar-heading">Admin Settings</div>
+    
+    <li class="nav-item">
+        <a class="nav-link <?php if($page == 'backup'){echo"bg-light text-primary active";}?>" href="">
+            <i class="fas fa-cloud-download-alt <?php if($page == 'backup'){echo"text-primary";}?>"></i>
+            <span style='font-size:18px';>Generate Backup</span></a>
+    </li>
+
+
     <li class="nav-item">
         <a class="nav-link <?php if($page == 'changepass'){echo"bg-light text-primary active";}?>" href="../management/changepass.admin.php">
             <i class="fas fa-key <?php if($page == 'changepass'){echo"text-primary";}?>"></i>
