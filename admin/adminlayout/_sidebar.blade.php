@@ -139,12 +139,15 @@
 
     <hr class="sidebar-divider my-0">
     <div class="sidebar-heading">Admin Settings</div>
-    
+
     <li class="nav-item">
-        <a class="nav-link <?php if($page == 'backup'){echo"bg-light text-primary active";}?>" href="">
-            <i class="fas fa-cloud-download-alt <?php if($page == 'backup'){echo"text-primary";}?>"></i>
-            <span style='font-size:18px';>Generate Backup</span></a>
+    <a class="nav-link <?php if($page == 'backup'){echo"bg-light text-primary active";}?>" data-toggle="modal" data-target="#backup">
+    <i class="fas fa-cloud-download-alt <?php if($page == 'backup'){echo"text-primary";}?>"></i>
+        <span style='font-size:18px';>Generate Backup</span></a>
     </li>
+
+
+    
 
 
     <li class="nav-item">
@@ -169,5 +172,7 @@
 
 
 <!-- MODAL -->
-<?php include "../management/gradingtoggle.admin.php"; 
- include "../management/studentgrade.admin.php"; ?>
+<?php 
+ include "../management/gradingtoggle.admin.php"; 
+ include "../management/studentgrade.admin.php"; 
+ include "../management/genbackup.admin.php"; ?>

@@ -108,9 +108,9 @@ $stat = $row['status'];
                         <h1 class="">Open Grade Record</h1>
                     </div>
                     <div class="row d-flex ">
-                        <hr class="divider bg-info" style="width: 40%;">
+                        <hr class="divider bg-info" style="width: 190px;">
                         <a class="" style="size: 200px;">Choose Term</a>
-                        <hr class="divider bg-info" style="width: 40%;">
+                        <hr class="divider bg-info" style="width: 190px;">
                     </div>
 
                    

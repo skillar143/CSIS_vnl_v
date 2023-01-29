@@ -31,7 +31,7 @@ if (isset($_SESSION['username'])) {
         </div> <?php } ?>
 
 </div>
-  <div class="table-responsive">
+  <div class="table-responsive mb-5">
     <table class="table table-striped table-hover table-borderless" id="datatableid">
         <thead class="bg-primary text-light ">
             <tr>
@@ -62,23 +62,9 @@ if (isset($_SESSION['username'])) {
                         while($row = $result-> fetch_assoc()){
                             $del = "<a class='btn btn-outline-danger m-1 btn-sm' data-toggle='tooltip' data-placement='top' title='Withdraw' href='../../database/withdraws/student.db.php?stid=$row[student_id]'>
                             <i class='fas fa-user-minus'></i></a>";
-                            //$edit = "<a class='btn btn-outline-info m-1 btn-sm' data-toggle='tooltip' data-placement='top' title='Edit' href='editstudentrecord.admin.php?stid=$row[student_id]'>
-                            //<i class='fas fa-edit'></i></a>";
-                            $hey = "fff";
-                            if($row['student_id'] == "C-21000068"){
-                                $hey = "aaa";
-                            }
-                            // $edit = "<a class='btn btn-sm btn-outline-info edit-student' id='studentEdit' 
-                            //     data-studentid='$row[student_id] $hey'   data-name='$row[name]'
-                            //     data-gender='$row[gender]'          data-cellphone='$row[cellphone]'
-                            //     data-bday='$row[bday]'              data-bplace='$row[bplace]'
-                            //     data-address='$row[address]'        data-course='$row[course]'
-                            //     data-address='$row[address]'        data-id='$row[student_id]'
-                            //     data-status='$row[status]'
-                            //     data-toggle='modal' data-target='#editStudent'>
-                            //     <i class='fas fa-edit'></i></i></a>";
-                            $edit = "'<a class='btn btn-sm btn-outline-info edit-student' onclick = 'editStudent(`" . $row['id']  . "`)'>
-                                <i class='fas fa-edit'></i></i></a>";
+                
+                            $edit = "<a class='btn btn-sm btn-outline-info edit-student' data-toggle='tooltip' data-placement='top' title='Edit' onclick = 'editStudent(`" . $row['id']  . "`)'>
+                            <i class='fas fa-edit'></i></i></a>";
                             echo "<tr><td>".$row['student_id']."</td>
                             <td>".$row['name']."</td>
                             <td>".$row['gender']."</td>
@@ -89,7 +75,7 @@ if (isset($_SESSION['username'])) {
                             <td class='text-wrap'>".$row['course']."</td>
                             <td>".$row['status']."</td>
                             <td>".$row['year']."</td>
-                            <td>".$del."$edit"."</td></tr>";
+                            <td>". $del . $edit. "</td></tr>";
                         }
                     }
                 ?>  
